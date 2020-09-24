@@ -98,6 +98,26 @@ public class DemoDeclaracionVariables {
 		System.out.println(xy4);
 		xy4 = 1.2E5f;
 		System.out.println(xy4);
+		
+		/*
+		 * CONSTANTES
+		 */
+		final double MESES = 12;
+		/*MESES = 13; This is not correct*/
+		
+		long nNumero;
+		double horaPorSemana, 
+		horasPorSemana, 
+		notaMedia;
+		short diasDeSemana;
+		
+		 /*
+		  * DONDE UTILIZAR UNA VARIABLE
+		  * 
+		  * En una clase
+		  * Al principio de un método o bloque de codigo
+		  * en el punto de utilizacion
+		  */
 	}
 
 }
