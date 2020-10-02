@@ -56,6 +56,32 @@ public class DemoOperadoresAritmeticos {
 		a1 %= a2;
 		System.out.println("El valor de a = " + a1);
 		
+		a = 5;
+		b = 2;
+		a += b;
+		System.out.println(a);
+		
+		a = 5;
+		b = 6;
+		a -= b;
+		System.out.println(a);
+		
+		//TABLA DE OPERACIONES EN JAVA
+				/*
+				 	* SIMBOLO			USO			DESCRIPCION
+				 	* = 				A=B 		Asigna un valor
+				 	* = 				A=B 		Multiplica  A por B y el resultado ser asignado A
+				 	* /= 				A/=B 		Lo mismo que la multiplicacion solo que divide
+				 	* %= 				A%=B 		Fija A al residuo o resposte de divir
+				 	* -= 				A-=B   		Realiza resta y el resultado se asignara A
+				 	* += 				A+=B 		Lo mismo que la resta pero en suma|
+				*/
+		System.out.println("suma = " + (4+5));
+		System.out.println("Resta = " + (7-5));
+		System.out.println("Producto = " + (4*5));
+		System.out.println("Division = " + (8/5));
+		System.out.println("Division = " + (8.0/5.0));
+		System.out.println("Division = " + (12%5));
 	}
 
 }
