@@ -82,6 +82,76 @@ public class DemoOperadoresAritmeticos {
 		System.out.println("Division = " + (8/5));
 		System.out.println("Division = " + (8.0/5.0));
 		System.out.println("Division = " + (12%5));
+		
+		/*
+		 * PRECEDENCIA DE OPERADORES MATEMÁTICAS BÁSICOS
+		 * OPERADOR           OPERACIONES             NIVERL DE PRECEDENCIA
+		 * 
+		 * + - (UNARIO)                                       1
+		 * *,/,%                                              2
+		 * + -                                                3
+		 * 
+		 * Ej.  6 + 2 + 3 - 4 / 2
+		 * 6 + (2*3) - (4/2) = 6 + 6 - 2;
+		 * 
+		 * Ej. 5 * (5+(6-2) + 1);
+		 *     5 * (5+4+1)
+		 *     5*(10)
+		 *     50
+		 *     
+		 * ASOCItividad
+		 * r = 3;
+		 * r * 4 + 5 = 17;
+		 * 
+		 * x = 8y = z;
+		 * 
+		 * 7 * 10 - 5 % 3 * 4 + 9
+		 * 70 - 5 % 3 * 4 + 9
+		 * 70 - 8 + 9
+		 * 62
+		 * 
+		 *USO DE PARENTESIS
+		 *Ej. (7 * (10-5) % 3) * 4 + 9
+		 *    (35 % 3) * 4 + 9
+		 *    2 * 4 + 9
+		 *    8 + 9
+		 *    17
+		 */
+		
+		System.out.println((7 * (10-5) % 3) * 4 + 9);
+		System.out.println(7*10-5%3*4+9);
+		
+		/*
+		 * n++ || ++n0
+		 * n-- || --n
+		 */
+		int n = 0;
+		n++;
+		System.out.println(n);
+		n++;
+		System.out.println(n);
+		++n;
+		System.out.println(n);
+		++n;
+		System.out.println(n);
+		
+		int m = 0;
+		m = n++; //doesnt work
+		m = ++n; //work
+		System.out.println(m);
+		
+		/*
+		 * OPERACIONES DE INCREMENTO Y DECREMENTO
+		 * INCREMENTACION          DECEMENTACION    
+		 * ++n                     --n
+		 * n += 1                  n -= 1
+		 * n = n + 1;              n = n - 1;
+		 */
+		n += 2;
+		System.out.println(n);
+		n -= 5;
+		System.out.println(n);
+		n += 1;
 	}
 
 }
