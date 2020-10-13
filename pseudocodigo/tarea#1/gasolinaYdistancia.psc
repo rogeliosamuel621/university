@@ -1,4 +1,4 @@
-Algoritmo sin_titulo
+Algoritmo GasolinaYDistancia
 	// Author: Rogelio Samuel Moreno Corrales
 	// Fecha: 07/10/2020
 	// Input: [Total de km recorridos, precio gasolina(por litro), dinero de gasolina gastado en el viaje, tiempo que han tardado(hrs, min)]
@@ -26,7 +26,7 @@ Algoritmo sin_titulo
 	Leer tiempoTardadomin
 	// ((litros gastados en el viaje) despues (litro por km) despues (litro cada 100 km)
 	gasolina100kmLtrs <- ((dineroGasolinaGatadoViaje/precioGasolinaPorLitro)/kmRecorridos)*100
-	gasolina100kmPrecio <- gasolina100kmLtrs*10
+	gasolina100kmPrecio <- gasolina100kmLtrs * precioGasolinaPorLitro
 	gasolina1kmLtrs <- (dineroGasolinaGatadoViaje/precioGasolinaPorLitro)/kmRecorridos
 	gasolina1kmPrecio <- gasolina100kmPrecio/100
 	VmediaKM <- kmRecorridos/tiempoTardadohrs

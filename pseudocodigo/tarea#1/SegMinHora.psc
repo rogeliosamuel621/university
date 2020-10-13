@@ -24,5 +24,4 @@ Algoritmo SegMinHoras
 	Escribir horaEntera,' hora(s).'
 	Escribir minEntero,' minuto(s).'
 	Escribir seg,' segundo(s).'
-	// Escribir horaEntera, "h ", minEntero, "m ", seg, "s"
 FinAlgoritmo

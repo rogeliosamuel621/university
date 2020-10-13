@@ -52,7 +52,24 @@ public class OperadoresRelacionales {
 		 *  ---------------------------------------------------------------------
 		 *  TABLA DE VERDAD DL OPERADOR AND (&&)
 		 *  ---------------------------------------------------------------------
+		 *  OPERANDO A  OPERANDO B		A && B
+		 *  VERDADERO	VERDADERO		VERDADERO
+		 *  VERDADERO   FALSO           FALSO
+		 *  FALSO       VERDADERO       FALSO
+		 *  FALSO       FALSO           FALSO
+		 *  
+		 *  ---------------------------------------------------------------------
+		 *  TABLA DE VERDAD DEL OPERADOR AND (||)
+		 *  ---------------------------------------------------------------------
+		 *  OPERANDOA   OPERADON B     A || B
+		 *  VERDADERO	VERDADERO		VERDADERO
+		 *  VERDADERO   FALSO           VERDADERO
+		 *  FALSO       VERDADERO       VERDADERO
+		 *  FALSO       FALSO           FALSO
 		 */
+		
+		
+	/*	
 		boolean c;
 		c = 3<7;
 		System.out.println(c);
@@ -69,7 +86,49 @@ public class OperadoresRelacionales {
 		byte nota = 10;
 		if(nota == 9)
 			System.out.println("Regular");
+			*/
+		
+		int edad;
+		char esMexicano;
+		edad = 5;
+		esMexicano = 'n';
+		
+		boolean puedeTenerINE;
+		puedeTenerINE = edad>=18 && esMexicano == 's';
+		System.out.println(puedeTenerINE);
 
+		int x1 = 5;
+		boolean resultadoDeLaCondicion;
+		resultadoDeLaCondicion = !(x1 == 5);
+		System.out.println(resultadoDeLaCondicion);
+		if(edad >= 18 || esMexicano == 's') 
+			System.out.println("Ya puedes tramitar INE");
+		 else 
+			System.out.println("No puedes tener INE");
+		
+		int a = 6;
+		String nombre;
+		nombre = "Marinero";
+		resultadoDeLaCondicion = a > 5 && nombre == "Marinero";
+		System.out.println(resultadoDeLaCondicion);
+		resultadoDeLaCondicion = (a > 5)  || (nombre == "Mari Sol");
+		System.out.println(resultadoDeLaCondicion);
+		double ventas = 0;
+		short horas = 0;
+		int prima = 0;
+		
+		if(ventas > 50000 || horas<100) {
+			prima = 100000;
+		}
+		if(!(ventas <2500)) {
+			prima = 12500;
+		}
+		int x = 5;
+		int b = 18;
+		if (x<5 ^ b<19)
+			System.out.println("Par de valores no validos");
+		else 
+			System.out.println("Par de valores validos");
 	}
 
 }
