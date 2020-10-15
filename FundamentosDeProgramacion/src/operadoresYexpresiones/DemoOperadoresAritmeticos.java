@@ -152,6 +152,22 @@ public class DemoOperadoresAritmeticos {
 		n -= 5;
 		System.out.println(n);
 		n += 1;
+		
+		int m1 = 2;
+		System.out.println("Raiz cuadrada de m1 = " + (Math.sqrt(m1)));
+		
+		System.out.println("m1 * PI = " + (Math.PI * m1));
+		System.out.println(Math.exp(m1));
+		double n2 = 2.5;
+		System.out.println(Math.ceil(n2));
+		System.out.println(Math.floor(n2));
+		
+		
+		
+		
+		
+		
+		
 	}
 
 }

@@ -9,48 +9,22 @@ public class Exercise10 {
 		System.out.println("Digite un numero del mes (1 al 12)");
 		byte month = sc.nextByte();
 		
-		
-		switch (month) {
-		case 1:
+		if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
 			System.out.println("31 dias");
-			break;
-		case 2:
-			System.out.println("29 dias");
-			break;
-		case 3:
-			System.out.println("31 dias");
-			break;
-		case 4:
-			System.out.println("30 dias");
-			break;
-		case 5:
-			System.out.println("31 dias");
-			break;
-		case 6:
-			System.out.println("30 dias");
-			break;
-		case 7:
-			System.out.println("31 dias");
-			break;
-		case 8:
-			System.out.println("31 dias");
-			break;
-		case 9:
-			System.out.println("30 dias");
-			break;
-		case 10:
-			System.out.println("31 dias");
-			break;
-		case 11:
-			System.out.println("30 dias");
-			break;
-		case 12:
-			System.out.println("31 dias");
-			break;
-		default:
-			System.out.println("Debe de ser un numero entre el 1 y el 12");
-			System.out.println("Reinice el programa...");
-			break;
+			return;
 		}
+		
+		if(month == 4 || month == 6 || month == 9 || month == 11) {
+			System.out.println("30 dias");
+			return;
+		}
+		
+		if(month == 2) {
+			System.out.println("29 dias");
+			return;
+		}
+		
+		//Default case
+		System.out.println("Debe de digitar un numero entre 1 y 12");
 	}
 }
