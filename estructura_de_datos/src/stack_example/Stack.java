@@ -29,6 +29,20 @@ public class Stack {
         this.upgradeSize();
     }
 
+    public void remove() throws Exception {
+        if (this.isEmpty()) throw new Exception("La pila esta vacia");
+
+        if (this.size == 1) {
+            this.top = null;
+            this.downgradeSize();
+            return;
+        }
+
+        Node prevNode = this.top.prev;
+        this.top = prevNode;
+        this.downgradeSize();
+    }
+
     public boolean isEmpty() {
         return this.top == null;
     }
@@ -43,6 +57,10 @@ public class Stack {
 
     private void upgradeSize() {
         this.size++;
+    }
+
+    private void downgradeSize() {
+        this.size--;
     }
 
     private void insertAtFirstPosition(int value) {
