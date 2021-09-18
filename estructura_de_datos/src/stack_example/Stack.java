@@ -18,7 +18,10 @@ public class Stack {
     }
 
     public void insert(int value) throws Exception {
-        if (this.size == 0) this.insertAtFirstPosition(value);
+        if (this.size == 0) {
+            this.insertAtFirstPosition(value);
+            return;
+        }
 
         if (this.isFull()) throw new Exception("La pila esta llena");
 
@@ -50,14 +53,15 @@ public class Stack {
         if (this.isEmpty()) throw new Exception("La pila esta vacia");
 
         Stack auxStack = new Stack();
+        int _size = this.size;
 
-        for(int i=0; i<=this.size; i++) {
+        for(int i=0; i<_size; i++) {
             int value = this.remove();
             System.out.println("Nodo: " + value);
             auxStack.insert(value);
         }
 
-        for (int i=0; i<=this.size; i++) {
+        for (int i=0; i<_size; i++) {
             int value = auxStack.remove();
             this.insert(value);
         }
