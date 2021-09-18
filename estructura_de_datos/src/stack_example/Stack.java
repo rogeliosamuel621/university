@@ -67,6 +67,20 @@ public class Stack {
         }
     }
 
+    public void gi() throws Exception {
+        if (this.isEmpty()) throw new Exception("La pila esta vacia");
+
+        Stack auxStack = new Stack();
+        int _size = this.size;
+
+        for(int i=0; i<_size; i++) {
+            int value = this.remove();
+            auxStack.insert(value);
+        }
+
+        auxStack.show();
+    }
+
     public boolean isEmpty() {
         return this.top == null;
     }

@@ -12,10 +12,8 @@ public class StackMain {
             System.out.println("Inserte tres nodos");
             stack.show();
 
-            stack.remove();
-
-            System.out.println("removi uno");
-            stack.show();
+            System.out.println("invertida");
+            stack.inverse();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
