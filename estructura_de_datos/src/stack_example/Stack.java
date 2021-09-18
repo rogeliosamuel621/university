@@ -67,7 +67,7 @@ public class Stack {
         }
     }
 
-    public void gi() throws Exception {
+    public void inverse() throws Exception {
         if (this.isEmpty()) throw new Exception("La pila esta vacia");
 
         Stack auxStack = new Stack();
