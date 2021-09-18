@@ -29,18 +29,38 @@ public class Stack {
         this.upgradeSize();
     }
 
-    public void remove() throws Exception {
+    public int remove() throws Exception {
         if (this.isEmpty()) throw new Exception("La pila esta vacia");
 
         if (this.size == 1) {
+            Node nodeToRemove = this.top;
             this.top = null;
             this.downgradeSize();
-            return;
+            return nodeToRemove.data;
         }
 
+        Node nodeToRemove = this.top;
         Node prevNode = this.top.prev;
         this.top = prevNode;
         this.downgradeSize();
+        return nodeToRemove.data;
+    }
+
+    public void show() throws Exception {
+        if (this.isEmpty()) throw new Exception("La pila esta vacia");
+
+        Stack auxStack = new Stack();
+
+        for(int i=0; i<=this.size; i++) {
+            int value = this.remove();
+            System.out.println("Nodo: " + value);
+            auxStack.insert(value);
+        }
+
+        for (int i=0; i<=this.size; i++) {
+            int value = auxStack.remove();
+            this.insert(value);
+        }
     }
 
     public boolean isEmpty() {
