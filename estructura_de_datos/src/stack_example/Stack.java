@@ -81,6 +81,41 @@ public class Stack {
         auxStack.show();
     }
 
+    public void Alternate(Stack stack2) throws Exception{
+        if (this.isEmpty() && stack2.isEmpty()){
+            throw new Exception("Las pilas estan vacias");
+        }
+
+        if (this.isEmpty()) {
+            stack2.show();
+            return;
+        }
+
+        if (stack2.isEmpty()) {
+            this.show();
+            return;
+        }
+
+        int totalSize = this.getTotalSize(stack2.size);
+        Stack resultStack = new Stack();
+
+        for(int i=0; i<totalSize; i++) {
+            if (i % 2 == 0) {
+                if (this.isEmpty()) continue;
+
+                int value = this.remove();
+                resultStack.insert(value);
+            } else {
+                if (stack2.isEmpty()) continue;;
+
+                int value = stack2.remove();
+                resultStack.insert(value);
+            }
+        }
+
+        resultStack.show();
+    }
+
     public boolean isEmpty() {
         return this.top == null;
     }
@@ -99,6 +134,16 @@ public class Stack {
 
     private void downgradeSize() {
         this.size--;
+    }
+
+    private int getTotalSize(int size) {
+        int differenceBetweenSizes = this.size - size;
+
+        if (differenceBetweenSizes < 0) differenceBetweenSizes*= -1;
+
+        int totalSize = this.size + size + differenceBetweenSizes;
+
+        return totalSize;
     }
 
     private void insertAtFirstPosition(int value) {
