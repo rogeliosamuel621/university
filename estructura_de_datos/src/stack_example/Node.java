@@ -9,7 +9,7 @@ public class Node {
         this.data = 0;
     }
 
-    public void Node(Node prev, int data) {
+    public void Node(int data) {
         this.prev = prev;
         this.data = data;
     }
