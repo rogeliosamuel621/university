@@ -30,21 +30,49 @@ public class Queue {
         this.upgradeLength();
     }
 
-    public void remove() {
+    public Node remove() {
         if (this.isEmpty()) {
             System.out.println("La cola esta vacia");
-            return;
+            return null;
         }
 
         if (this.length == 1) {
+            Node currentNode = this.first;
             this.first = null;
             this.last = null;
             this.downgradeLength();
-            return;
+            return currentNode;
         }
 
+        Node currentNode = this.first;
         this.first = this.first.prev;
         this.downgradeLength();
+        return currentNode;
+    }
+
+    public void show() {
+        Node currentNode = this.first;
+
+        for(int i=0; i<this.length; i++) {
+            System.out.println(currentNode.getValue());
+            currentNode = currentNode.prev;
+        }
+    }
+
+    public void show(boolean param) {
+        Queue auxQueue = new Queue(this.length);
+        int initialLength = this.length;
+
+        for(int i=0; i<initialLength; i++) {
+            Node currentNode = this.remove();
+            System.out.println(currentNode.getValue());
+            auxQueue.insert(currentNode.getValue());
+        }
+
+        for(int i=0; i<initialLength; i++) {
+            Node currentNode = auxQueue.remove();
+            this.insert(currentNode.getValue());
+        }
     }
 
     private boolean isEmpty() {

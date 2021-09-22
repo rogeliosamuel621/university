@@ -2,7 +2,7 @@ package queue_example;
 
 public class Node {
     Node prev;
-    int value;
+    private int value;
 
     public Node() {
         this.prev = null;

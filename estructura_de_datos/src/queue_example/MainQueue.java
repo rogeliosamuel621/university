@@ -9,6 +9,7 @@ public class MainQueue {
         queue.insert(4);
         queue.insert(5);
 
+        queue.show(true);
     }
 
 
