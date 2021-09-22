@@ -6,12 +6,8 @@ public class Queue {
     int capacity;
     int length;
 
-    private boolean isEmpty() {
-        return this.length == 0;
-    }
-
-    private boolean isFully() {
-        return this.length == this.capacity;
+    public Queue(int capacity) {
+        this.capacity = capacity;
     }
 
     public void insert(int value) {
@@ -51,6 +47,13 @@ public class Queue {
         this.downgradeLength();
     }
 
+    private boolean isEmpty() {
+        return this.length == 0;
+    }
+
+    private boolean isFully() {
+        return this.length == this.capacity;
+    }
     private void upgradeLength() {
         this.length++;
     }
