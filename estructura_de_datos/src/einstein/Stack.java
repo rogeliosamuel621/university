@@ -1,5 +1,7 @@
 package einstein;
 
+import java.util.concurrent.TimeUnit;
+
 public class Stack {
     Article top;
     int size;
@@ -63,4 +65,15 @@ public class Stack {
         return this.top == null;
     }
 
+    private int getRandomNumber() {
+        return (int)((Math.random() * 3) + 1);
+    }
+
+    private void wait(int number) throws Exception{
+        try {
+            TimeUnit.SECONDS.sleep(number);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
