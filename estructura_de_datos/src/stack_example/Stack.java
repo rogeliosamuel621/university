@@ -114,6 +114,7 @@ public class Stack {
         }
 
         resultStack.show();
+
     }
 
     public boolean isEmpty() {

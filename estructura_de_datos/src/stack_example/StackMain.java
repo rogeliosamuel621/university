@@ -15,6 +15,7 @@ public class StackMain {
             stack2.insert(6);
 
             stack.Alternate(stack2);
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
