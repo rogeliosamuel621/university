@@ -8,7 +8,6 @@ public class Servidor
     Proceso ultimo;
     int capacidad;
     int cont;
-    Proceso[] listaDeProcesos;
 
     public Servidor(int capacidad) {
         this.capacidad = capacidad;
@@ -17,17 +16,6 @@ public class Servidor
     public int NumeroAleatorio(int tope)
     {
         return (int)((Math.random() * tope) + 1);
-    }
-
-    public void Crea60Procesos()
-    {
-        listaDeProcesos = new Proceso[59];
-        for(int i=0;i>=59;i++)
-        {
-            int NumA= NumeroAleatorio(60);
-            Proceso proceso = new Proceso(NumA);
-            listaDeProcesos[i]= proceso;
-        }
     }
 
     public void insert(int value) {
