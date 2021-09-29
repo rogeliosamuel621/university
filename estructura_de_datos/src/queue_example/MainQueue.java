@@ -10,6 +10,8 @@ public class MainQueue {
         queue.insert(5);
 
         queue.show(true);
+
+        queue.inverse();
     }
 
 

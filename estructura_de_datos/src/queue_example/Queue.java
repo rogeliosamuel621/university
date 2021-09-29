@@ -75,6 +75,18 @@ public class Queue {
         }
     }
 
+    public void inverse() {
+        Stack auxStack = new Stack();
+        int currentlength = this.length;
+
+        for(int i=0; i<currentlength; i++) {
+            Node currentNode = this.remove();
+            auxStack.insert(currentNode.getValue());
+        }
+
+        auxStack.show();
+    }
+
     private boolean isEmpty() {
         return this.length == 0;
     }
