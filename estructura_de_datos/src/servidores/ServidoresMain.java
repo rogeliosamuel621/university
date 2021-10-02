@@ -1,5 +1,11 @@
 package servidores;
 
+/**
+ * This thing I made with a teammate
+ * And we were running out of time
+ * that's why the code is terrible xd
+ */
+
 import java.util.concurrent.TimeUnit;
 
 public class ServidoresMain {
