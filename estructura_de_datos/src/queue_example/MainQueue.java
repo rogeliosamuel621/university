@@ -9,8 +9,11 @@ public class MainQueue {
         queue.insert(4);
         queue.insert(5);
 
+        System.out.println("normal");
         queue.show(true);
 
+        System.out.println("invertido");
+        System.out.println();
         queue.inverse();
     }
 

@@ -10,7 +10,7 @@ public class ServidoresMain {
 
         for(int i=0;i<=59;i++)
         {
-            int NumA= servidor1.NumeroAleatorio(60);
+            int NumA= servidor1.NumeroAleatorio(100);
             Proceso proceso = new Proceso(NumA);
             listaDeProcesos[i]= proceso;
         }
@@ -27,6 +27,11 @@ public class ServidoresMain {
                 int procesosServidor1 = servidor1.cont;
                 int procesosServidor2 = servidor2.cont;
                 boolean servidor1TieneMas = procesosServidor1 > procesosServidor2;
+
+                if (servidor1.cont == 20) {
+                    servidor2.insert(listaDeProcesos[i].peso);
+                    System.out.println("El proceso de " + listaDeProcesos[i].peso + "MB se inserto en el mainframe 2");
+                }
 
                 if (servidor1TieneMas) {
                     servidor2.insert(listaDeProcesos[i].peso);
