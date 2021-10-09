@@ -9,13 +9,20 @@ package priority_queue;
 
 public class PriorityQueue {
     PriorityNode[] data;
-    int size = 0;
-    private int limit = 10;
+    int size;
+    private int limit;
 
-    public PriorityQueue() {
-        this.data = null;
+    private final int DEFAULT_LIMIT = 12;
+    private final int INITIAL_SIZE = 1;
+
+
+    public PriorityQueue(int limit) {
+        this.data = new PriorityNode[limit];
+        this.limit = limit | this.DEFAULT_LIMIT;
+        this.size = INITIAL_SIZE;
     }
 
+    /**
     public void push(int priority, String value) {
         PriorityNode newNode = new PriorityNode(priority, value);
         this.size++;
@@ -28,8 +35,66 @@ public class PriorityQueue {
         int position = this.size;
         data[position] = newNode;
     }
+    */
 
-    public boolean isEmpty(){
-        return this.size == 0;
+    public void push(int priority, String value) {
+        if (this.isFull()) {
+            System.out.println("Priority queue is full");
+            return;
+        }
+
+        if (isEmpty()) {
+            this.insertAtFirstPosition(value);
+            return;
+        }
+
+        int currentPosition = this.size;
+        PriorityNode newNode = new PriorityNode(priority, value);
+
+        data[currentPosition] = newNode;
+
+        int parentPosition = this.getParentPosition(currentPosition);
+        PriorityNode parentNode = this.data[parentPosition];
+
+        while (currentPosition != this.INITIAL_SIZE && parentNode.getPriority() > newNode.getPriority()) {
+            // exchange
+            this.data[currentPosition] = parentNode;
+            this.data[parentPosition] = newNode;
+
+            // update positions
+            currentPosition = parentPosition;
+            parentPosition = this.getParentPosition(currentPosition);
+
+            // get new parentNode
+            parentNode = this.data[parentPosition];
+        }
+
+    }
+
+    private void insertAtFirstPosition(String value) {
+        PriorityNode newNode = new PriorityNode(1, value);
+
+        this.data[this.size] = newNode;
+        this.upgradeSize();
+    }
+
+    private int getParentPosition(int position) {
+        return (int)(position / 2);
+    }
+
+    private boolean isEmpty(){
+        return this.size == this.INITIAL_SIZE;
+    }
+
+    private boolean isFull() {
+        return this.size == this.limit;
+    }
+
+    private void upgradeSize() {
+        this.size++;
+    }
+
+    private void downgradeSize() {
+        this.size--;
     }
 }

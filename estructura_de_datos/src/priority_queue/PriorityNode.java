@@ -5,7 +5,7 @@ public class PriorityNode {
     private String value;
 
     public PriorityNode() {
-        this.priority = 0;
+        this.priority = 1;
         this.value = "";
     }
 
