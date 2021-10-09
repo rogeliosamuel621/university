@@ -13,7 +13,7 @@ public class PriorityQueue {
     private int limit;
 
     private final int DEFAULT_LIMIT = 12;
-    private final int INITIAL_SIZE = 0;
+    private final int INITIAL_SIZE = 1;
 
 
     public PriorityQueue(int limit) {
@@ -37,51 +37,48 @@ public class PriorityQueue {
     }
     */
 
-    public void push(int priority, String value){
-
+    public void push(int priority, String value) {
         if (this.isFull()) {
-            System.out.println("Is full");
+            System.out.println("Priority queue is full");
             return;
         }
-        //creamos nodo a insertar
-        PriorityNode nodeToInsert = new PriorityNode(priority, value);
-        //aumentamos el tamaño de la cola priorizada
-        this.size++;
-        //si es el primero lo ponemos en la posición 1 y listo
-        if (size ==1){
-            data[size] = nodeToInsert;
-        } else {
-            //Si no está vacía la cola priorizada
-            //la posición temporal es la última
-            int myPosition = size;
-            //ponemos el nodo ahí
-            data[myPosition] = nodeToInsert;
-            //encontramos la posición del padre
-            int myParentPosition =(int)(myPosition/2);
-            //Y guardamos el valor del padre
-            PriorityNode myParent= data[myParentPosition];
-            //repetimos intercambiar el padre con el hijo hasta que el padre
-            //tenga mayor prioridad que el hijo
 
-            while (myPosition!=1&& myParent.getPriority()>nodeToInsert.getPriority()
-            ){
-                data[myPosition] = myParent;
-                data[myParentPosition] = nodeToInsert;
-                myPosition =myParentPosition;
-                myParentPosition = (int)(myParentPosition/2);
-                myParent= data[myParentPosition];
-            }
+        if (isEmpty()) {
+            this.insertAtFirstPosition(priority, value);
+            return;
+        }
+
+        int currentPosition = this.size;
+        PriorityNode newNode = new PriorityNode(priority, value);
+
+        data[currentPosition] = newNode;
+        this.upgradeSize();
+
+        int parentPosition = this.getParentPosition(currentPosition);
+        PriorityNode parentNode = this.data[parentPosition];
+
+        while (currentPosition != this.INITIAL_SIZE && parentNode.getPriority() > newNode.getPriority()) {
+            // exchange
+            this.data[currentPosition] = parentNode;
+            this.data[parentPosition] = newNode;
+
+            // update positions
+            currentPosition = parentPosition;
+            parentPosition = this.getParentPosition(currentPosition);
+
+            // get new parentNode
+            parentNode = this.data[parentPosition];
         }
     }
 
     public void show() {
-        for(int i=1; i<=this.size; i++) {
+        for(int i=this.INITIAL_SIZE; i<this.size; i++) {
             System.out.println(data[i].getValue());
         }
     }
 
-    private void insertAtFirstPosition(String value) {
-        PriorityNode newNode = new PriorityNode(1, value);
+    private void insertAtFirstPosition(int priority, String value) {
+        PriorityNode newNode = new PriorityNode(priority, value);
 
         this.data[this.size] = newNode;
         this.upgradeSize();
