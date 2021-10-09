@@ -52,6 +52,7 @@ public class PriorityQueue {
         PriorityNode newNode = new PriorityNode(priority, value);
 
         data[currentPosition] = newNode;
+        this.upgradeSize();
 
         int parentPosition = this.getParentPosition(currentPosition);
         PriorityNode parentNode = this.data[parentPosition];
@@ -68,7 +69,12 @@ public class PriorityQueue {
             // get new parentNode
             parentNode = this.data[parentPosition];
         }
+    }
 
+    public void show() {
+        for(int i=this.INITIAL_SIZE; i<this.size; i++) {
+            System.out.println(data[i].getValue());
+        }
     }
 
     private void insertAtFirstPosition(String value) {

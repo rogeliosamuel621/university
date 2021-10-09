@@ -15,11 +15,11 @@ public class PriorityNode {
     }
 
     public int getPriority() {
-        return priority;
+        return this.priority;
     }
 
     public String getValue() {
-        return value;
+        return this.value;
     }
 
     public void setPriority(int priority) {
