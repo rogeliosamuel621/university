@@ -1,15 +1,15 @@
 package priority_queue;
 
-public class Node {
+public class PriorityNode {
     private int priority;
     private String value;
 
-    public Node() {
+    public PriorityNode() {
         this.priority = 0;
         this.value = "";
     }
 
-    public Node(int priority, String value) {
+    public PriorityNode(int priority, String value) {
         this.priority = priority;
         this.value = value;
     }

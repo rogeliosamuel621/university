@@ -1,7 +1,14 @@
 package priority_queue;
 
+/**
+ * 2*n left child
+ * 2*n+1 right child
+ * round (n/2) someone's parent
+ * n is equal to array position
+ */
+
 public class PriorityQueue {
-    Node[] data;
+    PriorityNode[] data;
     int size = 0;
     private int limit = 10;
 
@@ -10,7 +17,7 @@ public class PriorityQueue {
     }
 
     public void push(int priority, String value) {
-        Node newNode = new Node(priority, value);
+        PriorityNode newNode = new PriorityNode(priority, value);
         this.size++;
 
         if (this.isEmpty()) {
