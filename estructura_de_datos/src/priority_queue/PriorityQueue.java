@@ -69,11 +69,29 @@ public class PriorityQueue {
             // get new parentNode
             parentNode = this.data[parentPosition];
         }
+
+        this.orderBrothers(parentPosition);
     }
 
     public void show() {
         for(int i=this.INITIAL_SIZE; i<this.size; i++) {
             System.out.println(data[i].getValue());
+        }
+    }
+
+    private void orderBrothers(int parentPosition) {
+        int leftChildPosition = 2 * parentPosition;
+        int rightChildPosition = 2 * parentPosition + 1;
+
+        PriorityNode leftChild = this.data[leftChildPosition];
+        PriorityNode rightChild = this.data[rightChildPosition];
+
+
+        if(leftChild == null || rightChild == null) return;
+
+        if (rightChild.getPriority() < leftChild.getPriority()) {
+            this.data[leftChildPosition] = rightChild;
+            this.data[rightChildPosition] = leftChild;
         }
     }
 
