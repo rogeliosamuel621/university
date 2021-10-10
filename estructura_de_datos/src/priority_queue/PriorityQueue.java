@@ -1,6 +1,7 @@
 package priority_queue;
 
-import javax.swing.plaf.IconUIResource;
+
+import java.util.Scanner;
 
 /**
  * 2*n left child
@@ -14,7 +15,6 @@ public class PriorityQueue {
     int size;
     private int limit;
 
-    private final int DEFAULT_LIMIT = 12;
     private final int INITIAL_SIZE = 1;
 
 
@@ -156,6 +156,26 @@ public class PriorityQueue {
         for(int i=this.INITIAL_SIZE; i<this.size; i++) {
             System.out.println(data[i].getValue());
         }
+    }
+
+    public void mostrarMenu() {
+        int OPCION=0;
+        Scanner leer = new Scanner(System.in);
+        do
+        {
+            System.out.println("1.-Establecer el tope de la cola");
+            System.out.println("2.-Establecer el rango de tiempo en el que se ingresan datos");
+            System.out.println("3.-Establecer el rango de tiempo de servicio del servidor");
+            System.out.println("4.-Iniciar");
+            System.out.println();
+
+
+            System.out.print("SELECCIONA UNA OPCION: ");
+            OPCION=leer.nextInt();
+
+        }while(OPCION !=4);
+        System.out.println();
+        System.out.println("Terminó");
     }
 
     private void orderBrothers(int parentPosition) {
