@@ -71,6 +71,7 @@ public class PriorityQueue {
             System.out.println("La cola esta vacia");
             return;
         }
+
         if (this.size == 2) {
             this.data[this.size - 1] = null;
             this.downgradeSize();
@@ -143,7 +144,6 @@ public class PriorityQueue {
         }
 
         this.downgradeSize();
-
     }
 
     public void show() {
@@ -242,12 +242,35 @@ public class PriorityQueue {
     }
 
     private void start() {
-        System.out.println("start...");
+/*        System.out.println("start...");
         System.out.println("Limite: " + this.limit);
         System.out.println("Tiempo minimo para push: " + this.minTimeForPush);
         System.out.println("Tiempo maximo para push: " + this.maxTimeForPush);
         System.out.println("Tiempo minimo para pop: " + this.minTimeForPop);
-        System.out.println("Tiempo maximo para pop: " + this.maxTimeForPop);
+        System.out.println("Tiempo maximo para pop: " + this.maxTimeForPop);*/
+
+        int totalSeconds = 0;
+
+        while (totalSeconds <= 180) {
+            boolean hasToPush = this.getHasToPush();
+            int timeToWait = hasToPush ? getTimeToPush() : getTimeToPop();
+
+        }
+
+    }
+
+    private int getTimeToPush() {
+        return (int)(Math.random() * this.maxTimeForPush + this.minTimeForPush);
+    }
+
+    private int getTimeToPop() {
+        return (int)(Math.random() * this.maxTimeForPop + this.minTimeForPop);
+    }
+
+    private boolean getHasToPush() {
+        int num = (int)(Math.random() * 2 + 1);
+
+        return num == 1;
     }
 
     private void orderBrothers(int parentPosition) {
