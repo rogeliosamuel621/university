@@ -13,6 +13,12 @@ public class PriorityQueue {
     PriorityNode[] data;
     int size;
     private int limit;
+    int minTimeForPush = 0;
+    int maxTimeForPush = 3;
+
+    int minTimeForPop = 3;
+    int maxTimeForPop = 3;
+
 
     private final int INITIAL_SIZE = 1;
 
@@ -98,7 +104,6 @@ public class PriorityQueue {
 
             if (leftChild == null) {
                 if (!(rightChild.getPriority() < lastNode.getPriority())) {
-                    System.out.println("derecha");
                     this.data[rightChildPosition] = lastNode;
                     this.data[currentPosition] = rightChild;
                     currentPosition = rightChildPosition;
@@ -108,7 +113,6 @@ public class PriorityQueue {
 
             if (rightChild == null) {
                 if (!(leftChild.getPriority() < lastNode.getPriority())) {
-                    System.out.println("izquierda");
                     this.data[leftChildPosition] = lastNode;
                     this.data[currentPosition] = leftChild;
                     currentPosition = leftChildPosition;
@@ -119,14 +123,13 @@ public class PriorityQueue {
 
             boolean lastNodeHasMorePriority =
                     lastNode.getPriority() < leftChild.getPriority() &&
-                            lastNode.getPriority() < rightChild.getPriority();
+                    lastNode.getPriority() < rightChild.getPriority();
 
             if (lastNodeHasMorePriority) {
                 break;
             }
 
             if (rightChild.getPriority() < leftChild.getPriority()) {
-                System.out.println("derecha mayor prioridad");
                 this.data[rightChildPosition] = lastNode;
                 this.data[currentPosition] = rightChild;
                 currentPosition = rightChildPosition;
@@ -134,7 +137,6 @@ public class PriorityQueue {
                 continue;
             }
 
-            System.out.println("izquierda default");
             this.data[leftChildPosition] = lastNode;
             this.data[currentPosition] = leftChild;
             currentPosition = leftChildPosition;
@@ -145,8 +147,9 @@ public class PriorityQueue {
     }
 
     public void show() {
+        System.out.println("Nombre" + "\t\t\t" + "Prioridad");
         for(int i=this.INITIAL_SIZE; i<this.size; i++) {
-            System.out.println(data[i].getValue());
+            System.out.println(data[i].getValue() + "\t\t\t" + data[i].getPriority());
         }
     }
 
@@ -165,7 +168,86 @@ public class PriorityQueue {
             System.out.print("SELECCIONA UNA OPCION: ");
             OPCION=leer.nextInt();
 
+            this.makeAction(OPCION);
+
         }while(OPCION !=4);
+    }
+
+    public void setLimit(int limit) {
+        this.limit = limit;
+    }
+
+    private void makeAction(int action) {
+        switch (action) {
+            case 1:
+                this.setLimitAction();
+                break;
+            case 2:
+                this.setTimeForPushAction();
+                break;
+            case 3:
+                this.setTimeForPopAction();
+                break;
+            case 4:
+                this.start();
+                break;
+            default:
+                System.out.println("Esa opcion no esta disponible, escoga otra");
+        }
+    }
+
+    private void setLimitAction() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Digite el limite de la cola");
+        int newLimit = sc.nextInt();
+
+        this.setLimit(newLimit);
+    }
+
+    private void setTimeForPushAction() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Digite el tiempo minimo");
+        int minTime = sc.nextInt();
+
+        System.out.println("Digite el tiempo maximo");
+        int maxTime = sc.nextInt();
+
+        if (minTime >= maxTime) {
+            System.out.println("El tiempo minimo debe ser menor que el tiempo maximo");
+            return;
+        }
+
+        this.minTimeForPush = minTime;
+        this.maxTimeForPush = maxTime;
+    }
+
+    private void setTimeForPopAction() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Digite el tiempo minimo");
+        int minTime = sc.nextInt();
+
+        System.out.println("Digite el tiempo maximo");
+        int maxTime = sc.nextInt();
+
+        if (minTime >= maxTime) {
+            System.out.println("El tiempo minimo debe ser menor que el tiempo maximo");
+            return;
+        }
+
+        this.minTimeForPop = minTime;
+        this.maxTimeForPop = maxTime;
+    }
+
+    private void start() {
+        System.out.println("start...");
+        System.out.println("Limite: " + this.limit);
+        System.out.println("Tiempo minimo para push: " + this.minTimeForPush);
+        System.out.println("Tiempo maximo para push: " + this.maxTimeForPush);
+        System.out.println("Tiempo minimo para pop: " + this.minTimeForPop);
+        System.out.println("Tiempo maximo para pop: " + this.maxTimeForPop);
     }
 
     private void orderBrothers(int parentPosition) {
