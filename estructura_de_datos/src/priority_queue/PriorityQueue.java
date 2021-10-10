@@ -18,7 +18,7 @@ public class PriorityQueue {
 
     public PriorityQueue(int limit) {
         this.data = new PriorityNode[limit];
-        this.limit = limit | this.DEFAULT_LIMIT;
+        this.limit = limit;
         this.size = INITIAL_SIZE;
     }
 
