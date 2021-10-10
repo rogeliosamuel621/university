@@ -1,5 +1,7 @@
 package priority_queue;
 
+import javax.swing.plaf.IconUIResource;
+
 /**
  * 2*n left child
  * 2*n+1 right child
@@ -21,21 +23,6 @@ public class PriorityQueue {
         this.limit = limit;
         this.size = INITIAL_SIZE;
     }
-
-    /**
-    public void push(int priority, String value) {
-        PriorityNode newNode = new PriorityNode(priority, value);
-        this.size++;
-
-        if (this.isEmpty()) {
-            data[size] = newNode;
-            return;
-        }
-
-        int position = this.size;
-        data[position] = newNode;
-    }
-    */
 
     public void push(int priority, String value) {
         if (this.isFull()) {
@@ -71,6 +58,98 @@ public class PriorityQueue {
         }
 
         this.orderBrothers(parentPosition);
+    }
+
+    public void pop() {
+        if (this.isEmpty()) {
+            System.out.println("Is empty");
+            return;
+        }
+        if (this.size == 2) {
+            System.out.println("primero");
+            this.data[this.size - 1] = null;
+            this.downgradeSize();
+            return;
+        }
+
+        int currentPosition = this.INITIAL_SIZE;
+        int lastPosition = this.size - 1;
+
+        PriorityNode lastNode = this.data[lastPosition];
+
+        this.data[currentPosition] = lastNode;
+        this.data[lastPosition] = null;
+
+        int leftChildPosition = 2 * currentPosition;
+        int rightChildPosition = 2 * currentPosition + 1;
+
+        PriorityNode leftChild = this.data[leftChildPosition];
+        PriorityNode rightChild = this.data[rightChildPosition];
+
+        System.out.println("current node " + lastNode.getValue());
+        System.out.println("current position " + currentPosition);
+        System.out.println();
+
+        while (rightChild != null || leftChild != null) {
+            leftChildPosition = 2 * currentPosition;
+            rightChildPosition = 2 * currentPosition + 1;
+
+            leftChild = this.data[leftChildPosition];
+            rightChild = this.data[rightChildPosition];
+
+            System.out.println("current position " + currentPosition);
+            System.out.println();
+
+            boolean hasTwoChildren = leftChild != null && rightChild != null;
+
+            if (!hasTwoChildren) break;
+
+            if (leftChild == null) {
+                if (!(rightChild.getPriority() < lastNode.getPriority())) {
+                    System.out.println("derecha");
+                    this.data[rightChildPosition] = lastNode;
+                    this.data[currentPosition] = rightChild;
+                    currentPosition = rightChildPosition;
+                    continue;
+                }
+            }
+
+            if (rightChild == null) {
+                if (!(leftChild.getPriority() < lastNode.getPriority())) {
+                    System.out.println("izquierda");
+                    this.data[leftChildPosition] = lastNode;
+                    this.data[currentPosition] = leftChild;
+                    currentPosition = leftChildPosition;
+                    continue;
+                }
+            }
+
+
+            boolean lastNodeHasMorePriority =
+                    lastNode.getPriority() < leftChild.getPriority() &&
+                    lastNode.getPriority() < rightChild.getPriority();
+
+            if (lastNodeHasMorePriority) {
+                break;
+            }
+
+            if (rightChild.getPriority() < leftChild.getPriority()) {
+                System.out.println("derecha mayor prioridad");
+                this.data[rightChildPosition] = lastNode;
+                this.data[currentPosition] = rightChild;
+                currentPosition = rightChildPosition;
+
+                continue;
+            }
+
+            System.out.println("izquierda default");
+            this.data[leftChildPosition] = lastNode;
+            this.data[currentPosition] = leftChild;
+            currentPosition = leftChildPosition;
+        }
+
+        this.downgradeSize();
+
     }
 
     public void show() {

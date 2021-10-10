@@ -2,22 +2,28 @@ package priority_queue;
 
 public class MainPriorityQueue {
     public static void main(String[] args) {
-        PriorityQueue priorityQueue = new PriorityQueue(10);
+        PriorityQueue priorityQueue = new PriorityQueue(20);
 
-        priorityQueue.push(5, "Alan");
-        priorityQueue.push(1, "Maia");
-        priorityQueue.push(1, "Lie");
-        priorityQueue.push(5, "Alan");
-        priorityQueue.push(1, "Maia");
-        priorityQueue.push(1, "Lie");
-        priorityQueue.push(5, "Alan");
-        priorityQueue.push(1, "Maia");
-        priorityQueue.push(1, "Lie");
-        priorityQueue.push(5, "Alan");
-        priorityQueue.push(1, "Maia");
-        priorityQueue.push(1, "Lie");
+        priorityQueue.push(1, "2");
+        priorityQueue.push(2, "2");
+        priorityQueue.push(2, "5");
+        priorityQueue.push(3, "7");
+        priorityQueue.push(3, "4");
+        priorityQueue.push(3, "7");
+        priorityQueue.push(3, "11");
+        priorityQueue.push(4, "8");
+        priorityQueue.push(4, "10");
+        priorityQueue.push(4, "6");
 
         System.out.println();
+        System.out.println("psuh");
         priorityQueue.show();
+
+        priorityQueue.pop();
+
+        System.out.println();
+        System.out.println("pop");
+        priorityQueue.show();
+
     }
 }
