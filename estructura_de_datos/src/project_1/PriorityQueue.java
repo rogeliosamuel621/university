@@ -1,5 +1,4 @@
-package priority_queue;
-
+package project_1;
 
 import java.util.Scanner;
 
@@ -26,7 +25,7 @@ public class PriorityQueue {
 
     public void push(int priority, String value) {
         if (this.isFull()) {
-            System.out.println("Priority queue is full");
+            System.out.println("La cola esta llena");
             return;
         }
 
@@ -58,15 +57,15 @@ public class PriorityQueue {
         }
 
         this.orderBrothers(parentPosition);
+        System.out.println("nodo insertado");
     }
 
     public void pop() {
         if (this.isEmpty()) {
-            System.out.println("Is empty");
+            System.out.println("La cola esta vacia");
             return;
         }
         if (this.size == 2) {
-            System.out.println("primero");
             this.data[this.size - 1] = null;
             this.downgradeSize();
             return;
@@ -86,19 +85,12 @@ public class PriorityQueue {
         PriorityNode leftChild = this.data[leftChildPosition];
         PriorityNode rightChild = this.data[rightChildPosition];
 
-        System.out.println("current node " + lastNode.getValue());
-        System.out.println("current position " + currentPosition);
-        System.out.println();
-
         while (rightChild != null || leftChild != null) {
             leftChildPosition = 2 * currentPosition;
             rightChildPosition = 2 * currentPosition + 1;
 
             leftChild = this.data[leftChildPosition];
             rightChild = this.data[rightChildPosition];
-
-            System.out.println("current position " + currentPosition);
-            System.out.println();
 
             boolean hasTwoChildren = leftChild != null && rightChild != null;
 
@@ -127,7 +119,7 @@ public class PriorityQueue {
 
             boolean lastNodeHasMorePriority =
                     lastNode.getPriority() < leftChild.getPriority() &&
-                    lastNode.getPriority() < rightChild.getPriority();
+                            lastNode.getPriority() < rightChild.getPriority();
 
             if (lastNodeHasMorePriority) {
                 break;
