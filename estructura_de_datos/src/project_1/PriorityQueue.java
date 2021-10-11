@@ -1,6 +1,7 @@
 package project_1;
 
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 2*n left child
@@ -13,10 +14,10 @@ public class PriorityQueue {
     PriorityNode[] data;
     int size;
     private int limit;
-    int minTimeForPush = 0;
+    int minTimeForPush = 1;
     int maxTimeForPush = 3;
 
-    int minTimeForPop = 3;
+    int minTimeForPop = 1;
     int maxTimeForPop = 3;
 
 
@@ -37,6 +38,7 @@ public class PriorityQueue {
 
         if (isEmpty()) {
             this.insertAtFirstPosition(priority, value);
+            System.out.println("Se ha insertado un usuario en la cola");
             return;
         }
 
@@ -63,7 +65,7 @@ public class PriorityQueue {
         }
 
         this.orderBrothers(parentPosition);
-        System.out.println("nodo insertado");
+        System.out.println("Se ha insertado un usuario en la cola");
     }
 
     public void pop() {
@@ -75,6 +77,7 @@ public class PriorityQueue {
         if (this.size == 2) {
             this.data[this.size - 1] = null;
             this.downgradeSize();
+            System.out.println("Se ha removido un usuario de la cola");
             return;
         }
 
@@ -144,13 +147,19 @@ public class PriorityQueue {
         }
 
         this.downgradeSize();
+        System.out.println("Se ha removido un usuario de la cola");
     }
 
     public void show() {
+        System.out.println();
+        System.out.println("Estado de la tabla");
+        System.out.println("-----------------------------------");
         System.out.println("Nombre" + "\t\t\t" + "Prioridad");
         for(int i=this.INITIAL_SIZE; i<this.size; i++) {
             System.out.println(data[i].getValue() + "\t\t\t" + data[i].getPriority());
         }
+        System.out.println("-----------------------------------");
+        System.out.println();
     }
 
     public void mostrarMenu() {
@@ -242,20 +251,39 @@ public class PriorityQueue {
     }
 
     private void start() {
-/*        System.out.println("start...");
+        System.out.println("start...");
         System.out.println("Limite: " + this.limit);
         System.out.println("Tiempo minimo para push: " + this.minTimeForPush);
         System.out.println("Tiempo maximo para push: " + this.maxTimeForPush);
         System.out.println("Tiempo minimo para pop: " + this.minTimeForPop);
-        System.out.println("Tiempo maximo para pop: " + this.maxTimeForPop);*/
+        System.out.println("Tiempo maximo para pop: " + this.maxTimeForPop);
 
         int totalSeconds = 0;
 
         while (totalSeconds <= 180) {
+            System.out.println("totalSeconds " + totalSeconds);
             boolean hasToPush = this.getHasToPush();
             int timeToWait = hasToPush ? getTimeToPush() : getTimeToPop();
 
+            for(int i=0; i<=timeToWait; i++) {
+                this.await(1);
+                totalSeconds = totalSeconds + 1;
+                this.show();
+            }
+
+            if (hasToPush) {
+                int randomPriority = this.getRandomPriority();
+                String randomName = this.getRandomName();
+
+                this.push(randomPriority, randomName);
+                continue;
+            }
+
+            this.pop();
         }
+
+        System.out.println("Ha terminado");
+        this.show();
 
     }
 
@@ -271,6 +299,18 @@ public class PriorityQueue {
         int num = (int)(Math.random() * 2 + 1);
 
         return num == 1;
+    }
+
+    private int getRandomPriority() {
+        return (int)(Math.random() * 5 + 1);
+    }
+
+    private String getRandomName() {
+        int randomPosition = (int)(Math.random() * 9);
+
+        String[] names = {"Maia", "Alan", "Samuel", "Lie", "Paulina", "Alejandra", "Marielena", "Alberto", "Eduardo", "Alma"};
+
+        return names[randomPosition];
     }
 
     private void orderBrothers(int parentPosition) {
@@ -314,5 +354,13 @@ public class PriorityQueue {
 
     private void downgradeSize() {
         this.size--;
+    }
+
+    private void await(int number) {
+        try {
+            TimeUnit.SECONDS.sleep(number);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
