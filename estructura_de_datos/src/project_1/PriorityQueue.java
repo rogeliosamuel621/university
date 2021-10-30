@@ -212,6 +212,7 @@ public class PriorityQueue {
         int newLimit = sc.nextInt();
 
         this.setLimit(newLimit);
+        System.out.println("Se han guardado los cambios, nuevo limite: " + newLimit);
     }
 
     private void setTimeForPushAction() {
@@ -230,6 +231,9 @@ public class PriorityQueue {
 
         this.minTimeForPush = minTime;
         this.maxTimeForPush = maxTime;
+
+        System.out.println("El tiempo minimo es: " + minTime);
+        System.out.println("El tiempo maximo es: " + maxTime);
     }
 
     private void setTimeForPopAction() {
@@ -248,6 +252,9 @@ public class PriorityQueue {
 
         this.minTimeForPop = minTime;
         this.maxTimeForPop = maxTime;
+
+        System.out.println("El tiempo minimo es: " + minTime);
+        System.out.println("El tiempo maximo es: " + maxTime);
     }
 
     private void start() {
@@ -257,11 +264,9 @@ public class PriorityQueue {
         System.out.println("Tiempo maximo para push: " + this.maxTimeForPush);
         System.out.println("Tiempo minimo para pop: " + this.minTimeForPop);
         System.out.println("Tiempo maximo para pop: " + this.maxTimeForPop);
-
         int totalSeconds = 0;
 
         while (totalSeconds <= 180) {
-            System.out.println("totalSeconds " + totalSeconds);
             boolean hasToPush = this.getHasToPush();
             int timeToWait = hasToPush ? getTimeToPush() : getTimeToPop();
 
@@ -282,7 +287,7 @@ public class PriorityQueue {
             this.pop();
         }
 
-        System.out.println("Ha terminado");
+        System.out.println("1Se ha terminado la simulación");
         this.show();
 
     }
