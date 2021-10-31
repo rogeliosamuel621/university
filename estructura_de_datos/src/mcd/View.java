@@ -1,9 +1,18 @@
 package mcd;
 
+import java.util.Scanner;
+
 public class View {
     public static void main(String[] args) {
-        System.out.println(getMcdRecursively(180, 324));
-        System.out.println(getMcdRecursively(10, 15));
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Digite el numero 1: ");
+        int num1 = sc.nextInt();
+
+        System.out.println("Digiste el numero 2: ");
+        int num2 = sc.nextInt();
+
+        System.out.println("Resultado: " + getMcdRecursively(num1, num2));
     }
 
     public static int getMcdRecursively(int num1, int num2) {
