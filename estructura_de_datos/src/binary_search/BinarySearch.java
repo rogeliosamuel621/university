@@ -11,7 +11,6 @@ public class BinarySearch {
 
         if (list[middle] == objective) return true;
 
-        System.out.println("iteracion");
         if (objective > list[middle]) return binarySearch(list, middle + 1, right, objective);
 
         return binarySearch(list, left, middle - 1, objective);
