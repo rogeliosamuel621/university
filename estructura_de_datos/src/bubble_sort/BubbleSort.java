@@ -16,20 +16,22 @@ public class BubbleSort {
     }
 
     public int[] selectionSort(int array[]) {
-        int i, j, menor, pos, tmp;
-        for (i = 0; i < array.length - 1; i++) {
+        int menor = 0;
+        int pos = 0;
+        int aux = 0;
+        for (int i = 0; i < array.length - 1; i++) {
             menor = array[i];
             pos = i;
-            for (j = i + 1; j < array.length; j++){
+            for (int j = i + 1; j < array.length; j++){
                 if (array[j] < menor) {
                     menor = array[j];
                     pos = j;
                 }
             }
             if (pos != i){
-                tmp = array[i];
+                aux = array[i];
                 array[i] = array[pos];
-                array[pos] = tmp;
+                array[pos] = aux;
             }
         }
 
