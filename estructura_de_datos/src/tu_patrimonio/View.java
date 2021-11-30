@@ -7,12 +7,17 @@ public class View {
         int[] credits1 = credits.generateCredits();
         int[] credits2 = credits.generateCredits();
 
+        long insertionSortStart = System.currentTimeMillis();
         credits.sortCreditsByInsertionSort(credits1);
-        credits.sortCreditsByShellSort(credits2);
+        long insertionSortEnd = System.currentTimeMillis();
+        long totalInsertionSort = insertionSortEnd - insertionSortStart;
+        System.out.println("Insertion sort duró: " + totalInsertionSort + " milisegundos");
 
-        credits.showCredits(credits1);
-        System.out.println();
-        credits.showCredits(credits2);
+        long shellSortStart = System.currentTimeMillis();
+        credits.sortCreditsByShellSort(credits2);
+        long shellSortEnd = System.currentTimeMillis();
+        long totalShellSort = shellSortEnd - shellSortStart;
+        System.out.println("Shell sort duró: " + totalShellSort + " milisegundos");
 
     }
 
