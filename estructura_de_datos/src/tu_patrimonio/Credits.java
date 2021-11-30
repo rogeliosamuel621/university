@@ -13,30 +13,29 @@ public class Credits {
         return credits;
     }
 
-    public int[] sortCreditsByShellSort(int[] A) {
-        int salto, aux, i;
-        boolean cambios;
+    public int[] sortCreditsByShellSort(int[] credits) {
+        int jump, aux;
+        boolean hasBeenChanged;
 
-        for (salto = A.length / 2; salto != 0; salto /= 2) {
-            cambios = true;
-            while (cambios) {   // Mientras se intercambie algún elemento
-                cambios = false;
-                for (i = salto; i < A.length; i++)   // se da una pasada
-                {
-                    if (A[i - salto] > A[i]) {       // y si están desordenados
-                        aux = A[i];                  // se reordenan
-                        A[i] = A[i - salto];
-                        A[i - salto] = aux;
-                        cambios = true;              // y se marca como cambio.
+        for (jump = credits.length / 2; jump != 0; jump /= 2) {
+            hasBeenChanged = true;
+            while (hasBeenChanged) {
+                hasBeenChanged = false;
+                for (int i = jump; i < credits.length; i++) {
+                    if (credits[i - jump] > credits[i]) {
+                        aux = credits[i];
+                        credits[i] = credits[i - jump];
+                        credits[i - jump] = aux;
+                        hasBeenChanged = true;
                     }
                 }
             }
         }
 
-        return A;
+        return credits;
     }
 
-    public int[] sortCreditsByInsertionSort(int[] arr){
+    public int[] sortCreditsByInsertionSort(int[] arr) {
         int i, key, j;
         for (i = 1; i < arr.length; i++)
         {
