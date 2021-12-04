@@ -3,6 +3,8 @@ package evidencia_2;
 import java.util.Scanner;
 
 public class Game {
+    Scanner sc = new Scanner(System.in);
+
     Question[] gameQuestions = {
             new Question("¿es Terrestre?", 5),
             new Question("¿es Terrestre?", 15),
@@ -21,28 +23,43 @@ public class Game {
     };
 
     void start() {
-        Scanner sc = new Scanner(System.in);
+
+
         Question board = this.createBoard();
-
-        final int attempts = 4;
-        Question currentQuestion = board;
-
-        for (int i=1; i<=attempts; i++) {
-            if (i == attempts) {
-                System.out.println(currentQuestion.getQuestion());
-                System.out.println("finalizado");
-                return;
-            }
-
-            System.out.println(currentQuestion.getQuestion());
-            int res = sc.nextInt();
-
-            currentQuestion = res == 1 ? currentQuestion.right : currentQuestion.left;
-        }
+        this.ask(board);
     }
 
     Question createBoard() {
         BinaryTree binaryTree = new BinaryTree(new Question("¿Es grande?", 10));
         return binaryTree.fillBinaryTree(this.gameQuestions);
+    }
+
+    void ask(Question board) {
+        final int attempts = 4;
+        Question currentQuestion = board;
+
+        for (int i=1; i<=attempts; i++) {
+            if (i == attempts) {
+                this.endOfTheGame(currentQuestion.getQuestion());
+                return;
+            }
+
+            String res = "";
+
+            do {
+                System.out.println(currentQuestion.getQuestion() + " (Si/No)");
+                res = this.sc.next().toLowerCase();
+
+                if (!res.equals("si") && !res.equals("no")) System.out.println("Escoga entre Si/No");
+            } while (!res.equals("si") && !res.equals("no"));
+
+            boolean isPositive = res.equals("si");
+            currentQuestion = isPositive ? currentQuestion.right : currentQuestion.left;
+        }
+    }
+
+    void endOfTheGame(String animal) {
+        System.out.println("Es la respuesta: " + animal);
+        System.out.println("El juego ha terminado");
     }
 }
