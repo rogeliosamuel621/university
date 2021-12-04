@@ -3,6 +3,8 @@ package evidencia_2;
 public class Question {
     private String question;
     private int id;
+    Question left;
+    Question right;
 
     Question(String question, int id) {
         this.question = question;
