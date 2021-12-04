@@ -23,10 +23,19 @@ public class Game {
     };
 
     void start() {
-
-
         Question board = this.createBoard();
-        this.ask(board);
+        String option = "";
+        do {
+            this.ask(board);
+            System.out.println();
+            System.out.println("¡Desea volver a jugar?");
+            option = this.sc.next();
+        } while (option.equals("si"));
+
+        System.out.println();
+        System.out.println();
+        System.out.println("El juego ha terminado");
+
     }
 
     Question createBoard() {
@@ -60,6 +69,6 @@ public class Game {
 
     void endOfTheGame(String animal) {
         System.out.println("Es la respuesta: " + animal);
-        System.out.println("El juego ha terminado");
+        System.out.println("La ronda ha terminado");
     }
 }
