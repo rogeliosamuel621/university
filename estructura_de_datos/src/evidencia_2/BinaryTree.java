@@ -9,8 +9,6 @@ public class BinaryTree {
 
     Question fillBinaryTree(Question[] questionsToInsert) {
         for(int i=0; i<questionsToInsert.length; i++) {
-            System.out.println("hi");
-            // this.insert(questionsToInsert[i]);
             this.insert(questionsToInsert[i], this.root);
         }
 
