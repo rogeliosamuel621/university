@@ -2,21 +2,20 @@ package evidencia_2;
 
 public class Game {
     Question[] gameQuestions = {
-            new Question("¿Es grande?", 1),
-            new Question("¿Es grande?", 2),
-            new Question("¿Es grande?", 3),
-            new Question("¿Es grande?", 4),
-            new Question("¿Es grande?", 6),
-            new Question("¿Es grande?", 5),
-            new Question("¿Es grande?", 7),
-            new Question("¿Es grande?", 8),
-            new Question("¿Es grande?", 10),
-            new Question("¿Es grande?", 12),
-            new Question("¿Es grande?", 14),
-            new Question("¿Es grande?", 9),
-            new Question("¿Es grande?", 11),
-            new Question("¿Es grande?", 13),
-            new Question("¿Es grande?", 15),
+            new Question("¿es Terrestre?", 5),
+            new Question("¿es Terrestre?", 15),
+            new Question("¿Habita en el mar?", 3),
+            new Question("¿Habita en el continente africano?", 7),
+            new Question("¿Suele encontrarse en medios urbanos?", 13),
+            new Question("¿Tiene 4 patas?", 17),
+            new Question("Cocodrilo", 2),
+            new Question("Tiburon", 4),
+            new Question("Elefante", 6),
+            new Question("Oso", 8),
+            new Question("Ratón", 12),
+            new Question("Ardilla", 14),
+            new Question("Pez", 16),
+            new Question("Nutria", 18),
     };
 
     void start() {
@@ -25,7 +24,7 @@ public class Game {
     }
 
     Question createBoard() {
-        BinaryTree binaryTree = new BinaryTree();
+        BinaryTree binaryTree = new BinaryTree(new Question("¿Es grande?", 10));
         return binaryTree.fillBinaryTree(this.gameQuestions);
     }
 }

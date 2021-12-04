@@ -3,40 +3,42 @@ package evidencia_2;
 public class BinaryTree {
     Question root;
 
+    public BinaryTree(Question question) {
+        this.root = question;
+    }
+
     Question fillBinaryTree(Question[] questionsToInsert) {
         for(int i=0; i<questionsToInsert.length; i++) {
-            this.insert(questionsToInsert[i]);
+            System.out.println("hi");
+            // this.insert(questionsToInsert[i]);
+            this.insert(questionsToInsert[i], this.root);
         }
 
         return this.root;
     }
 
-    void insert(Question questionToInsert) {
-        if (this.root == null) {
-            this.root = questionToInsert;
-            return;
-        }
+    void insert(Question questionToInsert, Question currentQuestion) {
 
-        Question currentQuestion = this.root;
+        int questionId = questionToInsert.getId();
 
-        while (true) {
-            boolean isEven = currentQuestion.getId() % 2 == 0;
+        if (questionId < currentQuestion.getId()) {
+            if (currentQuestion.left == null) {
+                currentQuestion.left = questionToInsert;
+                return;
+            }
 
-            if (isEven) {
-                if (currentQuestion.left == null) {
-                    currentQuestion.left = questionToInsert;
-                    break;
+            insert(questionToInsert, currentQuestion.left);
+        } else {
+            if (questionId > currentQuestion.getId()) {
+                if (currentQuestion.right == null) {
+                    currentQuestion.right = questionToInsert;
+                    return;
                 }
-                currentQuestion = currentQuestion.left;
-                break;
-            }
 
-            if (currentQuestion.right == null) {
-                currentQuestion.right = questionToInsert;
-                break;
+                insert(questionToInsert, currentQuestion.right);
             }
-            currentQuestion = currentQuestion.right;
-            break;
         }
+
+
     }
 }
