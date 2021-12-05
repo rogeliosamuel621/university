@@ -9,8 +9,8 @@ public class App {
         grades.sortByMergeSort(grades1, 0, grades.grades.length - 1);
         grades.sortByQuickSort(grades2, 0, grades.grades.length - 1);
         grades.printArray(grades1);
-        System.out.println("TIMES: " + grades.mergeCount);
+        System.out.println("Movimientos merge sort1: " + grades.mergeCount);
         grades.printArray(grades2);
-        System.out.println("TIMES: " + grades.quickCount);
+        System.out.println("Movimientos quick sort: " + grades.quickCount);
     }
 }

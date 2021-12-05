@@ -67,29 +67,29 @@ public class Grades {
     public void sortByQuickSort(int A[], int izq, int der) {
         this.quickCount++;
 
-        int pivote=A[izq]; // tomamos primer elemento como pivote
-        int i=izq;         // i realiza la búsqueda de izquierda a derecha
-        int j=der;         // j realiza la búsqueda de derecha a izquierda
+        int pivote=A[izq];
+        int i=izq;
+        int j=der;
         int aux;
 
-        while(i < j){                          // mientras no se crucen las búsquedas
+        while(i < j){
             this.quickCount++;
-            while(A[i] <= pivote && i < j) i++; // busca elemento mayor que pivote
-            while(A[j] > pivote) j--;           // busca elemento menor que pivote
-            if (i < j) {                        // si no se han cruzado
-                aux= A[i];                      // los intercambia
+            while(A[i] <= pivote && i < j) i++;
+            while(A[j] > pivote) j--;
+            if (i < j) {
+                aux= A[i];
                 A[i]=A[j];
                 A[j]=aux;
             }
         }
 
-        A[izq]=A[j];      // se coloca el pivote en su lugar de forma que tendremos
-        A[j]=pivote;      // los menores a su izquierda y los mayores a su derecha
+        A[izq]=A[j];
+        A[j]=pivote;
 
         if(izq < j-1)
-            sortByQuickSort(A,izq,j-1);          // ordenamos subarray izquierdo
+            sortByQuickSort(A,izq,j-1);
         if(j+1 < der)
-            sortByQuickSort(A,j+1,der);          // ordenamos subarray derecho
+            sortByQuickSort(A,j+1,der);
 
     }
 
