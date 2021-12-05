@@ -2,6 +2,8 @@ package grades;
 
 public class Grades {
     int[] grades = new int[11];
+    int mergeCount = 0;
+    int quickCount = 0;
 
     public Grades() {
         this.fillGrades();
@@ -9,6 +11,7 @@ public class Grades {
 
     public void sortByMergeSort(int arr[], int left, int right){
         if(left < right){
+            this.mergeCount++;
             int middle = (left + right) / 2;
 
             sortByMergeSort(arr, left, middle);
@@ -19,6 +22,7 @@ public class Grades {
     }
 
     public void merge(int arr[], int left, int middle, int right) {
+        this.mergeCount++;
         int n1 = middle - left + 1;
         int n2 = right - middle;
 
@@ -61,6 +65,7 @@ public class Grades {
     }
 
     public void sortByQuickSort(int A[], int izq, int der) {
+        this.quickCount++;
 
         int pivote=A[izq]; // tomamos primer elemento como pivote
         int i=izq;         // i realiza la búsqueda de izquierda a derecha
@@ -68,6 +73,7 @@ public class Grades {
         int aux;
 
         while(i < j){                          // mientras no se crucen las búsquedas
+            this.quickCount++;
             while(A[i] <= pivote && i < j) i++; // busca elemento mayor que pivote
             while(A[j] > pivote) j--;           // busca elemento menor que pivote
             if (i < j) {                        // si no se han cruzado
@@ -90,7 +96,7 @@ public class Grades {
     public void printArray(int arr[]) {
         int n = arr.length;
         for (int i=0; i<n; ++i) {
-            System.out.println(arr[i] + " ");
+            System.out.print(arr[i] + ", ");
         }
         System.out.println();
     }
