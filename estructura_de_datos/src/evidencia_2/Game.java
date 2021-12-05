@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Game {
     Scanner sc = new Scanner(System.in);
-
     Question[] gameQuestions = {
             new Question("¿es Terrestre?", 5),
             new Question("¿es Terrestre?", 15),
@@ -23,12 +22,18 @@ public class Game {
     };
 
     void start() {
+        System.out.println("bienvenido al juego, escoge un animal entre");
+        for(int i=7; i<gameQuestions.length; i++) {
+            System.out.print(gameQuestions[i].getQuestion() + ", ");
+        }
+        System.out.println();
+        System.out.println();
         Question board = this.createBoard();
         String option = "";
         do {
             this.ask(board);
             System.out.println();
-            System.out.println("¡Desea volver a jugar?");
+            System.out.println("¿Desea volver a jugar?");
             option = this.sc.next();
         } while (option.equals("si"));
 
