@@ -9,6 +9,9 @@ public class View {
 
         long bubbleSortStart = System.currentTimeMillis();
         bubbleSort.bubbleSort(array1);
+        for (int i=0; i< array1.length; i++) {
+            System.out.print(array1[i] + ", ");
+        }
         long bubbleSortEnd = System.currentTimeMillis();
         long bubbleSortTotalTime =  bubbleSortEnd - bubbleSortStart;
         System.out.println("Bubble sort duró: " + bubbleSortTotalTime + " milisegundos");
