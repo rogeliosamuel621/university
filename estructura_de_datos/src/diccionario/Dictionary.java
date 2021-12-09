@@ -30,6 +30,25 @@ public class Dictionary {
         }
     }
 
+    public Record getByword(String word) {
+        Record currentRecord = this.firstRecord;
+
+        for(int i=0; i<this.length; i++) {
+            if (currentRecord.getWord().equals(word)) {
+                return currentRecord;
+            }
+
+            currentRecord = currentRecord.next;
+        }
+
+        return null;
+    }
+
+    public void showRecord(Record record) {
+        System.out.println("Palabra: " + record.getWord());
+        System.out.println("definicion: " + record.getDefinition());
+    }
+
     private void upgradeLength() {
         this.length++;
     }
