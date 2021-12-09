@@ -161,28 +161,48 @@ public class Sort {
      * @param der
      */
     public void quickSort(int A[], int izq, int der) {
-        int pivote=A[izq];
-        int i=izq;
-        int j=der;
-        int aux;
+        try {
+            int pivote=A[izq];
+            int i=izq;
+            int j=der;
+            int aux;
 
-        while(i < j){
-            while(A[i] <= pivote && i < j) i++;
-            while(A[j] > pivote) j--;
-            if (i < j) {
-                aux= A[i];
-                A[i]=A[j];
-                A[j]=aux;
+            while(i < j){
+                while(A[i] <= pivote && i < j) i++;
+                while(A[j] > pivote) j--;
+                if (i < j) {
+                    aux= A[i];
+                    A[i]=A[j];
+                    A[j]=aux;
+                }
             }
+
+            A[izq]=A[j];
+            A[j]=pivote;
+
+            if(izq < j-1)
+                try {
+                    quickSort(A,izq,j-1);
+                } catch (StackOverflowError e) {
+                    return;
+                }
+            if(j+1 < der)
+                try {
+                    quickSort(A,j+1,der);
+                } catch (StackOverflowError e) {
+                    return;
+                }
+        } catch (StackOverflowError error) {
+            return;
         }
 
-        A[izq]=A[j];
-        A[j]=pivote;
+    }
 
-        if(izq < j-1)
-            quickSort(A,izq,j-1);
-        if(j+1 < der)
-            quickSort(A,j+1,der);
-
+    public void printArray(int[] array, String title) {
+        System.out.println();
+        System.out.println(title);
+        for(int i=0; i<array.length; i++) {
+            System.out.print(array[i] + ", ");
+        }
     }
 }

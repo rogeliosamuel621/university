@@ -9,17 +9,38 @@ public class DataLayer {
     int[] elementsBetween1And5_100000 = new int[100000];
 
     public DataLayer() {
+        System.out.println("llenando los 100...");
         this.fillRandomElements(this.randomElements_100, false);
+        System.out.println("Terminado");
+
+        System.out.println();
+        System.out.println("Llenando los 50,000...");
         this.fillRandomElements(this.randomElements_50000, false);
+        System.out.println("Terminado");
+
+        System.out.println();
+        System.out.println("Llenando los 100,000...");
         this.fillRandomElements(this.randomElements_100000, false);
+        System.out.println("Terminado");
 
+        System.out.println();
+        System.out.println("Llenando 100,000...");
         this.fillRandomElements(this.sortedElementsToDown_100000, false);
+        System.out.println("Ordenando hacia abajo...");
         this.sortArrayToDown(this.sortedElementsToDown_100000);
+        System.out.println("Terminado");
 
+        System.out.println();
+        System.out.println("Llenando los 100,000...");
         this.fillRandomElements(this.sortedElements_100000, false);
+        System.out.println("Ordenando...");
         this.sortArray(this.sortedElements_100000);
+        System.out.println("Terminado");
 
+        System.out.println();
+        System.out.println("Llenando los 100,000 entre 1 y 5...");
         this.fillRandomElements(elementsBetween1And5_100000, true);
+        System.out.println("Terminado");
     }
 
     private void fillRandomElements(int[] array, boolean isSpecial) {
