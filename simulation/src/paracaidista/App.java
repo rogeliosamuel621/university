@@ -15,10 +15,11 @@ public class App{
         double masa, resistencia, gravedad = 9.8;
         double resultado;
         final String paracaidista = "Paracaidista";
+        int count = 0;
         //Introduccion de datos
 
         //arrglo que guarda los las velocidades en las distintas posiciones.
-        double datos[] = new double[10];
+        double datos[] = new double[2000];
 
         //objeto que guarda los datos para posteriormente ser insertados en la grafica
         DefaultCategoryDataset data = new DefaultCategoryDataset();
@@ -43,10 +44,10 @@ public class App{
                 +"\n|            t               |           v                |"
                 +"\n-----------------------------|-----------------------------");
         //calculo de velocidad
-        for(int i=0; i<10; i++){
+        for(int i=0; i<2000; i++){
+            count++;
             resultado = ((gravedad*masa)/resistencia)*(1-Math.pow(Math.E, (-(resistencia/masa)*(i))));
-            int formattedResult = (int)(resultado);
-            datos[i]=formattedResult;
+            datos[i]=resultado;
             if((i+1)==10){
                 System.out.println("             " + (i) +"              |      "+ resultado
                         +"\n-----------------------------|-----------------------------");
@@ -56,15 +57,14 @@ public class App{
                         +"\n-----------------------------|-----------------------------");
             }
 
+            if (i == 0) continue;
+            if (Double.compare(datos[i-1], datos[i]) == 0) break;
         }
 
         //se guardan los faros en la dataset
-        for(int i=0; i<10; i++){
+        for(int i=0; i<count; i++){
             data.setValue(datos[i], paracaidista, String.valueOf(i+1));
         }
-
-
-
 
         JFreeChart grafico = ChartFactory.createLineChart("Paracaidista", "Distancia", "Velocidad", data);
 
@@ -75,6 +75,5 @@ public class App{
         ventana.setSize(400,200);
 
         ventana.add(panel);
-
     }
 }
