@@ -1,5 +1,7 @@
 package evidencia_3;
 
+import java.util.Arrays;
+
 public class App {
     static DataLayer dataLayer;
     static Sort sort;
@@ -8,25 +10,17 @@ public class App {
         dataLayer = new DataLayer();
         sort = new Sort();
 
-        //sort.printArray(dataLayer.randomElements_100, "Random elements 100");
-        //sort.printArray(dataLayer.randomElements_50000, "Random elements 50,000");
-        //sort.printArray(dataLayer.randomElements_100000, "Random elements 100,000");
-        //sort.printArray(dataLayer.sortedElementsToDown_100000, "Random elements sorted to dawn 100,000");
-        //sort.printArray(dataLayer.sortedElements_100000, "Random elements sorted 100,000");
-        //sort.printArray(dataLayer.elementsBetween1And5_100000, "Random elements between 1 and 5 100,000");
-
-
-        getTiming(dataLayer.randomElements_100000);
+        getTiming(dataLayer.elementsBetween1And5_100000);
 
     }
 
     private static void getTiming(int[] array) {
-        int[] array1 = array;
-        int[] array2 = array;
-        int[] array3 = array;
-        int[] array4 = array;
-        int[] array5 = array;
-        int[] array6 = array;
+        int[] array1 = Arrays.copyOf(array, array.length);
+        int[] array2 = Arrays.copyOf(array, array.length);;
+        int[] array3 = Arrays.copyOf(array, array.length);;
+        int[] array4 = Arrays.copyOf(array, array.length);;
+        int[] array5 = Arrays.copyOf(array, array.length);;
+        int[] array6 = Arrays.copyOf(array, array.length);;
 
         System.out.println();
         System.out.println();
