@@ -14,7 +14,7 @@ public class App{
         Scanner Keyboard = new Scanner(System.in);
         double masa, resistencia, gravedad = 9.8;
         double resultado;
-        final String p = "Paracaidista";
+        final String paracaidista = "Paracaidista";
         //Introduccion de datos
 
         //arrglo que guarda los las velocidades en las distintas posiciones.
@@ -44,14 +44,15 @@ public class App{
                 +"\n-----------------------------|-----------------------------");
         //calculo de velocidad
         for(int i=0; i<10; i++){
-            resultado = ((gravedad*masa)/resistencia)*(1-Math.pow(2.7, (-(resistencia/masa)*(i+1))));
-            datos[i]=resultado;
+            resultado = ((gravedad*masa)/resistencia)*(1-Math.pow(Math.E, (-(resistencia/masa)*(i))));
+            int formattedResult = (int)(resultado);
+            datos[i]=formattedResult;
             if((i+1)==10){
-                System.out.println("             " + (i+1) +"              |      "+ resultado
+                System.out.println("             " + (i) +"              |      "+ resultado
                         +"\n-----------------------------|-----------------------------");
             }
             else{
-                System.out.println("             " + (i+1) +"               |      "+ resultado
+                System.out.println("             " + (i) +"               |      "+ resultado
                         +"\n-----------------------------|-----------------------------");
             }
 
@@ -59,8 +60,10 @@ public class App{
 
         //se guardan los faros en la dataset
         for(int i=0; i<10; i++){
-            data.setValue(datos[i], p, String.valueOf(i+1));
+            data.setValue(datos[i], paracaidista, String.valueOf(i+1));
         }
+
+
 
 
         JFreeChart grafico = ChartFactory.createLineChart("Paracaidista", "Distancia", "Velocidad", data);
