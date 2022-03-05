@@ -1,79 +1,44 @@
 package paracaidista;
 
-
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.category.DefaultCategoryDataset;
-
-import javax.swing.*;
 import java.util.Scanner;
 
 public class App{
+    static Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
-        Scanner Keyboard = new Scanner(System.in);
-        double masa, resistencia, gravedad = 9.8;
-        double resultado;
-        final String paracaidista = "Paracaidista";
-        int count = 0;
-        //Introduccion de datos
+        float masa = obtenerMasa();
+        float resistencia = obtenerResistencia();
 
-        //arrglo que guarda los las velocidades en las distintas posiciones.
-        double datos[] = new double[2000];
-
-        //objeto que guarda los datos para posteriormente ser insertados en la grafica
-        DefaultCategoryDataset data = new DefaultCategoryDataset();
-        //Peso
-        do{
-            System.out.println("Inserte el peso del paracaidista");
-            masa = Keyboard.nextFloat();
-            if(masa < 1){
-                System.out.println("Inserte un valor valido");
-            }
-        }while(masa < 1);
-
-        //Resistencia
-        do{
-            System.out.println("Inserte la coeficiencia de la resistencia del aire");
-            resistencia = Keyboard.nextFloat();
-            if(masa < 1){
-                System.out.println("Inserte un valor valido");
-            }
-        }while(resistencia < 1);
-        System.out.println("-----------------------------|-----------------------------"
-                +"\n|            t               |           v                |"
-                +"\n-----------------------------|-----------------------------");
-        //calculo de velocidad
-        for(int i=0; i<2000; i++){
-            count++;
-            resultado = ((gravedad*masa)/resistencia)*(1-Math.pow(Math.E, (-(resistencia/masa)*(i))));
-            datos[i]=resultado;
-            if((i+1)==10){
-                System.out.println("             " + (i) +"              |      "+ resultado
-                        +"\n-----------------------------|-----------------------------");
-            }
-            else{
-                System.out.println("             " + (i) +"               |      "+ resultado
-                        +"\n-----------------------------|-----------------------------");
-            }
-
-            if (i == 0) continue;
-            if (Double.compare(datos[i-1], datos[i]) == 0) break;
-        }
-
-        //se guardan los faros en la dataset
-        for(int i=0; i<count; i++){
-            data.setValue(datos[i], paracaidista, String.valueOf(i+1));
-        }
-
-        JFreeChart grafico = ChartFactory.createLineChart("Paracaidista", "Distancia", "Velocidad", data);
-
-        ChartPanel panel = new ChartPanel(grafico);
-
-        JFrame ventana = new JFrame(" ");
-        ventana.setVisible(true);
-        ventana.setSize(400,200);
-
-        ventana.add(panel);
+        Simulation simulation = new Simulation(masa, resistencia);
+        simulation.generarSimulacion();
+        simulation.mostrarGrafica();
     }
+
+    static private float obtenerMasa() {
+        float masa = 0;
+        do {
+            System.out.println("Inserte el peso del paracaidista");
+            masa = sc.nextFloat();
+
+            if(masa < 1) System.out.println("Inserte un valor valido");
+
+        } while(masa < 1);
+
+        return masa;
+    }
+
+    static private float obtenerResistencia() {
+        float resistencia = 0;
+        do {
+            System.out.println("Inserte el peso del paracaidista");
+            resistencia = sc.nextFloat();
+
+            if(resistencia < 1) System.out.println("Inserte un valor valido");
+
+        } while(resistencia < 1);
+
+        return resistencia;
+    }
+
+
 }
