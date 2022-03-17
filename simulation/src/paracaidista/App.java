@@ -30,7 +30,7 @@ public class App{
     static private float obtenerResistencia() {
         float resistencia = 0;
         do {
-            System.out.println("Inserte el peso del paracaidista");
+            System.out.println("Inserte el coeficiente de resistencia");
             resistencia = sc.nextFloat();
 
             if(resistencia < 1) System.out.println("Inserte un valor valido");

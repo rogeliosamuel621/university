@@ -27,10 +27,11 @@ public class Simulation {
             double resultadoActual = obtenerVelocidad(i);
             this.resultados[i] = resultadoActual;
 
+            boolean esElPrimerResultado = i == 0;
+
+            if (esElPrimerResultado) this.mostrarInicioDeTabla();
             this.mostrarResultado(resultadoActual, i);
 
-            boolean esElPrimerResultado = i == 0;
-            if (esElPrimerResultado) this.mostrarInicioDeTabla();
             if (esElPrimerResultado) continue;
 
             boolean elResultadoEsConstante = Double.compare(this.resultados[i-1], this.resultados[i]) == 0;
