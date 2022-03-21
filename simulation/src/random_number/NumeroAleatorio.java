@@ -1,10 +1,15 @@
 package random_number;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class NumeroAleatorio {
+    static DecimalFormat formato1 = new DecimalFormat("0.00000");
     public static Scanner leer = new Scanner(System.in);
+
     public static void main(String[] args) {
+
+
         int option;
         boolean control = true;
 
@@ -15,18 +20,14 @@ public class NumeroAleatorio {
                     + "\n3.- Salir."
                     + "\n\nOPCION: ");
             option = leer.nextInt();
+
             switch (option) {
                 case 1:
-                    int cantidad;
-                    System.out.println("Inserte la cantidad de numeros a generar");
-                            cantidad = leer.nextInt();
-                    System.out.println();
-                    for (int i=1; i <= cantidad; i++) {
-                        System.out.println(i +". "+(int)(Math.random()*(1000- 0+1)+0));
-                    }
+                    int cantidad = obtenerCantidad();
+                    generarNum(cantidad);
                     break;
                 case 2:
-                    System.out.println((int)(Math.random()*(1000-0+1)+0));
+                    generarNum (1);
                     break;
                 case 3:
                     control = false;
@@ -35,7 +36,32 @@ public class NumeroAleatorio {
                     System.out.println("ERROR, ingrese una de las opciones.");
                     break;
             }
+
         }while(control);
+    }
+
+    public static int obtenerCantidad () {
+        int cantidad = 0;
+
+        do {
+            System.out.println("Inserte la cantidad de numeros a generar");
+            cantidad = leer.nextInt();
+
+            if(cantidad < 1) System.out.println("Inserte un valor valido");
+
+        } while(cantidad < 1);
+
+        return cantidad;
+    }
+
+    public static void generarNum (int cantidad) {
+        for (int i=0; i < cantidad; i++) {
+            double numRandom =  Math.random();
+            if (Double.compare(numRandom, 0.9999) == 0) {
+                System.out.println((i+1 + ". " + 1));
+            }
+            System.out.println((i+1 + ". " + formato1.format(numRandom)));
+        }
     }
 }
 
