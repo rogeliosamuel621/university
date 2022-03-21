@@ -1,11 +1,11 @@
 package newton_raphson;
 
 public class Calculations {
-    public double f1(double x) {
-        return x - (5 * Math.cos(2 * x)) + 5;
+    public double getFx(double x) {
+        return x - (5 * (Math.cos(2 * x))) + 5;
     }
 
-    public double f1Dx(double x) {
+    public double getFxDx(double x) {
         return 1 + (10 * Math.sin(2 * x));
     }
 
