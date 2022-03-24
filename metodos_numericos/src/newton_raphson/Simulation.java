@@ -10,13 +10,18 @@ public class Simulation {
     public static void main(String[] args) {
         double x1 = getX1();
         double errorRange = getErrorRange();
+        int start = -10;
+        int end = 10;
+        int i = 0;
 
-        for(int i=0; i<5; i++) {
+        while(x1 >= start && x1 <= end) {
+            i++;
             double x2 = simulation(x1, errorRange);
-            x1 = x2 + 2;
+            x1 = Math.floor(x2) + 4;
             System.out.println();
-            System.out.println("x1: " + x1);
             System.out.println();
+
+            if (i == 100) break;
         }
     }
 
