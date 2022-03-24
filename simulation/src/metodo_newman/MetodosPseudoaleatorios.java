@@ -84,13 +84,14 @@ public class MetodosPseudoaleatorios {
 
             switch (option) {
                 case 1:
-                    long semilla1 = obtenerSemilla10();
-                    empezarSimulacionNewman(semilla1);
+                    String semilla = obtenerSemilla10();
+                    int almacenaNumeros[] = new int [999];
+                    generarNewman(semilla,almacenaNumeros);
                     break;
                 case 2:
-                    long semillaRandom = generar10digitos();
-                    empezarSimulacionNewman(semillaRandom);
-
+                    String semillaRandom = generar10digitos();
+                    int almacenaNumeros2[] = new int [999];
+                    generarNewman(semillaRandom, almacenaNumeros2);
                     break;
                 case 3:
                     control = false;
@@ -109,47 +110,19 @@ public class MetodosPseudoaleatorios {
         return numeroFinal;
     }
 
-    public static long generar10digitos() {
-        int fiveDigits1 = (int)(10000 + Math.random() * 90000);
-        int fiveDigits2 = (int)(10000 + Math.random() * 90000);
-
-        String tenDigitsNum =  "" + fiveDigits1 + fiveDigits2;
-        return Long.parseLong(tenDigitsNum);
+    public static String generar10digitos () {
+        int fiveDigits1 = (int)(100000 * Math.random());
+        int fiveDigits2 = (int)(100000 * Math.random());
+        String numero10digitos =  "" + fiveDigits1 + fiveDigits2;
+        numero10digitos = convertir10digitos(numero10digitos);
+        return numero10digitos;
     }
 
-    private static void empezarSimulacionNewman(long num) {
-        long x0 = newmanElevarAl2(num);
+    public static String elevarAl2 (String numero) {
+        int num = Integer.parseInt(numero);
+        int numeroElevado = (int) (Math.pow(num,2));
+        return convertir8digitos(numeroElevado);
 
-        // paso a string
-        String x0EnString = x0 + "";
-
-        // obtengo 5 digitos y esa es la semilla 2
-        char digit1 = x0EnString.charAt(7);
-        char digit2 = x0EnString.charAt(8);
-        char digit3 = x0EnString.charAt(9);
-        char digit4 = x0EnString.charAt(10);
-        char digit5 = x0EnString.charAt(11);
-        String x1 = "" + digit1 + digit2 + digit3 + digit4 + digit5;
-        System.out.println(x1);
-
-        long result = Long.parseLong(x1);
-        long prevResult = result;
-
-        // se eleva al cuadrado la semilla 2 y se obtienen los 5 digitos del medio ( si es par, agg un 0 a la izquierda)
-
-        // se repite (se eleva al cuadrado la semilla 2 y se obtienen los 5 digitos del medio ( si es par, agg un 0 a la izquierda))
-
-        // el bucle para hasta que un valor se repita o de 0
-
-        while (result != 0 && prevResult != result) {
-            long resultAl2 = result * result;
-        }
-
-    }
-
-    private static void obtener5Digitos(long num) {
-        String numInString = num + "";
-        int numLength = numInString.length();
     }
 
     public static long newmanElevarAl2 (long num) {
@@ -167,13 +140,6 @@ public class MetodosPseudoaleatorios {
         return  Long.parseLong(resultInString);
     }
 
-    public static String elevarAl2 (String numero) {
-        int num = Integer.parseInt(numero);
-        int numeroElevado = (int) (Math.pow(num,2));
-        return convertir8digitos(numeroElevado);
-
-    }
-
     public static String obtenerSemilla () {
         int semillaObtenida;
         System.out.println("Ingresa la semilla de 4 digitos");
@@ -182,10 +148,12 @@ public class MetodosPseudoaleatorios {
         return semilla;
     }
 
-    public static long obtenerSemilla10 () {
+    public static String obtenerSemilla10 () {
+        long semillaObtenida;
         System.out.println("Ingresa la semilla de 10 digitos");
-        long semillaObtenida = leer.nextLong();
-        return semillaObtenida;
+        semillaObtenida = leer.nextLong();
+        String semilla = convertir10digitos(semillaObtenida);
+        return semilla;
     }
 
     public static String convertir4digitos (int numero) {
@@ -198,6 +166,16 @@ public class MetodosPseudoaleatorios {
         return numero4digitos;
     }
 
+    public static String convertir10digitos (long numero) {
+        String numero10digitos;
+        numero10digitos = "" + numero;
+
+        for(int i = numero10digitos.length(); i < 10; i++){
+            numero10digitos = "0" + numero10digitos;
+        }
+        return numero10digitos;
+    }
+
     public static String convertir8digitos (int numero) {
         String numero8digitos = "";
         numero8digitos = "" + numero;
@@ -206,6 +184,13 @@ public class MetodosPseudoaleatorios {
             numero8digitos = "0" + numero8digitos;
         }
         return numero8digitos;
+    }
+
+    public static String convertir10digitos (String numero10digitos) {
+        for(int i = numero10digitos.length(); i < 10; i++){
+            numero10digitos = "0" + numero10digitos;
+        }
+        return numero10digitos;
     }
 
     public static String obtenerNumMitad8 (String numero) {
@@ -218,6 +203,100 @@ public class MetodosPseudoaleatorios {
             return true;
         }
         return false;
+
+    }
+
+    private static String obtener5Digitos(String numero) {
+        StringBuilder numInString = new StringBuilder(numero);
+        int numLength = numInString.length();
+
+        char digit1 = '1';
+        char digit2 = '0';
+        char digit3 = '0';
+        char digit4 = '0';
+        char digit5 = '0';
+
+        // TODO: Validar casos cuando el numero es de menos dígitos
+        /**
+         * En ocaciones el numero elevado al cuadrado no es de 5 dígitos validos
+         * en ocaciones son 05219, como se ve sí tiene 5 digitos pero uno no vale
+         * haciendo que su resultado no sea de 9, 10 u 11 digitos, evitando que se tomen sus 5 digitos
+         */
+        switch (numLength) {
+            case 3:
+                String tempString0Aux = "00" + numInString;
+                digit1 = tempString0Aux.charAt(0);
+                digit2 = tempString0Aux.charAt(1);
+                digit3 = tempString0Aux.charAt(2);
+                digit4 = tempString0Aux.charAt(3);
+                digit5 = tempString0Aux.charAt(4);
+                break;
+            case 4:
+                String tempString0Aux1 = "0" + numInString;
+                digit1 = tempString0Aux1.charAt(0);
+                digit2 = tempString0Aux1.charAt(1);
+                digit3 = tempString0Aux1.charAt(2);
+                digit4 = tempString0Aux1.charAt(3);
+                digit5 = tempString0Aux1.charAt(4);
+                break;
+            case 5:
+                digit1 = numInString.charAt(0);
+                digit2 = numInString.charAt(1);
+                digit3 = numInString.charAt(2);
+                digit4 = numInString.charAt(3);
+                digit5 = numInString.charAt(4);
+                break;
+            case 6:
+                String tempString0 = "0" + numInString;
+                digit1 = tempString0.charAt(1);
+                digit2 = tempString0.charAt(2);
+                digit3 = tempString0.charAt(3);
+                digit4 = tempString0.charAt(4);
+                digit5 = tempString0.charAt(5);
+                break;
+            case 7:
+                digit1 = numInString.charAt(1);
+                digit2 = numInString.charAt(2);
+                digit3 = numInString.charAt(3);
+                digit4 = numInString.charAt(4);
+                digit5 = numInString.charAt(5);
+                break;
+            case 8:
+                String tempString1 = "0" + numInString;
+                digit1 = tempString1.charAt(2);
+                digit2 = tempString1.charAt(3);
+                digit3 = tempString1.charAt(4);
+                digit4 = tempString1.charAt(5);
+                digit5 = tempString1.charAt(6);
+                break;
+            case 9:
+                digit1 = numInString.charAt(2);
+                digit2 = numInString.charAt(3);
+                digit3 = numInString.charAt(4);
+                digit4 = numInString.charAt(5);
+                digit5 = numInString.charAt(6);
+                break;
+            case 10:
+                String tempString2 = "0" + numInString;
+
+                digit1 = tempString2.charAt(3);
+                digit2 = tempString2.charAt(4);
+                digit3 = tempString2.charAt(5);
+                digit4 = tempString2.charAt(6);
+                digit5 = tempString2.charAt(7);
+                break;
+            case 11:
+                digit1 = numInString.charAt(3);
+                digit2 = numInString.charAt(4);
+                digit3 = numInString.charAt(5);
+                digit4 = numInString.charAt(6);
+                digit5 = numInString.charAt(7);
+                break;
+        }
+
+        String result = "" + digit1 + digit2 + digit3 + digit4 + digit5;
+
+        return result;
 
     }
 
@@ -241,6 +320,39 @@ public class MetodosPseudoaleatorios {
             System.out.println("X" + i + " = " + semilla);
             semilla = elevarAl2(semilla);
             semilla = obtenerNumMitad8(semilla);
+        }
+    }
+
+    public static void generarNewman (String semilla, int array []) {
+        long x0 = Long.parseLong(semilla);
+        x0 = newmanElevarAl2(x0);
+
+        // paso a string
+        String x0EnString = x0 + "";
+
+        System.out.println("X0 = " + semilla);
+
+        // obtengo 5 digitos y esa es la semilla 2
+        char digit1 = x0EnString.charAt(7);
+        char digit2 = x0EnString.charAt(8);
+        char digit3 = x0EnString.charAt(9);
+        char digit4 = x0EnString.charAt(10);
+        char digit5 = x0EnString.charAt(11);
+
+        String x1 = "" + digit1 + digit2 + digit3 + digit4 + digit5;
+
+        for (int i = 0; i <= 1000; i++) {
+            int semillaInt = Integer.parseInt(x1);
+            array [i] = semillaInt;
+
+            if (validarRepetido(array, i)) break;
+            if (validar0(x1)) break;
+
+            System.out.println("X" + (i+1) + " = " + x1);
+            long semillaElevada = Long.parseLong(x1);
+            semillaElevada = semillaElevada * semillaElevada;
+            x1 = "" + semillaElevada;
+            x1 = obtener5Digitos(x1);
         }
     }
 }

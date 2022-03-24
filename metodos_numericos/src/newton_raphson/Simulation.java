@@ -11,23 +11,29 @@ public class Simulation {
         double x1 = getX1();
         double errorRange = getErrorRange();
 
-        simulation(x1, errorRange);
+        for(int i=0; i<5; i++) {
+            double x2 = simulation(x1, errorRange);
+            x1 = x2 + 2;
+            System.out.println();
+            System.out.println("x1: " + x1);
+            System.out.println();
+        }
     }
 
-    static private String simulation(double initialValueX1, double initialValueErrorRange) {
+    static private double simulation(double x1, double initialValueErrorRange) {
         Calculations calculations = new Calculations();
-        double x1 =  initialValueX1;
         double f1 = calculations.getFx(x1);
         double f2 = 0.0;
         double errorRange = initialValueErrorRange;
         String f2Formatted = "";
+        double x2;
 
         int i = 0;
 
         do {
             i++;
             double f1Dx = calculations.getFxDx(x1);
-            double x2 = calculations.newtonRaphsonMethod(x1, f1, f1Dx);
+            x2 = calculations.newtonRaphsonMethod(x1, f1, f1Dx);
             f2 = calculations.getFx(x2);
 
             NumberFormat formatter = new DecimalFormat("###.##########");
@@ -38,9 +44,10 @@ public class Simulation {
 
             x1 = x2;
             f1 = f2;
+            if (i == 100) break;
         }while(Math.abs(f2) > errorRange);
 
-        return f2Formatted;
+        return x2;
     }
 
     static private double getX1() {
