@@ -10,18 +10,15 @@ public class Simulation {
     public static void main(String[] args) {
         double x1 = getX1();
         double errorRange = getErrorRange();
-        int start = -10;
-        int end = 10;
+        int start = -500;
+        int end = 500;
         int i = 0;
 
         while(x1 >= start && x1 <= end) {
-            i++;
             double x2 = simulation(x1, errorRange);
-            x1 = Math.floor(x2) + 4;
+            x1 = x2 + 0.5;
             System.out.println();
             System.out.println();
-
-            if (i == 100) break;
         }
     }
 
@@ -49,7 +46,7 @@ public class Simulation {
 
             x1 = x2;
             f1 = f2;
-            if (i == 100) break;
+            // if (i == 100) break;
         }while(Math.abs(f2) > errorRange);
 
         return x2;

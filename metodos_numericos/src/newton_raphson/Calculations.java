@@ -2,7 +2,7 @@ package newton_raphson;
 
 public class Calculations {
     public double getFx(double x) {
-        return ((x * (Math.cos(x * x))) -4);
+        return ((x * (Math.cos(x * x))) - 4);
     }
 
     public double getFxDx(double x) {
