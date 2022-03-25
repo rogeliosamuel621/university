@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="fontbox-3.0.0-alpha2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/fontbox-3.0.0-alpha2.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/pdfbox-3.0.0-alpha2.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/pdfbox-debugger-3.0.0-alpha2.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/pdfbox-tools-3.0.0-alpha2.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/preflight-3.0.0-alpha2.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/xmpbox-3.0.0-alpha2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
