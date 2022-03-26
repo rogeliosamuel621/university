@@ -10,13 +10,15 @@ public class Simulation {
     public static void main(String[] args) {
         double x1 = getX1();
         double errorRange = getErrorRange();
-        int start = -500;
-        int end = 500;
+        int start = -15;
+        int end = 10;
         int i = 0;
 
         while(x1 >= start && x1 <= end) {
+            double factor = (i % 2) == 0 ? 0.5 : 0.05;
+            i++;
             double x2 = simulation(x1, errorRange);
-            x1 = x2 + 0.5;
+            x1 = x2 + factor;
             System.out.println();
             System.out.println();
         }
