@@ -2,18 +2,55 @@ package newton_raphson_v2;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        double x1 = (double)(pedirX1());
+        ArrayList<Double> resultados = new ArrayList<Double>();
+        double puntoInicial = pedirPuntoInicial();
+        double puntoFinal = pedirPuntoFinal();
         double rangoDeError = pedirRangoDeError();
+        double x1 = puntoInicial;
+
+        int i=0;
+
+        while(x1 >= puntoInicial && x1 <= puntoFinal) {
+
+            double x2 = obtenerUnaSolucion(x1, rangoDeError);
+
+            if (esRepetido(resultados, x2) && resultados.size() != 0) {
+                System.out.println("REPETIDO");
+                double valorAnterior = resultados.get(resultados.size() - 1);
+                x1 = valorAnterior + 1;
+                x2 = obtenerUnaSolucion(x1, rangoDeError);
+            }
+
+            resultados.add(x2);
+            x1 = x2 + 0.5;
+            System.out.println();
+            System.out.println("la solucion es: " + x2);
+
+            // if (i == 200) break;
+            i++;
+        }
 
         double solucion = obtenerUnaSolucion(x1, rangoDeError);
         System.out.println();
         System.out.println("La solucion es: " + solucion);
+    }
+
+    static private boolean esRepetido(ArrayList<Double> arr, double x) {
+        boolean esRepetido = false;
+        for(int i=0; i<arr.size(); i++) {
+            if (Double.compare(arr.get(i), x) == 0) {
+                esRepetido = true;
+            }
+        }
+
+        return esRepetido;
     }
 
     static private double obtenerUnaSolucion(double x1, double rangoDeError) {
@@ -39,15 +76,20 @@ public class App {
 
             x1 = x2;
             f1 = f2;
-            // if (i == 100) break;
+
         }while(Math.abs(f2) > rangoDeError);
 
         return x2;
     }
 
-    static private int pedirX1() {
+    static private double pedirPuntoInicial() {
         System.out.println("Digite el punto de inicio: ");
-        return sc.nextInt();
+        return sc.nextDouble();
+    }
+
+    static private double pedirPuntoFinal(){
+        System.out.println("Digite el punto final");
+        return sc.nextDouble();
     }
 
     static private double pedirRangoDeError() {

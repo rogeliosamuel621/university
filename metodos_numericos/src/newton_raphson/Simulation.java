@@ -2,26 +2,35 @@ package newton_raphson;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Simulation {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
+        ArrayList<Double> arr = new ArrayList<Double>();
         showCoverPage();
         double x1 = getX1();
         double errorRange = getErrorRange();
-        int start = -15;
-        int end = 10;
+        int start = -100;
+        int end = 100;
         int i = 0;
 
         while(x1 >= start && x1 <= end) {
-            double factor = 0.05;
+            double tempX1 = x1;
+            double factor = 0.5;
             i++;
             double x2 = simulation(x1, errorRange);
+
+
+
+            arr.add(x2);
             x1 = x2 + factor;
             System.out.println();
             System.out.println();
+
+            if (i == 200) break;
         }
     }
 
