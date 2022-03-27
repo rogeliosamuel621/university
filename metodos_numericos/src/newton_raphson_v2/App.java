@@ -32,7 +32,10 @@ public class App {
             obtenerUnaSolucion(x1, rangoDeError);
 
             resultados.add(x2);
-            x1 = x2 + 0.5;
+
+            boolean estaEnElLimiteDeNegativos = (Double.compare(x2, -5d) >= 0 && Double.compare(x2, -4d) <= 0);
+
+            x1 = estaEnElLimiteDeNegativos ? 4 : x2 + 0.5;
             System.out.println("La Raíz de la Ecuación: " + x2);
             System.out.println();
 
@@ -48,13 +51,6 @@ public class App {
             NumberFormat formatter = new DecimalFormat("###.##");
             String resultadoFormateado = formatter.format(arr.get(i));
             String xEnString = formatter.format(x);
-
-            /*
-            System.out.println();
-            System.out.println("[RESULTADO]: " + resultadoFormateado);
-            System.out.println("[X]:         " + xEnString);
-            System.out.println();
-            */
 
             if (resultadoFormateado.equals(xEnString)) {
                 esRepetido = true;
