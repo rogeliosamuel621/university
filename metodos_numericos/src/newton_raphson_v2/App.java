@@ -11,6 +11,7 @@ public class App {
     public static void main(String[] args) {
         ArrayList<Double> resultados = new ArrayList<Double>();
 
+        showCoverPage();
         double puntoInicial = pedirPuntoInicial();
         double puntoFinal = pedirPuntoFinal();
         double rangoDeError = pedirRangoDeError();
@@ -23,7 +24,6 @@ public class App {
             double x2 = obtenerUnaSolucionSinOutput(x1, rangoDeError);
 
             if (esRepetido(resultados, x2) && resultados.size() != 0) {
-                System.out.println("REPETIDO");
                 double valorAnterior = resultados.get(resultados.size() - 1);
                 x1 = valorAnterior + 1;
                 x2 = obtenerUnaSolucionSinOutput(x1, rangoDeError);
@@ -33,8 +33,8 @@ public class App {
 
             resultados.add(x2);
             x1 = x2 + 0.5;
+            System.out.println("La Raíz de la Ecuación: " + x2);
             System.out.println();
-            System.out.println("la solucion es: " + x2);
 
             // if (i == 200) break;
             i++;
@@ -73,6 +73,10 @@ public class App {
 
         int i = 0;
 
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("N   X1                           F(X1)                        F'(X1)                         X2                          F(X2)");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
+
         do {
             i++;
             double f1Dx = calculations.getFxDx(x1);
@@ -83,12 +87,16 @@ public class App {
 
             String f2Formatted = formatter.format(f2);
 
-            System.out.println(i + " x1: " + x1 + " F(x1): " + f1 + " F'(x1): " + f1Dx + " X2: " + x2 + " F(x2): " + f2Formatted);
+
+            System.out.println(i+"   "+x1+"            "+f1+"            "+f1Dx+"            "+x2+"            "+f2Formatted);
 
             x1 = x2;
             f1 = f2;
 
         }while(Math.abs(f2) > rangoDeError);
+
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
+
 
         return x2;
     }
@@ -129,5 +137,19 @@ public class App {
     static private double pedirRangoDeError() {
         System.out.println("Digite el rango de error");
         return sc.nextDouble();
+    }
+
+    static private void showCoverPage() {
+        System.out.println("Instituto Tecnológico de Culiacan");
+        System.out.println("Ing. en sistemas computacionales \n");
+        System.out.println("Meza Valenzuela Alan");
+        System.out.println("Moreno Corrales Rogelio Samuel");
+        System.out.println("Método de Newton Raphson. Raíces de una Ecuación.");
+        System.out.println("De 12:00 a 13:00 horas.\n");
+
+        System.out.println("Este programa ejecuta el proceso de cálculo de Raíces de una ecuación utilizando el método de Newton Raphson.");
+
+        System.out.println("Cuál es la pregunta del Problema:");
+        sc.next();
     }
 }
