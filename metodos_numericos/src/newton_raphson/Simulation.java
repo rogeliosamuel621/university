@@ -8,6 +8,7 @@ public class Simulation {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
+        showCoverPage();
         double x1 = getX1();
         double errorRange = getErrorRange();
         int start = -15;
@@ -15,7 +16,7 @@ public class Simulation {
         int i = 0;
 
         while(x1 >= start && x1 <= end) {
-            double factor = (i % 2) == 0 ? 0.5 : 0.05;
+            double factor = 0.05;
             i++;
             double x2 = simulation(x1, errorRange);
             x1 = x2 + factor;
@@ -62,5 +63,19 @@ public class Simulation {
     static private double getErrorRange() {
         System.out.println("Digite el rango de error: ");
         return sc.nextDouble();
+    }
+
+    static private void showCoverPage() {
+        System.out.println("Instituto Tecnológico de Culiacan");
+        System.out.println("Ing. en sistemas computacionales \n");
+        System.out.println("Meza Valenzuela Alan");
+        System.out.println("Moreno Corrales Rogelio Samuel");
+        System.out.println("Método de Newton Raphson. Raíces de una Ecuación.");
+        System.out.println("De 12:00 a 13:00 horas.\n");
+
+        System.out.println("Este programa ejecuta el proceso de cálculo de Raíces de una ecuación utilizando el método de Newton Raphson.");
+
+        System.out.println("Cuál es la pregunta del Problema:");
+        sc.next();
     }
 }
