@@ -11,13 +11,18 @@ public class App {
     public static void main(String[] args) {
         ArrayList<Double> resultados = new ArrayList<Double>();
 
-        showCoverPage();
+        String problem = showCoverPage();
         double puntoInicial = pedirPuntoInicial();
         double puntoFinal = pedirPuntoFinal();
         double rangoDeError = pedirRangoDeError();
+        int totalDeCasos = pedirTotalDeCasos();
         double x1 = puntoInicial;
 
-        int i=0;
+        System.out.println();
+        System.out.println();
+        showResultPage(problem);
+
+        int i = 1;
 
         while(x1 >= puntoInicial && x1 <= puntoFinal) {
 
@@ -35,11 +40,11 @@ public class App {
 
             boolean estaEnElLimiteDeNegativos = (Double.compare(x2, -5d) >= 0 && Double.compare(x2, -4d) <= 0);
 
-            x1 = estaEnElLimiteDeNegativos ? 4 : x2 + 0.5;
-            System.out.println("La Raíz de la Ecuación: " + x2);
+            x1 = estaEnElLimiteDeNegativos ? 4.000000000000001 : x2 + 0.5;
+            System.out.println("La Raíz (" + i + ") de la Ecuación: " + x2);
             System.out.println();
 
-            // if (i == 200) break;
+            if (i == totalDeCasos) break;
             i++;
         }
     }
@@ -135,7 +140,12 @@ public class App {
         return sc.nextDouble();
     }
 
-    static private void showCoverPage() {
+    static private int pedirTotalDeCasos() {
+        System.out.println("Digite el total de casos");
+        return sc.nextInt();
+    }
+
+    static private String showCoverPage() {
         System.out.println("Instituto Tecnológico de Culiacan");
         System.out.println("Ing. en sistemas computacionales \n");
         System.out.println("Meza Valenzuela Alan");
@@ -146,6 +156,18 @@ public class App {
         System.out.println("Este programa ejecuta el proceso de cálculo de Raíces de una ecuación utilizando el método de Newton Raphson.");
 
         System.out.println("Cuál es la pregunta del Problema:");
-        sc.next();
+        return sc.nextLine();
+    }
+
+    static private void showResultPage(String problema) {
+        System.out.println("Instituto Tecnológico de Culiacán");
+        System.out.println("Ingeniería en sistemas conputacionales");
+        System.out.println();
+        System.out.println("Meza Valenzuela Alan");
+        System.out.println("Moreno Corrales Rogelio Samuel");
+        System.out.println("Método de Newton Raphson. Raíces de una Ecuación");
+        System.out.println("De 10:00 a 11:00 horas.");
+        System.out.println();
+        System.out.println("[PREGUNTA]: " + problema);
     }
 }
