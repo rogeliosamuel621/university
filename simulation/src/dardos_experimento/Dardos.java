@@ -1,11 +1,11 @@
-package dardos;
+package dardos_experimento;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.*;
 import java.util.Scanner;
 
-public class DardosExperimento {
+public class Dardos extends JPanel{
     public static int dardos;
     public static void main(String[] args) {
         numDardos();
