@@ -91,18 +91,19 @@ public class App extends JPanel {
 
         // Roof
         g.setColor(new Color(125, 156, 176));
-        g.fillRect(initialPoint - 10, 550, 220, 50);
+        g.fillRect(initialPoint - 10, 570, 220, 30);
         g.setColor(new Color(0,0,0));
-        int baseLineRoof1 = 550;
-        for(int i=0; i<55; i+=5) {
+        int baseLineRoof1 = 570;
+        for(int i=0; i<35; i+=5) {
             g.drawLine(initialPoint - 10, baseLineRoof1 + i, initialPoint + 210, baseLineRoof1 + i);
         }
 
+        // Roof 1.1
         g.setColor(new Color(125, 156, 176));
-        g.fillRect(initialPoint + 20, 520, 160, 30);
+        g.fillRect(initialPoint + 20, 540, 160, 30);
         g.setColor(new Color(0,0,0));
-        int baseLineRoof1Rof = 520;
-        for(int i=0; i<55; i+=5) {
+        int baseLineRoof1Rof = 540;
+        for(int i=0; i<35; i+=5) {
             g.drawLine(initialPoint + 20, baseLineRoof1Rof + i, initialPoint + 180, baseLineRoof1Rof + i);
         }
     }
