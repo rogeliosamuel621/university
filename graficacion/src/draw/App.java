@@ -112,6 +112,64 @@ public class App extends JPanel {
         // Shape
         g.setColor(new Color(140, 158, 162));
         g.fillRect(initialPoint + 201, 400, 200, 400);
+
+        // Window
+        g.setColor(new Color(191, 201, 205));
+        g.fillRect(initialPoint + 221, 450, 160, 30);
+        border.setColor(new Color(0,0,0));
+        border.drawRect(initialPoint + 221, 450, 160, 30);
+        int separation = 160/4;
+        g.setColor(new Color(0,0,0));
+        g.drawLine((initialPoint + 221) + (separation * 1), 450, (initialPoint + 221) + (separation * 1), 480);
+        g.drawLine((initialPoint + 221) + (separation * 2), 450, (initialPoint + 221) + (separation * 2), 480);
+        g.drawLine((initialPoint + 221) + (separation * 3), 450, (initialPoint + 221) + (separation * 3), 480);
+
+        // panel
+        g.setColor(new Color(125, 156, 176));
+        g.fillRect(initialPoint + 201, 500, 200, 30);
+        g.setColor(new Color(0,0,0));
+        int baseLinePanel = 500;
+        for(int i=0; i<35; i+=5) {
+            g.drawLine(initialPoint + 201, baseLinePanel + i, initialPoint + 410, baseLinePanel + i);
+        }
+
+        // Window
+        g.setColor(new Color(191, 201, 205));
+        g.fillRect(initialPoint + 221, 550, 160, 30);
+        border.setColor(new Color(0,0,0));
+        border.drawRect(initialPoint + 221, 550, 160, 30);
+        int separation3 = 160/4;
+        g.setColor(new Color(0,0,0));
+        g.drawLine((initialPoint + 221) + (separation3 * 1), 550, (initialPoint + 221) + (separation3 * 1), 580);
+        g.drawLine((initialPoint + 221) + (separation3 * 2), 550, (initialPoint + 221) + (separation3 * 2), 580);
+        g.drawLine((initialPoint + 221) + (separation3 * 3), 550, (initialPoint + 221) + (separation3 * 3), 580);
+
+        // Panel
+        g.setColor(new Color(125, 156, 176));
+        g.fillRect(initialPoint + 201, 600, 200, 30);
+        g.setColor(new Color(0,0,0));
+        int baseLinePanel2 = 600;
+        for(int i=0; i<35; i+=5) {
+            g.drawLine(initialPoint + 201, baseLinePanel2 + i, initialPoint + 410, baseLinePanel2 + i);
+        }
+
+        // Roof
+        g.setColor(new Color(125, 156, 176));
+        g.fillRect(initialPoint + 191, 400, 220, 30);
+        g.setColor(new Color(0,0,0));
+        int baseLineRoof1 = 400;
+        for(int i=0; i<35; i+=5) {
+            g.drawLine(initialPoint + 191, baseLineRoof1 + i, initialPoint + 410, baseLineRoof1 + i);
+        }
+
+        // Door
+        g.setColor(new Color(191, 201, 205));
+        g.fillRect(initialPoint + 221, 650, 160, 150);
+        border.setColor(new Color(0,0,0));
+        border.drawRect(initialPoint + 221, 650, 160, 150);
+        int separation4 = 160/2;
+        g.setColor(new Color(0,0,0));
+        g.drawLine((initialPoint + 221) + (separation4 * 1), 650, (initialPoint + 221) + (separation4 * 1), 800);
     }
 
     private void thirdBuilding() {
