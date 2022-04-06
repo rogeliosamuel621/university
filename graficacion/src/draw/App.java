@@ -29,6 +29,7 @@ public class App extends JPanel {
 
 
         // background
+        GradientPaint ventana_azul= new GradientPaint(0,0,new Color(20, 95, 165),10,10, new Color(63, 136, 205), true);
         g.setColor(new Color(0, 0, 200));
         g.fillRect(initialPoint - initialPoint, 0, 1200, 800);
 
