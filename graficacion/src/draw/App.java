@@ -6,7 +6,10 @@ import java.awt.*;
 public class App extends JPanel {
     int initialPoint = 300;
     Graphics g;
+    Graphics2D g2D;
     Graphics2D border;
+    GradientPaint buildingColor = new GradientPaint(0,0,new Color(233, 249, 254),50,50, new Color(140, 158, 162), true);
+
 
     public static void main(String[] args) {
 
@@ -22,6 +25,7 @@ public class App extends JPanel {
 
     public void  paint(Graphics graphics){
         g = graphics;
+        g2D = (Graphics2D) g;
         // borders
         border = (Graphics2D) g;
         BasicStroke borderWidth = new BasicStroke(1);
@@ -29,9 +33,24 @@ public class App extends JPanel {
 
 
         // background
-        GradientPaint ventana_azul= new GradientPaint(0,0,new Color(20, 95, 165),10,10, new Color(63, 136, 205), true);
-        g.setColor(new Color(0, 0, 200));
+        // GradientPaint ventana_azul= new GradientPaint(0,0,new Color(20, 95, 165),10,10, new Color(63, 136, 205), true);
+        GradientPaint bg_blue= new GradientPaint(0,0,new Color(20, 95, 165),500,500, new Color(63, 136, 205), true);
+        g2D.setPaint(bg_blue);
         g.fillRect(initialPoint - initialPoint, 0, 1200, 800);
+
+        // clouds
+        printClouds(100, 100);
+        printClouds(400, 150);
+        printClouds(700, 50);
+        printClouds(1000, 200);
+
+        // First Tree
+        g.setColor(new Color(102, 51, 0));
+        g.drawLine(initialPoint - 100, 800, initialPoint - 100, 700);
+        int[] xPoint = {initialPoint - 100, initialPoint - 150, initialPoint - 50};
+        int[] yPoint = {550, 700, 700};
+        g.setColor(new Color(88, 230, 72));
+        g.fillPolygon(xPoint, yPoint, 3);
 
         // 1st building
         firstBuilding();
@@ -42,15 +61,24 @@ public class App extends JPanel {
         // 3rd building
         thirdBuilding();
 
-        /*
-        g.setColor(new Color(125, 156, 176));
-        g.fillRect(initialPoint + 400, 550, 220, 50);
-        g.setColor(new Color(0,0,0));
-        int baseLineRoof2 = 550;
-        for(int i=0; i<55; i+=5) {
-            g.drawLine(initialPoint - 10, baseLineRoof1 + i, initialPoint + 210, baseLineRoof1 + i);
-        }
-        */
+        // Second Tree
+        g.setColor(new Color(102, 51, 0));
+        g.drawLine(initialPoint + 702, 800, initialPoint + 702, 700);
+        int[] xPoint2 = {initialPoint + 702, initialPoint + 648, initialPoint + 752};
+        int[] yPoint2 = {550, 700, 700};
+        g.setColor(new Color(88, 230, 72));
+        g.fillPolygon(xPoint2, yPoint2, 3);
+    }
+
+    private void printClouds(int initialPositionX, int initialPositionY) {
+        GradientPaint bg_blue= new GradientPaint(0,0,new Color(21, 182, 222),100,100, new Color(204, 230, 255), true);
+        g2D.setPaint(bg_blue);
+        g.fillArc(initialPositionX, initialPositionY, 60, 60, 0, 360);
+        g.fillArc(initialPositionX + 30, initialPositionY - 30, 60, 60, 0, 360);
+        g.fillArc(initialPositionX + 50, initialPositionY - 20, 60, 60, 0, 360);
+        g.fillArc(initialPositionX + 70, initialPositionY, 60, 60, 0, 360);
+        g.fillArc(initialPositionX + 30, initialPositionY, 60, 60, 0, 360);
+
     }
 
     public void firstBuilding() {
@@ -59,7 +87,9 @@ public class App extends JPanel {
         g.fillRect(initialPoint, 600, 200, 200);
 
         // windows
-        g.setColor(new Color(191, 201, 205));
+        GradientPaint ventana_azul= new GradientPaint(0,0,new Color(233, 249, 254),50,50, new Color(119, 203, 202), true);
+        g2D.setPaint(ventana_azul);
+        // g.setColor(new Color(191, 201, 205));
         g.fillRect(initialPoint + 20, 700, 160, 30);
         border.setColor(new Color(0,0,0));
         border.drawRect(initialPoint + 20, 700, 160, 30);
@@ -70,7 +100,7 @@ public class App extends JPanel {
         g.drawLine((initialPoint + 20) + (separation * 2), 700, (initialPoint + 20) + (separation * 2), 730);
         g.drawLine((initialPoint + 20) + (separation * 3), 700, (initialPoint + 20) + (separation * 3), 730);
 
-        g.setColor(new Color(191, 201, 205));
+        g2D.setPaint(ventana_azul);
         g.fillRect(initialPoint + 20, 660, 160, 30);
         border.setColor(new Color(0,0,0));
         border.drawRect(initialPoint + 20, 660, 160, 30);
@@ -80,7 +110,7 @@ public class App extends JPanel {
         g.drawLine((initialPoint + 20) + (separation * 2), 660, (initialPoint + 20) + (separation * 2), 690);
         g.drawLine((initialPoint + 20) + (separation * 3), 660, (initialPoint + 20) + (separation * 3), 690);
 
-        g.setColor(new Color(191, 201, 205));
+        g2D.setPaint(ventana_azul);
         g.fillRect(initialPoint + 20, 620, 160, 30);
         border.setColor(new Color(0,0,0));
         border.drawRect(initialPoint + 20, 620, 160, 30);
@@ -115,7 +145,8 @@ public class App extends JPanel {
         g.fillRect(initialPoint + 201, 400, 200, 400);
 
         // Window
-        g.setColor(new Color(191, 201, 205));
+        GradientPaint ventana_azul= new GradientPaint(0,0,new Color(233, 249, 254),50,50, new Color(119, 203, 202), true);
+        g2D.setPaint(ventana_azul);
         g.fillRect(initialPoint + 221, 450, 160, 30);
         border.setColor(new Color(0,0,0));
         border.drawRect(initialPoint + 221, 450, 160, 30);
@@ -135,7 +166,7 @@ public class App extends JPanel {
         }
 
         // Window
-        g.setColor(new Color(191, 201, 205));
+        g2D.setPaint(ventana_azul);
         g.fillRect(initialPoint + 221, 550, 160, 30);
         border.setColor(new Color(0,0,0));
         border.drawRect(initialPoint + 221, 550, 160, 30);
@@ -164,7 +195,7 @@ public class App extends JPanel {
         }
 
         // Door
-        g.setColor(new Color(191, 201, 205));
+        g2D.setPaint(ventana_azul);
         g.fillRect(initialPoint + 221, 650, 160, 150);
         border.setColor(new Color(0,0,0));
         border.drawRect(initialPoint + 221, 650, 160, 150);
@@ -179,10 +210,11 @@ public class App extends JPanel {
         g.fillRect(initialPoint + 402, 200, 200, 600);
 
         // Windows
-        g.setColor(new Color(191, 201, 205));
+        GradientPaint ventana_azul= new GradientPaint(0,0,new Color(233, 249, 254),50,50, new Color(119, 203, 202), true);
+        g2D.setPaint(ventana_azul);
         int count = 700;
         for(int i = 0; i<13; i++) {
-            g.setColor(new Color(191, 201, 205));
+            g2D.setPaint(ventana_azul);
             g.fillRect(initialPoint + 420, count, 160, 30);
             border.setColor(new Color(0,0,0));
             border.drawRect(initialPoint + 420, count, 160, 30);
