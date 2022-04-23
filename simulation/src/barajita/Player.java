@@ -28,12 +28,21 @@ public class Player {
             StringBuilder _cardName = new StringBuilder(cardName);
             int cardValue = Integer.parseInt(_cardName.deleteCharAt(0).toString());
 
-            Card newCard = new Card(cardValue, image);
+            Card newCard = new Card(cardValue, image, cardName);
 
             this.cards.add(newCard);
 
         } catch (Exception e) {
             e.getStackTrace();
         }
+    }
+
+    public void addCard(Card card) {
+        this.cards.add(card);
+    }
+
+    public ArrayList<Card> getCards() {
+        ArrayList<Card> temCards =  this.cards;
+        return temCards;
     }
 }

@@ -5,5 +5,6 @@ public class App {
         Game game = new Game();
 
         game.generateCards();
+        game.distributeCards();
     }
 }

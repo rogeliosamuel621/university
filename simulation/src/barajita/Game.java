@@ -4,67 +4,148 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class Game {
-    ArrayList<JLabel> oro = new ArrayList<JLabel>();
-    ArrayList<JLabel> copas = new ArrayList<JLabel>();
-    ArrayList<JLabel> espadas = new ArrayList<JLabel>();
-    ArrayList<JLabel> bastos = new ArrayList<JLabel>();
+    ArrayList<Card> oro = new ArrayList<Card>();
+    ArrayList<Card> copas = new ArrayList<Card>();
+    ArrayList<Card> espadas = new ArrayList<Card>();
+    ArrayList<Card> bastos = new ArrayList<Card>();
     int[] values = {2, 3, 4, 5, 6, 7, 10, 11, 12, 13};
+
+    Player player1 = new Player();
+    Player player2 = new Player();
+    Player player3 = new Player();
+    Player player4 = new Player();
+
+    public void distributeCards() {
+        for (int i=0; i<10; i++) {
+            Card randomCard = null;
+            do {
+                randomCard = this.getRandomCard();
+            }while (randomCard == null);
+
+            this.player1.addCard(randomCard);
+        }
+
+        System.out.println("JUGDOR 1 FINISHED");
+        for(int i=0; i<10; i++) {
+            System.out.println(this.player1.getCards().get(i).getName());
+        }
+
+        for (int i=0; i<10; i++) {
+            Card randomCard = null;
+            do {
+                randomCard = this.getRandomCard();
+            }while (randomCard == null);
+
+            this.player2.addCard(randomCard);
+        }
+
+        /*
+        System.out.println("JUGDOR 2 FINISHED");
+        for(int i=0; i<10; i++) {
+            System.out.println(this.player2.getCards().get(i).getName());
+        }
+         */
+
+        for (int i=0; i<10; i++) {
+            Card randomCard = null;
+            do {
+                randomCard = this.getRandomCard();
+            }while (randomCard == null);
+
+            this.player3.addCard(randomCard);
+        }
+
+        /*
+        System.out.println("JUGDOR 3 FINISHED");
+        for(int i=0; i<10; i++) {
+            System.out.println(this.player3.getCards().get(i).getName());
+        }
+         */
+
+        for (int i=0; i<10; i++) {
+            Card randomCard = null;
+            do {
+                randomCard = this.getRandomCard();
+            }while (randomCard == null);
+
+            this.player4.addCard(randomCard);
+        }
+
+        /*
+        System.out.println("JUGDOR 4 FINISHED");
+        for(int i=0; i<10; i++) {
+            System.out.println(this.player4.getCards().get(i).getName());
+        }
+        */
+    }
 
     public void generateCards() {
         // oro
         for(int i=0; i<10; i++) {
             String cardName = "O" + this.values[i];
             JLabel cardImage = this.createCardImage(cardName);
-            this.oro.add(cardImage);
+            Card card = new Card(values[i], cardImage, cardName);
+            this.oro.add(card);
         }
 
         // copas
         for(int i=0; i<10; i++) {
             String cardName = "C" + this.values[i];
             JLabel cardImage = this.createCardImage(cardName);
-            this.copas.add(cardImage);
+            Card card = new Card(values[i], cardImage, cardName);
+            this.copas.add(card);
         }
 
         // espadas
         for(int i=0; i<10; i++) {
-            String cardName = "e" + this.values[i];
+            String cardName = "E" + this.values[i];
             JLabel cardImage = this.createCardImage(cardName);
-            this.espadas.add(cardImage);
+            Card card = new Card(values[i], cardImage, cardName);
+            this.espadas.add(card);
         }
 
         // bastos
         for(int i=0; i<10; i++) {
-            String cardName = "b" + this.values[i];
+            String cardName = "B" + this.values[i];
             JLabel cardImage = this.createCardImage(cardName);
-            this.bastos.add(cardImage);
+            Card card = new Card(values[i], cardImage, cardName);
+            this.bastos.add(card);
         }
-
-
     }
 
-    public void distributeCards() {
+    public Card getRandomCard() {
         double num1 = Math.random();
         double num2 = Math.random();
 
         if(num1 >= 0.0d && num1 < 0.25d) { // oro
             int cardValue = this.getCardValue(num2);
-            String cardName = "O" + cardValue + ".jpg";
+            String cardName = "O" + cardValue;
+            Card cardToGive = this.getCardInArray(cardName, this.oro);
+            return cardToGive;
         }
 
         if (num1 >= 0.25d && num1 < 0.50d) { // copas
             int cardValue = this.getCardValue(num2);
-            String cardName = "C" + cardValue + ".jpg";
+            String cardName = "C" + cardValue ;
+            Card cardToGive = this.getCardInArray(cardName, this.copas);
+            return cardToGive;
         }
 
         if (num1 >= 0.50d && num1 < 0.75d) { // espadas
             int cardValue = this.getCardValue(num2);
-            String cardName = "E" + cardValue + ".jpg";
+            String cardName = "E" + cardValue;
+            Card cardToGive = this.getCardInArray(cardName, this.espadas);
+            return cardToGive;
         }
 
         if (num1 >= 0.75d && num1 < 1.0d) { // bastos
             int cardValue = this.getCardValue(num2);
-            String cardName = "B" + cardValue + ".jpg";
+            String cardName = "B" + cardValue;
+            Card cardToGive = this.getCardInArray(cardName, this.bastos);
+            return cardToGive;
         }
+
+        return null;
 
     }
 
@@ -84,7 +165,7 @@ public class Game {
     private JLabel createCardImage(String cardName) {
         try {
             String currentPath = new java.io.File(".").getCanonicalPath() + "/src/barajita/";
-            JLabel image = new JLabel(new ImageIcon(currentPath + "images/" + cardName));
+            JLabel image = new JLabel(new ImageIcon(currentPath + "images/" + cardName + ".jpg"));
 
             return image;
         } catch (Exception e) {
@@ -92,4 +173,20 @@ public class Game {
             return null;
         }
     }
+
+    private Card getCardInArray(String cardName, ArrayList<Card> cards) {
+        Card cardFound = null;
+        for(int i=0; i<cards.size(); i++) {
+            if (cards.get(i) == null) continue;
+
+            String currentCardName = cards.get(i).getName();
+            if (cardName.equals(currentCardName)) {
+                cardFound = cards.get(i);
+                cards.set(i, null);
+            }
+        }
+
+        return cardFound;
+    }
+
 }
