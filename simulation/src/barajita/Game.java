@@ -25,11 +25,6 @@ public class Game {
             this.player1.addCard(randomCard);
         }
 
-        System.out.println("JUGDOR 1 FINISHED");
-        for(int i=0; i<10; i++) {
-            System.out.println(this.player1.getCards().get(i).getName());
-        }
-
         for (int i=0; i<10; i++) {
             Card randomCard = null;
             do {
@@ -38,13 +33,6 @@ public class Game {
 
             this.player2.addCard(randomCard);
         }
-
-        /*
-        System.out.println("JUGDOR 2 FINISHED");
-        for(int i=0; i<10; i++) {
-            System.out.println(this.player2.getCards().get(i).getName());
-        }
-         */
 
         for (int i=0; i<10; i++) {
             Card randomCard = null;
@@ -55,13 +43,6 @@ public class Game {
             this.player3.addCard(randomCard);
         }
 
-        /*
-        System.out.println("JUGDOR 3 FINISHED");
-        for(int i=0; i<10; i++) {
-            System.out.println(this.player3.getCards().get(i).getName());
-        }
-         */
-
         for (int i=0; i<10; i++) {
             Card randomCard = null;
             do {
@@ -70,13 +51,6 @@ public class Game {
 
             this.player4.addCard(randomCard);
         }
-
-        /*
-        System.out.println("JUGDOR 4 FINISHED");
-        for(int i=0; i<10; i++) {
-            System.out.println(this.player4.getCards().get(i).getName());
-        }
-        */
     }
 
     public void generateCards() {
