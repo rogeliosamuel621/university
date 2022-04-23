@@ -167,4 +167,32 @@ public class Game {
         return cardFound;
     }
 
+    public void recordWhoWins(ArrayList<Card> cardsInTable) {
+        int bigger = cardsInTable.get(0).getValue();
+        int position = 0;
+
+
+        for(int i=0; i<cardsInTable.size(); i++) {
+            if (bigger < cardsInTable.get(i).getValue()) {
+                bigger = cardsInTable.get(i).getValue();
+                position = i;
+            }
+        }
+
+        switch (position) {
+            case 0:
+                this.player1.upgradeVictoriesCount();
+                break;
+            case 1:
+                this.player2.upgradeVictoriesCount();
+                break;
+            case 2:
+                this.player3.upgradeVictoriesCount();
+                break;
+            case 3:
+                this.player4.upgradeVictoriesCount();
+                break;
+        }
+    }
+
 }

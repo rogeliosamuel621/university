@@ -8,7 +8,6 @@ public class Table extends JPanel implements Runnable {
     private static final long serialVersionUID = 1L;
     static String currentPath = "";
     int turnos;
-    static int puntos;
     static Game game;
 
     public static void main(String[] args){
@@ -67,6 +66,8 @@ public class Table extends JPanel implements Runnable {
         cardsToPlay.add(player4.getCards().get(turnos));
 
         printCenterCards(g, cardsToPlay);
+        game.recordWhoWins(cardsToPlay);
+
     }
 
     @Override
@@ -74,7 +75,7 @@ public class Table extends JPanel implements Runnable {
         // TODO Auto-generated method stub
         try {
             turnos++;
-            Thread.sleep(1500);
+            Thread.sleep(1000);
             repaint();
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
@@ -94,16 +95,16 @@ public class Table extends JPanel implements Runnable {
         g.setColor (Color.black);
 
         g.drawString("Jugador 1", 370, 20);
-        g.drawString("Score: " + puntos, 500, 20);
+        g.drawString("Score: " + game.player1.getVictories(), 500, 20);
 
         g.drawString("Jugador 2", 720, 140);
-        g.drawString("Score: " + puntos, 800, 140);
+        g.drawString("Score: " + game.player2.getVictories(), 800, 140);
 
         g.drawString("Jugador 3", 370, 510);
-        g.drawString("Score: " + puntos, 500, 510);
+        g.drawString("Score: " + game.player3.getVictories(), 500, 510);
 
         g.drawString("Jugador 4", 40, 140);
-        g.drawString("Score: " + puntos, 115, 140);
+        g.drawString("Score: " + game.player4.getVictories(), 115, 140);
 
         for (int i=0; i < (300 - (30 * numOfCards)); i = i + 30) {
             g.drawImage(cartaReverso.getImage(), x, (y + i), 138, 90, null);
