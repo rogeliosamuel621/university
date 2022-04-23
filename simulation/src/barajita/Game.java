@@ -15,6 +15,10 @@ public class Game {
     Player player3 = new Player();
     Player player4 = new Player();
 
+    public Game() {
+        System.out.println("generó");
+    }
+
     public void distributeCards() {
         for (int i=0; i<10; i++) {
             Card randomCard = null;
