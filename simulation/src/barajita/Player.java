@@ -22,8 +22,8 @@ public class Player {
 
     public void addCard(String cardName) {
         try {
-            String currentPath = new java.io.File(".").getCanonicalPath() + "/src/barajita/images";
-            JLabel image = new JLabel(new ImageIcon(currentPath + "images\\" + cardName));
+            String currentPath = new java.io.File(".").getCanonicalPath() + "/src/barajita/";
+            JLabel image = new JLabel(new ImageIcon(currentPath + "images/" + cardName));
 
             StringBuilder _cardName = new StringBuilder(cardName);
             int cardValue = Integer.parseInt(_cardName.deleteCharAt(0).toString());
