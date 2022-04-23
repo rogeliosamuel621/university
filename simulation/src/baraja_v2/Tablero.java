@@ -27,7 +27,7 @@ public class Tablero extends javax.swing.JFrame {
     Random rnd = new Random();
     double valor;
     public String nombreCartas[] = {"O", "C", "E", "B"};
-    JLabel jlImagenes[] = new JLabel[numerodecartas];
+    JLabel[] jlImagenes = new JLabel[numerodecartas];
     JLabel ImagenMesa;
     JButton Grafica;
     String currentPath = "";
@@ -193,8 +193,8 @@ public class Tablero extends javax.swing.JFrame {
                 CartaAgg.add(aux);
             }
 
-            jugar();
             espacioCartas();
+            jugar();
 
             while (!CartaAgg.isEmpty()) {
                 CartaAgg.remove(0);
@@ -461,7 +461,7 @@ public class Tablero extends javax.swing.JFrame {
 
             if (posicion == 0) {
                 X1 += 45;
-                jlImagenes[i] = new JLabel(new ImageIcon(getClass().getResource("imagenes/back.jpg")));
+                jlImagenes[i] = new JLabel(new ImageIcon(this.currentPath + "imagenes/back.jpg"));
                 jlImagenes[i].setBounds(X1, Y1, 100, 150);
 
                 ImagenMesa.add(jlImagenes[i]);
@@ -469,20 +469,20 @@ public class Tablero extends javax.swing.JFrame {
 
             if (posicion == 1) {
                 X2 += 45;
-                jlImagenes[i] = new JLabel(new ImageIcon(getClass().getResource("imagenes/back.jpg")));
+                jlImagenes[i] = new JLabel(new ImageIcon(this.currentPath + "imagenes/back.jpg"));
                 jlImagenes[i].setBounds(X2, Y2, 100, 150);
 
                 ImagenMesa.add(jlImagenes[i]);
             }
             if (posicion == 2) {
                 X3 += 45;
-                jlImagenes[i] = new JLabel(new ImageIcon(getClass().getResource("imagenes/back.jpg")));
+                jlImagenes[i] = new JLabel(new ImageIcon(this.currentPath + "imagenes/back.jpg"));
                 jlImagenes[i].setBounds(X3, Y3, 100, 150);
                 ImagenMesa.add(jlImagenes[i]);
             }
             if (posicion == 3) {
                 X4 += 45;
-                jlImagenes[i] = new JLabel(new ImageIcon(getClass().getResource("imagenes/back.jpg")));
+                jlImagenes[i] = new JLabel(new ImageIcon(this.currentPath + "imagenes/back.jpg"));
                 jlImagenes[i].setBounds(X4, Y4, 100, 150);
                 ImagenMesa.add(jlImagenes[i]);
             }
