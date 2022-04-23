@@ -8,7 +8,6 @@ public class App extends JPanel {
     Graphics g;
     Graphics2D g2D;
     Graphics2D border;
-    GradientPaint buildingColor = new GradientPaint(0,0,new Color(233, 249, 254),50,50, new Color(140, 158, 162), true);
 
 
     public static void main(String[] args) {
@@ -45,11 +44,13 @@ public class App extends JPanel {
         printClouds(1000, 200);
 
         // First Tree
+        GradientPaint treeColor = new GradientPaint(0,0,new Color(2, 65, 29),120,120, new Color(108, 160, 130), true);
+        g2D.setPaint(treeColor);
         g.setColor(new Color(102, 51, 0));
         g.drawLine(initialPoint - 100, 800, initialPoint - 100, 700);
         int[] xPoint = {initialPoint - 100, initialPoint - 150, initialPoint - 50};
         int[] yPoint = {550, 700, 700};
-        g.setColor(new Color(88, 230, 72));
+        g2D.setPaint(treeColor);
         g.fillPolygon(xPoint, yPoint, 3);
 
         // 1st building
@@ -62,11 +63,12 @@ public class App extends JPanel {
         thirdBuilding();
 
         // Second Tree
+        GradientPaint treeColor2 = new GradientPaint(0,0,new Color(2, 65, 29),100,100, new Color(108, 160, 130), true);
         g.setColor(new Color(102, 51, 0));
         g.drawLine(initialPoint + 702, 800, initialPoint + 702, 700);
         int[] xPoint2 = {initialPoint + 702, initialPoint + 648, initialPoint + 752};
         int[] yPoint2 = {550, 700, 700};
-        g.setColor(new Color(88, 230, 72));
+        g2D.setPaint(treeColor2);
         g.fillPolygon(xPoint2, yPoint2, 3);
     }
 
@@ -83,7 +85,7 @@ public class App extends JPanel {
 
     public void firstBuilding() {
         // Shape
-        g.setColor(new Color(140, 158, 162));
+        g.setColor(new Color(135, 153, 161));
         g.fillRect(initialPoint, 600, 200, 200);
 
         // windows
@@ -121,7 +123,7 @@ public class App extends JPanel {
         g.drawLine((initialPoint + 20) + (separation * 3), 620, (initialPoint + 20) + (separation * 3), 650);
 
         // Roof
-        g.setColor(new Color(125, 156, 176));
+        g.setColor(new Color(113, 141, 167));
         g.fillRect(initialPoint - 10, 570, 220, 30);
         g.setColor(new Color(0,0,0));
         int baseLineRoof1 = 570;
@@ -130,7 +132,7 @@ public class App extends JPanel {
         }
 
         // Roof 1.1
-        g.setColor(new Color(125, 156, 176));
+        g.setColor(new Color(113, 141, 167));
         g.fillRect(initialPoint + 20, 540, 160, 30);
         g.setColor(new Color(0,0,0));
         int baseLineRoof1Rof = 540;
@@ -141,7 +143,7 @@ public class App extends JPanel {
 
     public void secondBuilding() {
         // Shape
-        g.setColor(new Color(140, 158, 162));
+        g.setColor(new Color(135, 153, 161));
         g.fillRect(initialPoint + 201, 400, 200, 400);
 
         // Window
@@ -157,7 +159,7 @@ public class App extends JPanel {
         g.drawLine((initialPoint + 221) + (separation * 3), 450, (initialPoint + 221) + (separation * 3), 480);
 
         // panel
-        g.setColor(new Color(125, 156, 176));
+        g.setColor(new Color(113, 141, 167));
         g.fillRect(initialPoint + 201, 500, 200, 30);
         g.setColor(new Color(0,0,0));
         int baseLinePanel = 500;
@@ -177,7 +179,7 @@ public class App extends JPanel {
         g.drawLine((initialPoint + 221) + (separation3 * 3), 550, (initialPoint + 221) + (separation3 * 3), 580);
 
         // Panel
-        g.setColor(new Color(125, 156, 176));
+        g.setColor(new Color(113, 141, 167));
         g.fillRect(initialPoint + 201, 600, 200, 30);
         g.setColor(new Color(0,0,0));
         int baseLinePanel2 = 600;
@@ -186,7 +188,7 @@ public class App extends JPanel {
         }
 
         // Roof
-        g.setColor(new Color(125, 156, 176));
+        g.setColor(new Color(113, 141, 167));
         g.fillRect(initialPoint + 191, 400, 220, 30);
         g.setColor(new Color(0,0,0));
         int baseLineRoof1 = 400;
@@ -206,7 +208,7 @@ public class App extends JPanel {
 
     private void thirdBuilding() {
         // Shape
-        g.setColor(new Color(140, 158, 162));
+        g.setColor(new Color(135, 153, 161));
         g.fillRect(initialPoint + 402, 200, 200, 600);
 
         // Windows
@@ -230,7 +232,7 @@ public class App extends JPanel {
         }
 
         // Roof
-        g.setColor(new Color(125, 156, 176));
+        g.setColor(new Color(113, 141, 167));
         g.fillRect(initialPoint + 392, 180, 220, 20);
         g.setColor(new Color(0,0,0));
         int baseLineRoof1 = 180;
