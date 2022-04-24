@@ -35,13 +35,14 @@ public class Table extends JPanel implements Runnable {
 
             ventana();
             try {
-                Thread.sleep(14000);
+                Thread.sleep(16000);
                 ventana.setVisible(false);
             } catch (Exception e) {
                 System.out.println(e.getStackTrace());
             }
 
             Player winner = game.getWinner();
+            if (winner == null) continue;
             switch (winner.getName()) {
                 case "Jugador 1":
                     player1Win++;
@@ -120,7 +121,8 @@ public class Table extends JPanel implements Runnable {
             printTable(g, 0);
             if (turnos == 10) {
                 Player winner = game.getWinner();
-                JOptionPane.showMessageDialog(ventana, "Ganador: " + winner.getName());
+                String msg = winner == null ? "Empate" : "Ganador: " + winner.getName();
+                JOptionPane.showMessageDialog(ventana, msg);
             }
         } else {
             ArrayList<Card> cardsToPlay = new ArrayList<Card>();
@@ -134,32 +136,6 @@ public class Table extends JPanel implements Runnable {
             printTable(g, turnos + 1);
             printCenterCards(g, cardsToPlay);
         }
-/*
-        printTable(g, turnos);
-
-        if (turnos >= 10) {
-            printTable(g, 0);
-
-            if (turnos == 10) {
-                Player winner = game.getWinner();
-                JOptionPane.showMessageDialog(ventana, "Ganador: " + winner.getName());
-            }
-
-            return;
-        } else {
-            printTable(g, turnos + 1);
-        }
-
-        ArrayList<Card> cardsToPlay = new ArrayList<Card>();
-        cardsToPlay.add(player1.getCards().get(turnos));
-        cardsToPlay.add(player2.getCards().get(turnos));
-        cardsToPlay.add(player3.getCards().get(turnos));
-        cardsToPlay.add(player4.getCards().get(turnos));
-
-        printCenterCards(g, cardsToPlay);
-        game.recordWhoWins(cardsToPlay);
-
- */
 
     }
 

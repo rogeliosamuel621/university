@@ -212,6 +212,7 @@ public class Game {
         players.add(player3);
         players.add(player4);
 
+        int victoryRepeated = this.isTie(players);
 
         for (int i = 0; i < 4; i++) {
             if (biggerNumOfVictories < players.get(i).getVictories()) {
@@ -220,7 +221,22 @@ public class Game {
             }
         }
 
+        if (victoryRepeated == winner.getVictories()) return null;
+
         return winner;
+    }
+
+    private int isTie(ArrayList<Player> players) {
+        for (int i = 0; i < players.size(); i++) {
+            Player currentPlayer = players.get(i);
+            for (int j = 0; j < players.size(); j++) {
+                if (currentPlayer.getName().equals(players.get(j).getName())) continue;
+
+                if (currentPlayer.getVictories() == players.get(j).getVictories()) return currentPlayer.getVictories();
+            }
+        }
+
+        return -1;
     }
 
     private ArrayList<Card> getRepeatedValues(ArrayList<Card> cards) {
