@@ -168,12 +168,13 @@ public class Game {
     }
 
     public void recordWhoWins(ArrayList<Card> cardsInTable) {
-        ArrayList<Card> repeatedCards = getRepeatedValues(cardsInTable);
-        System.out.println("CARTAS REPETIDAS");
-        for (int i = 0; i < repeatedCards.size(); i++) {
-            System.out.println(repeatedCards.get(i).getValue());
-        }
-        System.out.println();
+//        ArrayList<Card> repeatedCards = getRepeatedValues(cardsInTable);
+//        System.out.println("CARTAS REPETIDAS");
+//        for (int i = 0; i < repeatedCards.size(); i++) {
+//            System.out.println(repeatedCards.get(i).getValue());
+//        }
+//        System.out.println();
+
         int bigger = cardsInTable.get(0).getValue();
         int position = 0;
 

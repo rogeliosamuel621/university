@@ -3,29 +3,95 @@ package barajita;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Table extends JPanel implements Runnable {
     private static final long serialVersionUID = 1L;
     static String currentPath = "";
     int turnos;
     static Game game;
+    static JFrame ventana;
 
     public static void main(String[] args){
-        game = new Game();
-        game.generateCards();
-        game.distributeCards();
-        try {
-            currentPath = new java.io.File(".").getCanonicalPath() + "/src/barajita/";
-        } catch (Exception e) {
-            System.out.println("Error in constructor");
-            e.printStackTrace();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("digite el numero de simulaciones");
+        int numOfSimulations = sc.nextInt();
+
+        int player1Win = 0;
+        int player2Win = 0;
+        int player3Win = 0;
+        int player4Win = 0;
+
+        for(int i=1; i<=numOfSimulations; i++) {
+            game = new Game();
+            game.generateCards();
+            game.distributeCards();
+            try {
+                currentPath = new java.io.File(".").getCanonicalPath() + "/src/barajita/";
+            } catch (Exception e) {
+                System.out.println("Error in constructor");
+                e.printStackTrace();
+            }
+
+            ventana();
+            try {
+                Thread.sleep(14000);
+                ventana.setVisible(false);
+            } catch (Exception e) {
+                System.out.println(e.getStackTrace());
+            }
+
+            Player winner = game.getWinner();
+            switch (winner.getName()) {
+                case "Jugador 1":
+                    player1Win++;
+                    break;
+                case "Jugador 2":
+                    player2Win++;
+                    break;
+                case "Jugador 3":
+                    player3Win++;
+                    break;
+                case "Jugador 4":
+                    player4Win++;
+                    break;
+            }
         }
 
-        ventana();
+        int position = 0;
+        int bigger = 0;
+        Player winner = null;
+        int[] scores = {player1Win, player2Win, player3Win, player4Win};
+        for(int i=0; i<4; i++) {
+            if (bigger < scores[i]) {
+                bigger = scores[i];
+                position = i;
+            }
+        }
+
+        switch (position) {
+            case 0:
+                winner = game.player1;
+                break;
+            case 1:
+                winner = game.player2;
+                break;
+            case 2:
+                winner = game.player3;
+                break;
+            case 3:
+                winner = game.player4;
+                break;
+        }
+
+        JOptionPane.showMessageDialog(null, "Ganador: " + winner.getName());
+
+        System.exit(0);
+
     }
 
     public static void ventana() {
-        JFrame ventana = new JFrame("Juego");
+        ventana = new JFrame("Juego");
         Table obj = new Table();
         ventana.add(obj);
         ventana.setSize(900, 900);
@@ -43,21 +109,42 @@ public class Table extends JPanel implements Runnable {
     }
 
     public static void play (Graphics g, int turnos) {
-        printTable(g, 0);
+        //printTable(g, 0);
 
         Player player1 = game.player1;
         Player player2 = game.player2;
         Player player3 = game.player3;
         Player player4 = game.player4;
 
-        printTable(g, turnos);
-
         if (turnos >= 10) {
             printTable(g, 0);
             if (turnos == 10) {
                 Player winner = game.getWinner();
-                JOptionPane.showMessageDialog(null, "Ganador: " + winner.getName());
+                JOptionPane.showMessageDialog(ventana, "Ganador: " + winner.getName());
             }
+        } else {
+            ArrayList<Card> cardsToPlay = new ArrayList<Card>();
+            cardsToPlay.add(player1.getCards().get(turnos));
+            cardsToPlay.add(player2.getCards().get(turnos));
+            cardsToPlay.add(player3.getCards().get(turnos));
+            cardsToPlay.add(player4.getCards().get(turnos));
+
+
+            game.recordWhoWins(cardsToPlay);
+            printTable(g, turnos + 1);
+            printCenterCards(g, cardsToPlay);
+        }
+/*
+        printTable(g, turnos);
+
+        if (turnos >= 10) {
+            printTable(g, 0);
+
+            if (turnos == 10) {
+                Player winner = game.getWinner();
+                JOptionPane.showMessageDialog(ventana, "Ganador: " + winner.getName());
+            }
+
             return;
         } else {
             printTable(g, turnos + 1);
@@ -72,6 +159,8 @@ public class Table extends JPanel implements Runnable {
         printCenterCards(g, cardsToPlay);
         game.recordWhoWins(cardsToPlay);
 
+ */
+
     }
 
     @Override
@@ -79,7 +168,10 @@ public class Table extends JPanel implements Runnable {
         // TODO Auto-generated method stub
         try {
             turnos++;
-            Thread.sleep(5000);
+            Thread.sleep(1000);
+            if (turnos == 11) {
+                return;
+            }
             repaint();
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
