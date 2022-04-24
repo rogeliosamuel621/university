@@ -6,10 +6,12 @@ import java.util.ArrayList;
 public class Player {
     private int victories;
     private ArrayList<Card> cards;
+    private String name = "";
 
-    public Player() {
+    public Player(String name) {
         this.cards = new ArrayList<Card>();
         this.victories = 0;
+        this.name = name;
     }
 
     public void upgradeVictoriesCount() {
@@ -44,5 +46,9 @@ public class Player {
     public ArrayList<Card> getCards() {
         ArrayList<Card> temCards =  this.cards;
         return temCards;
+    }
+
+    public String getName() {
+        return name;
     }
 }

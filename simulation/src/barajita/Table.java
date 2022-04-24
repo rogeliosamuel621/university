@@ -54,6 +54,10 @@ public class Table extends JPanel implements Runnable {
 
         if (turnos >= 10) {
             printTable(g, 0);
+            if (turnos == 10) {
+                Player winner = game.getWinner();
+                JOptionPane.showMessageDialog(null, "Ganador: " + winner.getName());
+            }
             return;
         } else {
             printTable(g, turnos + 1);
@@ -75,7 +79,7 @@ public class Table extends JPanel implements Runnable {
         // TODO Auto-generated method stub
         try {
             turnos++;
-            Thread.sleep(1000);
+            Thread.sleep(5000);
             repaint();
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block

@@ -10,10 +10,10 @@ public class Game {
     ArrayList<Card> bastos = new ArrayList<Card>();
     int[] values = {2, 3, 4, 5, 6, 7, 10, 11, 12, 13};
 
-    Player player1 = new Player();
-    Player player2 = new Player();
-    Player player3 = new Player();
-    Player player4 = new Player();
+    Player player1 = new Player("Jugador 1");
+    Player player2 = new Player("Jugador 2");
+    Player player3 = new Player("Jugador 3");
+    Player player4 = new Player("Jugador 4");
 
     public Game() {
         System.out.println("generó");
@@ -168,6 +168,12 @@ public class Game {
     }
 
     public void recordWhoWins(ArrayList<Card> cardsInTable) {
+        ArrayList<Card> repeatedCards = getRepeatedValues(cardsInTable);
+        System.out.println("CARTAS REPETIDAS");
+        for (int i = 0; i < repeatedCards.size(); i++) {
+            System.out.println(repeatedCards.get(i).getValue());
+        }
+        System.out.println();
         int bigger = cardsInTable.get(0).getValue();
         int position = 0;
 
@@ -195,4 +201,75 @@ public class Game {
         }
     }
 
+    public Player getWinner() {
+        int biggerNumOfVictories = 0;
+        Player winner = null;
+
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+        players.add(player4);
+
+
+        for (int i = 0; i < 4; i++) {
+            if (biggerNumOfVictories < players.get(i).getVictories()) {
+                biggerNumOfVictories = players.get(i).getVictories();
+                winner = players.get(i);
+            }
+        }
+
+        return winner;
+    }
+
+    private ArrayList<Card> getRepeatedValues(ArrayList<Card> cards) {
+        ArrayList<RepeatedCard> repeatedCards = new ArrayList<>();
+        for (int i = 0; i < cards.size(); i++) {
+            repeatedCards.add(new RepeatedCard(cards.get(i)));
+        }
+
+
+        for (int i = 0; i < repeatedCards.size(); i++) {
+            RepeatedCard currentCard = repeatedCards.get(i);
+
+            if (i == cards.size()) break;
+
+            for (int j = i + 1; j < cards.size(); j++) {
+                if (currentCard.card.getValue() == repeatedCards.get(j).card.getValue()) {
+                    currentCard.makeRepeated();
+                    repeatedCards.get(j).makeRepeated();
+                    break;
+                }
+            }
+        }
+
+        ArrayList<Card> repeatedCardsFounded = new ArrayList<>();
+
+        for (int i = 0; i < repeatedCards.size(); i++) {
+            if (repeatedCards.get(i).getIsRepeated()) {
+                repeatedCardsFounded.add(repeatedCards.get(i).card);
+            }
+        }
+
+        return repeatedCardsFounded;
+    }
+
+}
+
+class RepeatedCard {
+    Card card;
+    private boolean isRepeated;
+
+    public RepeatedCard(Card card) {
+        this.card = card;
+        this.isRepeated = false;
+    }
+
+    public void makeRepeated() {
+        this.isRepeated = true;
+    }
+
+    public boolean getIsRepeated() {
+        return this.isRepeated;
+    }
 }
