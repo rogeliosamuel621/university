@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
 
 public class Table extends JPanel implements Runnable {
     private static final long serialVersionUID = 1L;
@@ -11,6 +15,7 @@ public class Table extends JPanel implements Runnable {
     int turnos;
     static Game game;
     static JFrame ventana;
+    static DefaultPieDataset data = new DefaultPieDataset();
 
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
@@ -59,6 +64,8 @@ public class Table extends JPanel implements Runnable {
             }
         }
 
+
+
         int position = 0;
         int bigger = 0;
         Player winner = null;
@@ -85,10 +92,20 @@ public class Table extends JPanel implements Runnable {
                 break;
         }
 
+
+
         JOptionPane.showMessageDialog(null, "Ganador: " + winner.getName());
 
-        System.exit(0);
-
+        data.setValue("Jugador 1", player1Win);
+        data.setValue("Jugador 2", player2Win);
+        data.setValue("Jugador 3", player3Win);
+        data.setValue("Jugador 4", player4Win);
+        JFreeChart grafico = ChartFactory.createPieChart("Consultas", data, true, true, false);
+        ChartPanel panel = new ChartPanel(grafico);
+        JFrame ventana2 = new JFrame(" ");
+        ventana2.setVisible(true);
+        ventana2.setSize(700, 700);
+        ventana2.add(panel);
     }
 
     public static void ventana() {

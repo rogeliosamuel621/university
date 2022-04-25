@@ -2,6 +2,9 @@ package barajita;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 
 public class Game {
     ArrayList<Card> oro = new ArrayList<Card>();
@@ -227,16 +230,22 @@ public class Game {
     }
 
     private int isTie(ArrayList<Player> players) {
+        ArrayList<Integer> repeatedScores = new ArrayList<Integer>();
+
         for (int i = 0; i < players.size(); i++) {
             Player currentPlayer = players.get(i);
             for (int j = 0; j < players.size(); j++) {
                 if (currentPlayer.getName().equals(players.get(j).getName())) continue;
 
-                if (currentPlayer.getVictories() == players.get(j).getVictories()) return currentPlayer.getVictories();
+                if (currentPlayer.getVictories() == players.get(j).getVictories()) {
+                    repeatedScores.add(currentPlayer.getVictories());
+                }
             }
         }
 
-        return -1;
+        Collections.sort(repeatedScores);
+
+        return repeatedScores.size() == 0 ? -1 : repeatedScores.get(repeatedScores.size() - 1);
     }
 
     private ArrayList<Card> getRepeatedValues(ArrayList<Card> cards) {
