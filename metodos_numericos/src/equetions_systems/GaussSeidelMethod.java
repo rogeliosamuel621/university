@@ -22,9 +22,15 @@ public class GaussSeidelMethod {
         fillUnknowns(initialValues);
 
         for (int i = 0; i < this.totalCalculations; i++) { // for del total de casos
-            for (int j = 0; j < this.unknowns.length; j++) {
+            double[] newUnknowns = new double[this.unknowns.length];
 
+            for (int j = 0; j < this.unknowns.length; j++) {
+                newUnknowns[i] = getUnknownValue(this.equationsSystem[i], i);
             }
+
+            fillUnknowns(newUnknowns);
+
+
         }
 
     }
@@ -42,5 +48,19 @@ public class GaussSeidelMethod {
         }
 
         return initialValues;
+    }
+
+    private double getUnknownValue(int[] equation, int positionToEvaluate) {
+        double equationResult = equation[equation.length - 1];
+        double unknown = equation[positionToEvaluate];
+        equation[positionToEvaluate] = 0;
+
+        double summation = equationResult;
+
+        for (int i = 0; i < equation.length - 1; i++) {
+            summation = summation - (equation[i] * this.unknowns[i]);
+        }
+
+        return summation / unknown;
     }
 }
