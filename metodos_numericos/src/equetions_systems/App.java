@@ -15,6 +15,16 @@ public class App {
 
         GaussSeidelMethod gaussSeidelMethod = new GaussSeidelMethod(numOfVariables, initialValues, equationsSystem, errorToTolerate, totalCalculations, decimalFigures);
         gaussSeidelMethod.runMethod();
+
+        System.out.println("\t\t\t INSTITUTO TECNOLÓGICO DE CULIACÁN");
+        System.out.println("\t\t\t\t ING. EN SISTEMAS");
+        System.out.println();
+        System.out.println("Meza Valenzuela Alan");
+        System.out.println("Moreno Corrales Rogelio Samuel");
+        System.out.println("Solución de Sistemas de Ecuaciones");
+        System.out.println("Método de Gauss Seidel");
+        System.out.println("de 10:00 a 11:00 horas");
+        System.out.println("Pregunta: " +  problem);
         
     }
 
