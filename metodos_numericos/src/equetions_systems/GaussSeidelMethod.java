@@ -1,18 +1,16 @@
 package equetions_systems;
 
-import jdk.swing.interop.SwingInterOpUtils;
-
 import java.util.Arrays;
 
 public class GaussSeidelMethod {
     double[] unknowns;
-    double initialValues;
+    double[] initialValues;
     int[][] equationsSystem;
     int errorToTolerate;
     int totalCalculations;
     int decimalFigures;
 
-    public GaussSeidelMethod(int numOfVariables, double initialValues, int[][] equationsSystem, int errorToTolerate, int totalCalculations, int decimalFigures) {
+    public GaussSeidelMethod(int numOfVariables, double[] initialValues, int[][] equationsSystem, int errorToTolerate, int totalCalculations, int decimalFigures) {
         this.unknowns = new double[numOfVariables];
         this.initialValues = initialValues;
         this.equationsSystem = equationsSystem;
@@ -22,8 +20,7 @@ public class GaussSeidelMethod {
     }
 
     public void runMethod() {
-        double[] initialValues = generateInitialValues(this.initialValues);
-        fillUnknowns(initialValues);
+        fillUnknowns(this.initialValues);
 
         for (int i = 0; i < this.totalCalculations; i++) { // for del total de casos
             double[] prevValues = Arrays.copyOf(this.unknowns, this.unknowns.length);
@@ -33,7 +30,6 @@ public class GaussSeidelMethod {
             for (int j = 0; j < prevValues.length; j++) {
                 System.out.print("x" + (j+1) + " = " + prevValues[j] + " ");
             }
-            System.out.println();
             //
 
             for (int j = 0; j < this.unknowns.length; j++) { // despejar y encontrar incógnitas
@@ -122,12 +118,8 @@ public class GaussSeidelMethod {
     private boolean calculateError(double[] prevValues, double[] currentValues) {
         double[] summationValues = new double[this.unknowns.length];
 
-
-        //System.out.println("SUMATORIA");
         for (int i = 0; i < summationValues.length; i++) {
-            //System.out.println(Math.abs(currentValues[i]) + " - " + Math.abs(prevValues[i]));
             summationValues[i] = Math.abs(Math.abs(currentValues[i]) - Math.abs(prevValues[i]));
-            //System.out.println("x" + (i+1) + " = " + summationValues[i]);
         }
 
         double summationResult = 0.0d;
