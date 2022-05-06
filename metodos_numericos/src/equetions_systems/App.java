@@ -13,6 +13,9 @@ public class App {
         int initialValues = askForInitialValues();
         int decimalFigures = askForDecimalFigures();
 
+        GaussSeidelMethod gaussSeidelMethod = new GaussSeidelMethod(numOfVariables, initialValues, equationsSystem, errorToTolerate, totalCalculations, decimalFigures);
+        gaussSeidelMethod.runMethod();
+
         /*
         System.out.println("PROBLEM: " + problem);
         System.out.println("Numero de variables: " + numOfVariables);
@@ -67,7 +70,7 @@ public class App {
 
     private static int[][] askForVariables(int numOfVariables) {
         int[][] equationsSystem = new int[numOfVariables][numOfVariables + 1];
-
+        // int[][] temEquationsSystem = {{5500, 2500, 700, 107900}, {350, 500, 120, 13640}, {300, 600, 2500, 67000}};
         for(int i=0; i<numOfVariables; i++) {
             System.out.println("\n** Variables de ecuacion " +  (i+1) + "**");
             for (int j = 0; j < numOfVariables + 1; j++) {
