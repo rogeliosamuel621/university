@@ -63,4 +63,19 @@ public class GaussSeidelMethod {
 
         return summation / unknown;
     }
+
+    private boolean calculateError(double[] prevValues, double[] currentValues) {
+        double[] summationValues = new double[this.unknowns.length];
+
+        for (int i = 0; i < summationValues.length; i++) {
+            summationValues[i] = Math.abs(Math.abs(currentValues[i]) - Math.abs(prevValues[i]));
+        }
+
+        double summationResult = 0.0d;
+        for (int i = 0; i < summationValues.length; i++) {
+            summationResult = summationResult + summationValues[i];
+        }
+
+        return summationResult <= this.errorToTolerate;
+    }
 }
