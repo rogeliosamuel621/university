@@ -4,17 +4,21 @@ import java.util.Scanner;
 
 public class App {
     static Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
         String problem = askForProblem();
         int numOfVariables = 3;
-        int[][] equationsSystem = askForVariables(numOfVariables);
+        Variable variables = askForVariables(numOfVariables);
         int errorToTolerate = 1;
         int totalCalculations = 50;
         double[] initialValues = {5,5,5};
         int decimalFigures = 6;
 
+        int[][] equationsSystem = variables.equationSystem;
+        String[] nameOfVariables = variables.nameOfVariables;
+
         GaussSeidelMethod gaussSeidelMethod = new GaussSeidelMethod(numOfVariables, initialValues, equationsSystem, errorToTolerate, totalCalculations, decimalFigures);
-        gaussSeidelMethod.runMethod();
+        double[][] records = gaussSeidelMethod.runMethod();
 
         System.out.println("\t\t\t INSTITUTO TECNOLÓGICO DE CULIACÁN");
         System.out.println("\t\t\t\t ING. EN SISTEMAS");
@@ -25,6 +29,25 @@ public class App {
         System.out.println("Método de Gauss Seidel");
         System.out.println("de 10:00 a 11:00 horas");
         System.out.println("Pregunta: " +  problem);
+
+        System.out.println();
+        System.out.println();
+
+        System.out.print("\t No. \t ");
+        for (int i = 0; i < nameOfVariables.length; i++) {
+            System.out.print("\t " + nameOfVariables[i] + " \t");
+        }
+        System.out.print(" \t Error total \t");
+        System.out.println();
+
+
+        for (int i = 0; i < records.length; i++) {
+            System.out.print("\t  " + i + " \t");
+            for (int j = 0; j < records[i].length; j++) {
+                System.out.print("\t " + records[i][j]);
+            }
+            System.out.println();
+        }
         
     }
 
@@ -49,11 +72,13 @@ public class App {
         return numOfVariables;
     }
 
-    private static int[][] askForVariables(int numOfVariables) {
+    private static Variable askForVariables(int numOfVariables) {
         int[][] equationsSystem = new int[numOfVariables][numOfVariables + 1];
-        int[][] temEquationsSystem = {{5500, 2500, 700, 107900}, {350, 500, 120, 13640}, {300, 600, 2500, 67000}};
-        /*
+        int[][] tempEquationsSystem = {{5500, 2500, 700, 107900}, {350, 500, 120, 13640}, {300, 600, 2500, 67000}};
+        String[] nameOfVariables = new String[numOfVariables];
+
         for(int i=0; i<numOfVariables; i++) {
+            /*
             System.out.println("\n** Variables de ecuacion " +  (i+1) + "**");
             for (int j = 0; j < numOfVariables + 1; j++) {
                 if (j == numOfVariables) {
@@ -67,10 +92,14 @@ public class App {
                 int value = sc.nextInt();
                 equationsSystem[i][j] = value;
             }
-        }
-         */
+             */
 
-        return temEquationsSystem;
+            System.out.print("Digite el nombre de la variable x" + (i+1) + ": ");
+            nameOfVariables[i] = sc.next();
+        }
+
+
+        return new Variable(tempEquationsSystem, nameOfVariables);
     }
 
     private static int askForErrorToTolerate() {
@@ -95,5 +124,15 @@ public class App {
     private static int askForDecimalFigures() {
         System.out.println("Digite el número de cifras decimales: ");
         return sc.nextInt();
+    }
+}
+
+class Variable {
+    int[][] equationSystem;
+    String[] nameOfVariables;
+
+    public Variable(int[][] equationSystem, String[] nameOfVariables) {
+        this.equationSystem = equationSystem;
+        this.nameOfVariables = nameOfVariables;
     }
 }
