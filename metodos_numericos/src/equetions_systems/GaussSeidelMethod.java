@@ -30,33 +30,9 @@ public class GaussSeidelMethod {
         for (int i = 0; i < this.totalCalculations; i++) { // for del total de casos
             double[] prevValues = Arrays.copyOf(this.unknowns, this.unknowns.length);
 
-
-
-            /*
-            System.out.println("\n Prev values");
-            for (int j = 0; j < prevValues.length; j++) {
-                System.out.print("x" + (j+1) + " = " + prevValues[j] + " ");
-            }
-
-             */
-
-
             for (int j = 0; j < this.unknowns.length; j++) { // despejar y encontrar incógnitas
                 this.unknowns[j] = getUnknownValue(this.equationsSystem[j], j);
             }
-
-
-            /*
-            System.out.println("\n New Values");
-            for (int j = 0; j < this.unknowns.length; j++) {
-                System.out.print("x" + (j+1) + " = " + this.unknowns[j] + " ");
-            }
-
-             */
-
-
-
-            //fillUnknowns(newUnknowns);
 
             boolean isFinished = this.calculateError(prevValues, this.unknowns);
             this.recordData(this.unknowns, i + 1);
@@ -72,15 +48,6 @@ public class GaussSeidelMethod {
         for (int i = 0; i < this.unknowns.length; i++) {
             this.unknowns[i] = values[i];
         }
-    }
-
-    private double[] generateInitialValues(double num) {
-        double [] initialValues = new double[this.unknowns.length];
-        for (int i = 0; i < this.unknowns.length; i++) {
-            initialValues[i] = num;
-        }
-
-        return initialValues;
     }
 
     private double getUnknownValue(int[] equation, int positionToEvaluate) {
@@ -112,7 +79,6 @@ public class GaussSeidelMethod {
             summationResult = summationResult + summationValues[i];
         }
 
-        System.out.println("\n Suma de las diferencias absolutas: " + summationResult);
         this.currentError = summationResult;
         return summationResult <= this.errorToTolerate;
     }

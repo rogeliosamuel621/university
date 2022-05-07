@@ -48,6 +48,13 @@ public class App {
 
             for (int j = 0; j < records[i].length; j++) {
                 String recordFormatted = getFormattedRecord(decimalFigures, records[i][j]);
+                String moreSpaces = "";
+                if (recordFormatted.length() < 9) {
+                    int spacesToAdd = (9 - recordFormatted.length()) / 2;
+                    for (int k = 0; k < spacesToAdd; k++) {
+                        moreSpaces = moreSpaces + " ";
+                    }
+                }
                 String space = "";
                 for (int k = 0; k < nameOfVariables.length; k++) {
                     space = space + " ";
@@ -56,7 +63,7 @@ public class App {
                     areResultsFinished = true;
                     break;
                 }
-                System.out.print("|\t " + space + recordFormatted + space + " \t");
+                System.out.print("|\t " + space + moreSpaces + recordFormatted + space + moreSpaces + " \t");
             }
 
             if (areResultsFinished == true) {
