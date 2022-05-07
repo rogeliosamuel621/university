@@ -1,5 +1,6 @@
 package equetions_systems;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class App {
@@ -33,19 +34,35 @@ public class App {
         System.out.println();
         System.out.println();
 
-        System.out.print("\t No. \t ");
+        System.out.print("|\t No. \t |");
         for (int i = 0; i < nameOfVariables.length; i++) {
-            System.out.print("\t " + nameOfVariables[i] + " \t");
+            System.out.print("\t\t " + nameOfVariables[i] + " \t\t|");
         }
-        System.out.print(" \t Error total \t");
+        System.out.print(" \t Error total \t|");
         System.out.println();
+        boolean areResultsFinished = false;
 
 
         for (int i = 0; i < records.length; i++) {
             System.out.print("\t  " + i + " \t");
+
             for (int j = 0; j < records[i].length; j++) {
-                System.out.print("\t " + records[i][j]);
+                String recordFormatted = getFormattedRecord(decimalFigures, records[i][j]);
+                String space = "";
+                for (int k = 0; k < nameOfVariables.length; k++) {
+                    space = space + " ";
+                }
+                if (recordFormatted.equals("0") && i >= 1) {
+                    areResultsFinished = true;
+                    break;
+                }
+                System.out.print("|\t " + space + recordFormatted + space + " \t");
             }
+
+            if (areResultsFinished == true) {
+                break;
+            }
+
             System.out.println();
         }
         
@@ -78,22 +95,6 @@ public class App {
         String[] nameOfVariables = new String[numOfVariables];
 
         for(int i=0; i<numOfVariables; i++) {
-            /*
-            System.out.println("\n** Variables de ecuacion " +  (i+1) + "**");
-            for (int j = 0; j < numOfVariables + 1; j++) {
-                if (j == numOfVariables) {
-                    System.out.print("Resultado = ");
-                    int result = sc.nextInt();
-                    equationsSystem[i][j] = result;
-                    continue;
-                }
-
-                System.out.print("x" + (j+1) + " = ");
-                int value = sc.nextInt();
-                equationsSystem[i][j] = value;
-            }
-             */
-
             System.out.print("Digite el nombre de la variable x" + (i+1) + ": ");
             nameOfVariables[i] = sc.next();
         }
@@ -124,6 +125,16 @@ public class App {
     private static int askForDecimalFigures() {
         System.out.println("Digite el número de cifras decimales: ");
         return sc.nextInt();
+    }
+
+    private static String getFormattedRecord(int numOfDecimals, double numToFormat) {
+        String decimals = "#";
+
+        for (int i = 0; i < numOfDecimals - 1; i++) {
+            decimals = decimals + "#";
+        }
+
+        return new DecimalFormat("#."+decimals).format(numToFormat);
     }
 }
 
