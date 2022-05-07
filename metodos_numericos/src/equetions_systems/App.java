@@ -33,46 +33,13 @@ public class App {
 
         System.out.println();
         System.out.println();
+        generateTableHeader(nameOfVariables);
+        generateTableBody(records, decimalFigures, nameOfVariables);
 
-        System.out.print("|\t No. \t |");
-        for (int i = 0; i < nameOfVariables.length; i++) {
-            System.out.print("\t\t " + nameOfVariables[i] + " \t\t|");
-        }
-        System.out.print(" \t Error total \t|");
-        System.out.println();
-        boolean areResultsFinished = false;
+        double[] results = gaussSeidelMethod.results;
 
+        printResults(results, nameOfVariables, decimalFigures);
 
-        for (int i = 0; i < records.length; i++) {
-            System.out.print("\t  " + i + " \t");
-
-            for (int j = 0; j < records[i].length; j++) {
-                String recordFormatted = getFormattedRecord(decimalFigures, records[i][j]);
-                String moreSpaces = "";
-                if (recordFormatted.length() < 9) {
-                    int spacesToAdd = (9 - recordFormatted.length()) / 2;
-                    for (int k = 0; k < spacesToAdd; k++) {
-                        moreSpaces = moreSpaces + " ";
-                    }
-                }
-                String space = "";
-                for (int k = 0; k < nameOfVariables.length; k++) {
-                    space = space + " ";
-                }
-                if (recordFormatted.equals("0") && i >= 1) {
-                    areResultsFinished = true;
-                    break;
-                }
-                System.out.print("|\t " + space + moreSpaces + recordFormatted + space + moreSpaces + " \t");
-            }
-
-            if (areResultsFinished == true) {
-                break;
-            }
-
-            System.out.println();
-        }
-        
     }
 
     private static String askForProblem() {
@@ -142,6 +109,58 @@ public class App {
         }
 
         return new DecimalFormat("#."+decimals).format(numToFormat);
+    }
+
+    private static void generateTableHeader(String[] nameOfVariables) {
+        System.out.print("|\t No. \t |");
+        for (int i = 0; i < nameOfVariables.length; i++) {
+            System.out.print("\t\t " + nameOfVariables[i] + " \t\t|");
+        }
+        System.out.print(" \t Error total \t|");
+        System.out.println();
+    }
+
+    private static void generateTableBody(double[][] records, int decimalFigures, String[] nameOfVariables) {
+        boolean areResultsFinished = false;
+
+        for (int i = 0; i < records.length; i++) {
+            System.out.print("\t  " + i + " \t");
+
+            for (int j = 0; j < records[i].length; j++) {
+                String recordFormatted = getFormattedRecord(decimalFigures, records[i][j]);
+                String moreSpaces = "";
+                if (recordFormatted.length() < 9) {
+                    int spacesToAdd = (9 - recordFormatted.length()) / 2;
+                    for (int k = 0; k < spacesToAdd; k++) {
+                        moreSpaces = moreSpaces + " ";
+                    }
+                }
+                String space = "";
+                for (int k = 0; k < nameOfVariables.length; k++) {
+                    space = space + " ";
+                }
+                if (recordFormatted.equals("0") && i >= 1) {
+                    areResultsFinished = true;
+                    break;
+                }
+                System.out.print("|\t " + space + moreSpaces + recordFormatted + space + moreSpaces + " \t");
+            }
+
+            if (areResultsFinished == true) {
+                break;
+            }
+
+            System.out.println();
+        }
+    }
+
+    static private void printResults(double[] results, String[] nameOfVariables, int decimalFigures) {
+        System.out.println();
+        System.out.println("Resultados del porblema");
+        for (int i = 0; i < results.length; i++) {
+            String resultFormatted = getFormattedRecord(decimalFigures, results[i]);
+            System.out.println(nameOfVariables[i] + " = " + resultFormatted);
+        }
     }
 }
 

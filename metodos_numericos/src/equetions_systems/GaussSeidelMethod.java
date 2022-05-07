@@ -11,6 +11,7 @@ public class GaussSeidelMethod {
     int decimalFigures;
     double currentError = 0.0d;
     double[][] records;
+    double[] results;
 
     public GaussSeidelMethod(int numOfVariables, double[] initialValues, int[][] equationsSystem, int errorToTolerate, int totalCalculations, int decimalFigures) {
         this.unknowns = new double[numOfVariables];
@@ -21,6 +22,7 @@ public class GaussSeidelMethod {
         this.decimalFigures = decimalFigures;
 
         this.records = new double[totalCalculations][numOfVariables + 1];
+        this.results = new double[numOfVariables];
     }
 
     public double[][] runMethod() {
@@ -38,7 +40,10 @@ public class GaussSeidelMethod {
             this.recordData(this.unknowns, i + 1);
 
 
-            if (isFinished) break;
+            if (isFinished) {
+                this.results = this.unknowns;
+                break;
+            }
         }
 
         return this.records;
