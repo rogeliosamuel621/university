@@ -8,42 +8,38 @@ public class App {
 
     public static void main(String[] args) {
         String problem = askForProblem();
-        int numOfVariables = 3;
+        String unity = askForUnity();
+        int numOfVariables = askForNumOfVariables();
         Variable variables = askForVariables(numOfVariables);
-        int errorToTolerate = 1;
-        int totalCalculations = 50;
-        double[] initialValues = {5,5,5};
-        int decimalFigures = 6;
+        int errorToTolerate = askForErrorToTolerate();
+        int totalCalculations = askForTotalCalculations();
+        double[] initialValues = askForInitialValues(numOfVariables);
+        int decimalFigures = askForDecimalFigures();
 
         int[][] equationsSystem = variables.equationSystem;
         String[] nameOfVariables = variables.nameOfVariables;
 
         GaussSeidelMethod gaussSeidelMethod = new GaussSeidelMethod(numOfVariables, initialValues, equationsSystem, errorToTolerate, totalCalculations, decimalFigures);
-        double[][] records = gaussSeidelMethod.runMethod();
+        double[][] records = gaussSeidelMethod.run();
 
-        System.out.println("\t\t\t INSTITUTO TECNOLÓGICO DE CULIACÁN");
-        System.out.println("\t\t\t\t ING. EN SISTEMAS");
-        System.out.println();
-        System.out.println("Meza Valenzuela Alan");
-        System.out.println("Moreno Corrales Rogelio Samuel");
-        System.out.println("Solución de Sistemas de Ecuaciones");
-        System.out.println("Método de Gauss Seidel");
-        System.out.println("de 10:00 a 11:00 horas");
-        System.out.println("Pregunta: " +  problem);
+        printHeader(problem);
 
-        System.out.println();
-        System.out.println();
         generateTableHeader(nameOfVariables);
         generateTableBody(records, decimalFigures, nameOfVariables);
 
         double[] results = gaussSeidelMethod.results;
 
-        printResults(results, nameOfVariables, decimalFigures);
+        printResults(results, nameOfVariables, decimalFigures, unity);
 
     }
 
     private static String askForProblem() {
         System.out.println("Digite el problema: ");
+        return sc.nextLine();
+    }
+
+    private static String askForUnity() {
+        System.out.println("Digite la unidad del problema: ");
         return sc.nextLine();
     }
 
@@ -111,7 +107,21 @@ public class App {
         return new DecimalFormat("#."+decimals).format(numToFormat);
     }
 
+    private static void printHeader(String problem) {
+        System.out.println("\t\t\t INSTITUTO TECNOLÓGICO DE CULIACÁN");
+        System.out.println("\t\t\t\t ING. EN SISTEMAS");
+        System.out.println();
+        System.out.println("Meza Valenzuela Alan");
+        System.out.println("Moreno Corrales Rogelio Samuel");
+        System.out.println("Solución de Sistemas de Ecuaciones");
+        System.out.println("Método de Gauss Seidel");
+        System.out.println("de 10:00 a 11:00 horas");
+        System.out.println("Pregunta: " +  problem);
+    }
+
     private static void generateTableHeader(String[] nameOfVariables) {
+        System.out.println();
+        System.out.println();
         System.out.print("|\t No. \t |");
         for (int i = 0; i < nameOfVariables.length; i++) {
             System.out.print("\t\t " + nameOfVariables[i] + " \t\t|");
@@ -154,12 +164,12 @@ public class App {
         }
     }
 
-    static private void printResults(double[] results, String[] nameOfVariables, int decimalFigures) {
+    static private void printResults(double[] results, String[] nameOfVariables, int decimalFigures, String unity) {
         System.out.println();
-        System.out.println("Resultados del porblema");
+        System.out.println("Resultados del problema");
         for (int i = 0; i < results.length; i++) {
             String resultFormatted = getFormattedRecord(decimalFigures, results[i]);
-            System.out.println(nameOfVariables[i] + " = " + resultFormatted);
+            System.out.println(nameOfVariables[i] + " = " + resultFormatted +  " " + unity);
         }
     }
 }

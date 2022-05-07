@@ -25,7 +25,7 @@ public class GaussSeidelMethod {
         this.results = new double[numOfVariables];
     }
 
-    public double[][] runMethod() {
+    public double[][] run() {
         fillUnknowns(this.initialValues);
         this.recordData(this.initialValues, 0);
 
