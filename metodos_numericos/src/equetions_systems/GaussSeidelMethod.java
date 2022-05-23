@@ -6,14 +6,14 @@ public class GaussSeidelMethod {
     double[] unknowns;
     double[] initialValues;
     int[][] equationsSystem;
-    int errorToTolerate;
+    double errorToTolerate;
     int totalCalculations;
     int decimalFigures;
     double currentError = 0.0d;
     double[][] records;
     double[] results;
 
-    public GaussSeidelMethod(int numOfVariables, double[] initialValues, int[][] equationsSystem, int errorToTolerate, int totalCalculations, int decimalFigures) {
+    public GaussSeidelMethod(int numOfVariables, double[] initialValues, int[][] equationsSystem, double errorToTolerate, int totalCalculations, int decimalFigures) {
         this.unknowns = new double[numOfVariables];
         this.initialValues = initialValues;
         this.equationsSystem = equationsSystem;

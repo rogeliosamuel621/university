@@ -11,7 +11,7 @@ public class App {
         String unity = askForUnity();
         int numOfVariables = askForNumOfVariables();
         Variable variables = askForVariables(numOfVariables);
-        int errorToTolerate = askForErrorToTolerate();
+        double errorToTolerate = askForErrorToTolerate();
         int totalCalculations = askForTotalCalculations();
         double[] initialValues = askForInitialValues(numOfVariables);
         int decimalFigures = askForDecimalFigures();
@@ -61,21 +61,34 @@ public class App {
 
     private static Variable askForVariables(int numOfVariables) {
         int[][] equationsSystem = new int[numOfVariables][numOfVariables + 1];
-        int[][] tempEquationsSystem = {{5500, 2500, 700, 107900}, {350, 500, 120, 13640}, {300, 600, 2500, 67000}};
         String[] nameOfVariables = new String[numOfVariables];
 
         for(int i=0; i<numOfVariables; i++) {
+                System.out.println("\n** Variables de ecuacion " +  (i+1) + "**");
+                for (int j = 0; j < numOfVariables + 1; j++) {
+                    if (j == numOfVariables) {
+                        System.out.print("Resultado = ");
+                        int result = sc.nextInt();
+                        equationsSystem[i][j] = result;
+                        continue;
+                    }
+
+                    System.out.print("x" + (j+1) + " = ");
+                    int value = sc.nextInt();
+                    equationsSystem[i][j] = value;
+                }
+
             System.out.print("Digite el nombre de la variable x" + (i+1) + ": ");
             nameOfVariables[i] = sc.next();
         }
 
 
-        return new Variable(tempEquationsSystem, nameOfVariables);
+        return new Variable(equationsSystem, nameOfVariables);
     }
 
-    private static int askForErrorToTolerate() {
+    private static double askForErrorToTolerate() {
         System.out.println("Digite el error a tolerar: ");
-        return sc.nextInt();
+        return sc.nextDouble();
     }
 
     private static int askForTotalCalculations() {
