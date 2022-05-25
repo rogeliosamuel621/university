@@ -41,7 +41,7 @@ public class Game {
         System.out.println("i $antes \t bet \t #ale \t color \t ganó? \t $despues \t meta? \t exito");
         for (int i = 0; i < recordStrategy1.size(); i++) {
             Record c = recordStrategy1.get(i);
-            System.out.println(c.iteration + " \t " + c.prevBalance + " \t " + c.bet + " \t " + c.randomNumber + " \t " + c.color + " \t " + c.won + " \t " + c.nextBalance + " \t " + c.goalReached + " \t " + c.successes);
+            System.out.println(c.iteration + " \t " + c.prevBalance + " \t " + c.bet + " \t " + c.randomNumber + " \t " + c.color + " \t " + c.won + " \t " + c.nextBalance + " \t\t " + c.goalReached + " \t " + c.successes);
         }
         System.out.println();
 
@@ -49,7 +49,7 @@ public class Game {
         System.out.println("i $antes \t bet \t #ale \t color \t ganó? \t $despues \t meta? \t exito");
         for (int i = 0; i < recordStrategy2.size(); i++) {
             Record c = recordStrategy2.get(i);
-            System.out.println(c.iteration + " \t " + c.prevBalance + " \t " + c.bet + " \t " + c.randomNumber + " \t " + c.color + " \t " + c.won + " \t " + c.nextBalance + " \t " + c.goalReached + " \t " + c.successes);
+            System.out.println(c.iteration + " \t " + c.prevBalance + " \t " + c.bet + " \t " + c.randomNumber + " \t " + c.color + " \t " + c.won + " \t " + c.nextBalance + " \t\t " + c.goalReached + " \t " + c.successes);
         }
         System.out.println();
     }

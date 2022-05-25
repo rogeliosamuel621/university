@@ -13,18 +13,32 @@ public class Strategy2 {
     int successes = 0;
     ArrayList<Record> records = new ArrayList<>();
     boolean prevIsWinner = true;
+    boolean moreThanTwiceLost = false;
 
     public boolean play(double randomNumber, int color, int iteration, boolean prevColorIsGreen) {
 
         int prevBalance = this.currentBalance;
+        if (this.moreThanTwiceLost) {
+            this.updateQuantityToBet(false, color, prevColorIsGreen);
+        } else {
+            this.updateQuantityToBet(true, color, prevColorIsGreen);
+        }
 
         boolean isWinner = this.getIsWinner(color);
 
+        
+        if (!this.prevIsWinner && !isWinner) {
+            this.moreThanTwiceLost = true;
+        } else if(isWinner) {
+            this.moreThanTwiceLost = false;
+        }
+        /*
         if (!this.prevIsWinner && !isWinner) {
             this.updateQuantityToBet(this.prevIsWinner, color, prevColorIsGreen);
         } else if (isWinner) {
             this.updateQuantityToBet(isWinner, color, prevColorIsGreen);
         }
+         */
 
         this.prevIsWinner = isWinner;
         this.upgradeSuccesses(isWinner, prevColorIsGreen);
@@ -61,7 +75,7 @@ public class Strategy2 {
     }
 
     private void updateQuantityToBet(boolean isWinner, int color, boolean prevColorIsGreen) {
-        if (prevColorIsGreen || color == 3) return;
+        if (prevColorIsGreen) return;
 
         if (!isWinner) {
             this.quantityToBet = this.quantityToBet * 2;
