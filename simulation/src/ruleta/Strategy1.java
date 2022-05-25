@@ -18,7 +18,7 @@ public class Strategy1 {
     int successes = 0;
     ArrayList<Record> records = new ArrayList<>();
 
-    public void play(double randomNumber, int color, int iteration, boolean prevColorIsGreen) {
+    public boolean play(double randomNumber, int color, int iteration, boolean prevColorIsGreen) {
 
         int prevBalance = this.currentBalance;
 
@@ -36,6 +36,8 @@ public class Strategy1 {
 
         Record newRecord = new Record(iteration, prevBalance, this.quantityToBet, randomNumber, textColor, textWin, balanceAfterBet, textGoalReached, this.successes);
         this.records.add(newRecord);
+
+        return isGoalReached;
 
 
     }
