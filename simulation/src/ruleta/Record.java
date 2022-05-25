@@ -1,6 +1,6 @@
 package ruleta;
 
-public class TableField {
+public class Record {
     int iteration;
     int prevBalance;
     int bet;
@@ -11,7 +11,7 @@ public class TableField {
     String goalReached;
     int successes;
 
-    public TableField(int iteration, int prevBalance, int bet, double randomNumber, String color, String won, int nextBalance, String goalReached, int successes) {
+    public Record(int iteration, int prevBalance, int bet, double randomNumber, String color, String won, int nextBalance, String goalReached, int successes) {
         this.iteration = iteration;
         this.prevBalance = prevBalance;
         this.bet = bet;
