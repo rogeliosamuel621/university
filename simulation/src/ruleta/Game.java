@@ -2,8 +2,6 @@ package ruleta;
 
 public class Game {
     public void startSimulation() {
-        boolean strategy1ReachedTheGoal = false;
-        boolean strategy2ReachedTheGoal = false;
         boolean prevColorIsGreen = false;
 
         Strategy1 strategy1 = new Strategy1();
@@ -11,7 +9,9 @@ public class Game {
         int iteration = 0;
         int prevColor = 0;
 
-        while (!strategy1ReachedTheGoal || !strategy2ReachedTheGoal) {
+        while (true) {
+            iteration++;
+
             double randomNumber = Math.random();
             int color = this.getColor(randomNumber);
 
@@ -21,7 +21,9 @@ public class Game {
                 prevColorIsGreen = false;
             }
 
-            strategy1ReachedTheGoal = strategy1.play(randomNumber, color, iteration, prevColorIsGreen);
+            boolean strategy1ReachedTheGoal = strategy1.play(randomNumber, color, iteration, prevColorIsGreen);
+
+            if (strategy1ReachedTheGoal) break;
 
             prevColor = color;
         }
