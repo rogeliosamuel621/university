@@ -1,5 +1,6 @@
 package ruleta;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Strategy2 {
@@ -36,10 +37,11 @@ public class Strategy2 {
         String textColor = this.getTextColor(color);
         String textWin = this.getTextWin(color);
         String textGoalReached = this.getTextGoalReached(isGoalReached);
+        String textRandomNumber = new DecimalFormat("0.00000").format(randomNumber);
 
-        Record newRecord = new Record(iteration, prevBalance, this.quantityToBet, randomNumber, textColor, textWin, balanceAfterBet, textGoalReached, this.successes);
+        Record newRecord = new Record(iteration, prevBalance, this.quantityToBet, textRandomNumber, textColor, textWin, balanceAfterBet, textGoalReached, this.successes);
 
-
+        /*
         System.out.println("i: " + newRecord.iteration);
         System.out.println("$ antes: " + newRecord.prevBalance);
         System.out.println("apuesta: " + newRecord.bet);
@@ -51,7 +53,7 @@ public class Strategy2 {
         System.out.println("exitos: " + newRecord.successes);
         System.out.println("CUrrent balance: " + this.currentBalance);
         System.out.println();
-
+        */
 
         this.records.add(newRecord);
 

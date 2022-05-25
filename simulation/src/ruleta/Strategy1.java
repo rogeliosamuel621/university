@@ -7,6 +7,7 @@ COLORS
 - 3: GREEN
  */
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Strategy1 {
@@ -33,8 +34,9 @@ public class Strategy1 {
         String textColor = this.getTextColor(color);
         String textWin = this.getTextWin(color);
         String textGoalReached = this.getTextGoalReached(isGoalReached);
+        String textRandomNumber = new DecimalFormat("0.00000").format(randomNumber);
 
-        Record newRecord = new Record(iteration, prevBalance, this.quantityToBet, randomNumber, textColor, textWin, balanceAfterBet, textGoalReached, this.successes);
+        Record newRecord = new Record(iteration, prevBalance, this.quantityToBet, textRandomNumber, textColor, textWin, balanceAfterBet, textGoalReached, this.successes);
 
         /*
         System.out.println("i: " + newRecord.iteration);
