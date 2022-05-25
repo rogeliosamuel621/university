@@ -54,9 +54,28 @@ public class Game {
         }
         System.out.println();
 
+        boolean strategy1IsWinner = strategy1.currentBalance == strategy1.goal;
+        boolean strategy2IsWinner = strategy2.currentBalance == strategy2.goal;
+        boolean isTie = strategy1IsWinner && strategy2IsWinner;
         boolean strategy1IsBetter = recordStrategy1.size() < recordStrategy2.size();
 
-        System.out.println("La estrategia " + (strategy1IsBetter ? "1" : "2") + " Terminó más rápido");
+        String winnerText = "";
+
+        if (isTie) {
+            if (strategy1IsBetter) {
+                winnerText = "1";
+            } else {
+                winnerText = "2";
+            }
+        } else {
+            if (strategy1IsWinner) {
+                winnerText = "1";
+            } else {
+                winnerText = "2";
+            }
+        }
+
+        System.out.println("La estrategia " + (winnerText) + " es la mejor");
 
     }
 
