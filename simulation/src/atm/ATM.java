@@ -46,45 +46,30 @@ public class ATM {
                     arrivalTime = tbaInSeconds;
                     previousArrivalTime.add(arrivalTime);
                     timeStartsService = tbaInSeconds;
-                    waitTime = timeStartsService - arrivalTime;
-                    totalWaitTime = totalWaitTime + waitTime;
-                    if (arrivalTime <= timeServiceEnds) {
-                        timeStartsService = timeServiceEnds;
-                    }
-                    else {
-                        timeStartsService = arrivalTime;
-                    }
 
-                    waitTime = timeStartsService - arrivalTime;
-
-                    operation = getOperation(random2);
-                    operationTime = getTime(operation);
-
-                    timeServiceEnds = timeStartsService + operationTime;
                 }
                 else {
                     arrivalTime = previousArrivalTime.get(i-1) + tbaInSeconds;
                     previousArrivalTime.add(arrivalTime);
 
-                    if (arrivalTime <= timeServiceEnds) {
-                        timeStartsService = timeServiceEnds;
-                    }
-                    else {
-                        timeStartsService = arrivalTime;
-                    }
-
-                    waitTime = timeStartsService - arrivalTime;
-                    totalWaitTime = totalWaitTime + waitTime;
-
-                    operation = getOperation(random2);
-                    operationTime = getTime(operation);
-
-                    timeServiceEnds = timeStartsService + operationTime;
+                }
+                if (arrivalTime <= timeServiceEnds) {
+                    timeStartsService = timeServiceEnds;
+                }
+                else {
+                    timeStartsService = arrivalTime;
                 }
 
-                System.out.println((cont+ "\t") + (formato1.format(random) + "\t\t") +
-                        ((CalcularTiempo(tbaInSeconds)) + "\t\t\t") + (CalcularTiempo(arrivalTime) + "\t\t")
-                        + (CalcularTiempo(timeStartsService) + "\t\t\t") + (CalcularTiempo(waitTime) + "\t")
+                waitTime = timeStartsService - arrivalTime;
+                totalWaitTime = totalWaitTime + waitTime;
+
+                operation = getOperation(random2);
+                operationTime = getTime(operation);
+
+                timeServiceEnds = timeStartsService + operationTime;
+                System.out.println((cont+ "\t\t") + (formato1.format(random) + "\t\t\t") +
+                        ((CalcularTiempo(tbaInSeconds)) + "\t\t\t\t") + (CalcularTiempo(arrivalTime) + "\t\t\t")
+                        + (CalcularTiempo(timeStartsService) + "\t\t\t\t") + (CalcularTiempo(waitTime) + "\t\t\t")
                         + (formato1.format(random2) + "\t") + (operation + "\t\t") +
                         (operationTime + "\t\t\t") + CalcularTiempo(timeServiceEnds));
             }
