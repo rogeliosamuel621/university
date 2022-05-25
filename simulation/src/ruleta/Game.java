@@ -54,6 +54,9 @@ public class Game {
         }
         System.out.println();
 
+        boolean strategy1IsBetter = recordStrategy1.size() < recordStrategy2.size();
+
+        System.out.println("La estrategia " + (strategy1IsBetter ? "1" : "2") + " Terminó más rápido");
 
     }
 
