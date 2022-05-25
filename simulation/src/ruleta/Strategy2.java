@@ -15,34 +15,16 @@ public class Strategy2 {
     boolean prevIsWinner = true;
     boolean moreThanTwiceLost = false;
 
-    public boolean play(double randomNumber, int color, int iteration, boolean prevColorIsGreen) {
+    public boolean play(double randomNumber, int color, int iteration, boolean prevColorIsGreen, boolean currentColorIsGreen) {
 
         int prevBalance = this.currentBalance;
-        if (this.moreThanTwiceLost) {
-            this.updateQuantityToBet(false, color, prevColorIsGreen);
-        } else {
-            this.updateQuantityToBet(true, color, prevColorIsGreen);
-        }
+        this.updateQuantityToBet(this.prevIsWinner, color, prevColorIsGreen);
 
         boolean isWinner = this.getIsWinner(color);
 
-        
-        if (!this.prevIsWinner && !isWinner) {
-            this.moreThanTwiceLost = true;
-        } else if(isWinner) {
-            this.moreThanTwiceLost = false;
-        }
-        /*
-        if (!this.prevIsWinner && !isWinner) {
-            this.updateQuantityToBet(this.prevIsWinner, color, prevColorIsGreen);
-        } else if (isWinner) {
-            this.updateQuantityToBet(isWinner, color, prevColorIsGreen);
-        }
-         */
-
         this.prevIsWinner = isWinner;
-        this.upgradeSuccesses(isWinner, prevColorIsGreen);
-        this.updateBalanceAfterResult(isWinner, this.quantityToBet, prevColorIsGreen);
+        this.upgradeSuccesses(isWinner, prevColorIsGreen, currentColorIsGreen);
+        this.updateBalanceAfterResult(isWinner, this.quantityToBet, prevColorIsGreen, currentColorIsGreen);
 
         int balanceAfterBet = this.currentBalance;
 
@@ -54,20 +36,6 @@ public class Strategy2 {
         String textRandomNumber = new DecimalFormat("0.00000").format(randomNumber);
 
         Record newRecord = new Record(iteration, prevBalance, this.quantityToBet, textRandomNumber, textColor, textWin, balanceAfterBet, textGoalReached, this.successes);
-
-        /*
-        System.out.println("i: " + newRecord.iteration);
-        System.out.println("$ antes: " + newRecord.prevBalance);
-        System.out.println("apuesta: " + newRecord.bet);
-        System.out.println("ale: " + newRecord.randomNumber);
-        System.out.println("color: " + newRecord.color);
-        System.out.println("ganó?: " + newRecord.won);
-        System.out.println("$ after: " + newRecord.nextBalance);
-        System.out.println("meta: " + newRecord.goalReached);
-        System.out.println("exitos: " + newRecord.successes);
-        System.out.println("CUrrent balance: " + this.currentBalance);
-        System.out.println();
-        */
 
         this.records.add(newRecord);
 
@@ -87,7 +55,9 @@ public class Strategy2 {
 
     }
 
-    private void updateBalanceAfterResult(boolean won, int currentBet, boolean prevColorIsGreen) {
+    private void updateBalanceAfterResult(boolean won, int currentBet, boolean prevColorIsGreen, boolean currentColorIsGreen) {
+        if (currentColorIsGreen) return;
+
         if (prevColorIsGreen && !won) {
             this.currentBalance = this.currentBalance - currentBet;
             return;
@@ -103,8 +73,8 @@ public class Strategy2 {
         this.currentBalance = this.currentBalance - currentBet;
     }
 
-    private void upgradeSuccesses(boolean isWinner, boolean prevColorIsGreen) {
-        if (isWinner && !prevColorIsGreen) {
+    private void upgradeSuccesses(boolean isWinner, boolean prevColorIsGreen, boolean currentColorIsGreen) {
+        if (isWinner && !prevColorIsGreen && !currentColorIsGreen) {
             this.successes++;
             return;
         }

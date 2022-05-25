@@ -19,15 +19,16 @@ public class Game {
 
             double randomNumber = Math.random();
             int color = this.getColor(randomNumber);
+            boolean currentColorIsGreen = color == 3;
 
-            if (color == 3 || prevColor == 3) {
+            if (prevColor == 3) {
                 prevColorIsGreen = true;
             } else {
                 prevColorIsGreen = false;
             }
 
-            if(!strategy1ReachedTheGoal) strategy1ReachedTheGoal = strategy1.play(randomNumber, color, iteration, prevColorIsGreen);
-            if(!strategy2ReachedTheGoal) strategy2ReachedTheGoal = strategy2.play(randomNumber, color, iteration, prevColorIsGreen);
+            if(!strategy1ReachedTheGoal) strategy1ReachedTheGoal = strategy1.play(randomNumber, color, iteration, prevColorIsGreen, currentColorIsGreen);
+            if(!strategy2ReachedTheGoal) strategy2ReachedTheGoal = strategy2.play(randomNumber, color, iteration, prevColorIsGreen, currentColorIsGreen);
 
             if (strategy1ReachedTheGoal && strategy2ReachedTheGoal) break;
 
@@ -52,6 +53,8 @@ public class Game {
             System.out.println(c.iteration + " \t " + c.prevBalance + " \t " + c.bet + " \t " + c.randomNumber + " \t " + c.color + " \t " + c.won + " \t " + c.nextBalance + " \t\t " + c.goalReached + " \t " + c.successes);
         }
         System.out.println();
+
+
     }
 
     private int getColor(double randomNumber) {

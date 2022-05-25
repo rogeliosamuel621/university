@@ -19,12 +19,12 @@ public class Strategy1 {
     int successes = 0;
     ArrayList<Record> records = new ArrayList<>();
 
-    public boolean play(double randomNumber, int color, int iteration, boolean prevColorIsGreen) {
+    public boolean play(double randomNumber, int color, int iteration, boolean prevColorIsGreen, boolean currentColorIsGreen) {
 
         int prevBalance = this.currentBalance;
 
         boolean isWinner = this.getIsWinner(color);
-        this.upgradeSuccesses(isWinner, prevColorIsGreen);
+        this.upgradeSuccesses(isWinner, prevColorIsGreen, color);
         this.updateBalanceAfterResult(isWinner, this.quantityToBet, prevColorIsGreen);
 
         int balanceAfterBet = this.currentBalance;
@@ -37,20 +37,6 @@ public class Strategy1 {
         String textRandomNumber = new DecimalFormat("0.00000").format(randomNumber);
 
         Record newRecord = new Record(iteration, prevBalance, this.quantityToBet, textRandomNumber, textColor, textWin, balanceAfterBet, textGoalReached, this.successes);
-
-        /*
-        System.out.println("i: " + newRecord.iteration);
-        System.out.println("$ antes: " + newRecord.prevBalance);
-        System.out.println("apuesta: " + newRecord.bet);
-        System.out.println("ale: " + newRecord.randomNumber);
-        System.out.println("color: " + newRecord.color);
-        System.out.println("ganó?: " + newRecord.won);
-        System.out.println("$ after: " + newRecord.nextBalance);
-        System.out.println("meta: " + newRecord.goalReached);
-        System.out.println("exitos: " + newRecord.successes);
-        System.out.println("CUrrent balance: " + this.currentBalance);
-        System.out.println();
-        */
 
         this.records.add(newRecord);
 
@@ -73,8 +59,8 @@ public class Strategy1 {
         this.currentBalance = this.currentBalance - currentBet;
     }
 
-    private void upgradeSuccesses(boolean isWinner, boolean prevColorIsGreen) {
-        if (isWinner && !prevColorIsGreen) {
+    private void upgradeSuccesses(boolean isWinner, boolean prevColorIsGreen, int color) {
+        if (isWinner && !prevColorIsGreen && color != 3) {
             this.successes++;
             return;
         }
