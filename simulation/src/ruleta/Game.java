@@ -5,6 +5,7 @@ public class Game {
         boolean prevColorIsGreen = false;
 
         Strategy1 strategy1 = new Strategy1();
+        Strategy2 strategy2 = new Strategy2();
 
         int iteration = 0;
         int prevColor = 0;
@@ -22,8 +23,9 @@ public class Game {
             }
 
             boolean strategy1ReachedTheGoal = strategy1.play(randomNumber, color, iteration, prevColorIsGreen);
+            boolean strategy2ReachedTheGoal = strategy2.play(randomNumber, color, iteration, prevColorIsGreen);
 
-            if (strategy1ReachedTheGoal) break;
+            if (strategy1ReachedTheGoal || strategy2ReachedTheGoal) break;
 
             prevColor = color;
         }
