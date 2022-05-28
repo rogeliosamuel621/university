@@ -13,6 +13,9 @@ public class App {
         int upperLimit = getUpperLimit();
         int[] nValues = getEnValues();
 
+        SimpsonRuleMethod simpsonRuleMethod = new SimpsonRuleMethod();
+        simpsonRuleMethod.startSimulation(lowerLimit, upperLimit, nValues, realValue);
+
     }
 
     static private double getRealValue() {

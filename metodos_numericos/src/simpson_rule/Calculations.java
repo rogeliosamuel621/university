@@ -31,15 +31,15 @@ public class Calculations {
         return ((3*h) / 8) * (this.fx(a) + summation + this.fx(b));
     }
 
-    private double fx(double x) {
+    public double fx(double x) {
         return 8 + (5 * (x * x));
     }
 
-    private int getFactorForComplexRule3(int index) {
+    public int getFactorForComplexRule3(int index) {
         return (index % 2) == 0 ? 2 : 4;
     }
 
-    private int getFactorForComplexRule8(int index) {
+    public int getFactorForComplexRule8(int index) {
         return (index % 2) == 0 ? 2 : 3;
 
     }
