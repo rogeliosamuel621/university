@@ -1,4 +1,4 @@
-package chicuadrado_xd;
+package multiples_programs;
 
 public class ChiSquareMethod {
 }
