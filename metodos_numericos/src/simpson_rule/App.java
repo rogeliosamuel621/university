@@ -1,20 +1,20 @@
 package simpson_rule;
 
-import jdk.swing.interop.SwingInterOpUtils;
-
 import java.util.Scanner;
 
 public class App {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
+
         double realValue = getRealValue();
         int lowerLimit = getLowerLimit();
         int upperLimit = getUpperLimit();
         int[] nValues = getEnValues();
 
+
         SimpsonRuleMethod simpsonRuleMethod = new SimpsonRuleMethod();
-        simpsonRuleMethod.startSimulation(lowerLimit, upperLimit, nValues, realValue);
+        simpsonRuleMethod.startSimulation(lowerLimit, upperLimit, nValues, 10);
 
     }
 
