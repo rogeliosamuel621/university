@@ -6,20 +6,16 @@ public class App {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-/*
         String problem = getProblem();
         double realValue = getRealValue();
         int lowerLimit = getLowerLimit();
         int upperLimit = getUpperLimit();
         int[] nValues = getEnValues();
-        */
-        int[] nValues = {2, 3, 8, 15};
 
-        showHeader("problem");
-
+        showHeader(problem);
 
         SimpsonRuleMethod simpsonRuleMethod = new SimpsonRuleMethod();
-        simpsonRuleMethod.startSimulation(1, 6, nValues, 10);
+        simpsonRuleMethod.startSimulation(lowerLimit, upperLimit, nValues, realValue);
 
     }
 

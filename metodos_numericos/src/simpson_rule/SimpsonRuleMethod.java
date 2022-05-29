@@ -6,11 +6,12 @@ public class SimpsonRuleMethod {
     public void startSimulation(double a, double b, int[] nValues, double realValue) {
         for (int i = 0; i < nValues.length; i++) {
             int currentNValue = nValues[i];
-            this.process(a, b, currentNValue);
+            this.process(a, b, currentNValue, realValue);
+            System.out.println();
         }
     }
 
-    private void process(double a, double b, int n) {
+    private void process(double a, double b, int n, double realValue) {
         double h = (b - a) / n;
         int pointsXY = n + 1;
         int numOfX = n - 1;
@@ -47,7 +48,6 @@ public class SimpsonRuleMethod {
         double finalResult = this.getRuleValue(n, h) * summationFx;
 
         //show table
-        DecimalFormat d = new DecimalFormat();
         String aText = new DecimalFormat("0.00000").format(a);
         String faText = new DecimalFormat("0.00000").format(fa);
         String bText = new DecimalFormat("0.00000").format(b);
@@ -56,16 +56,25 @@ public class SimpsonRuleMethod {
         System.out.println("------------------------------------------------------------------------------------");
         System.out.println("Pxy \t\t x \t\t f(x) \t\t Factor \t\t Area \t\t");
         System.out.println("------------------------------------------------------------------------------------");
-        System.out.println(1 + "\t\t  " + aText + "\t" + faText + "\t\t" + 1 + "\t\t\t" + faText);
+        System.out.println(1 + "\t\t  " + aText + "\t" + faText + "\t\t   " + 1 + "\t\t\t" + faText);
         for (int i = 0; i < fxValues.length; i++) {
             String xValueText = new DecimalFormat("0.00000").format(xValues[i]);
             String fxValueText = new DecimalFormat("0.00000").format(fxValues[i]);
             String factorValueText = Integer.toString(factorValues[i]);
             String fxFactorValueText = new DecimalFormat("0.00000").format(fxFactorValues[i]);
 
-            System.out.println((i + 1) + "\t\t  " + xValueText + "\t" + fxValueText + "\t\t" + factorValueText + "\t\t\t" + fxFactorValueText);
+            System.out.println((i + 1) + "\t\t  " + xValueText + "\t" + fxValueText + "\t\t   " + factorValueText + "\t\t\t" + fxFactorValueText);
         }
-        System.out.println(pointsXY + "\t\t  " + bText + "\t" + fbText + "\t\t" + 1 + "\t\t\t" + fbText);
+        System.out.println(pointsXY + "\t\t  " + bText + "\t" + fbText + "\t\t   " + 1 + "\t\t\t" + fbText);
+        System.out.println("------------------------------------------------------------------------------------");
+        System.out.println();
+        System.out.println("No. de divisiones = " + n);
+        System.out.println("Valor real de la integral = " + realValue + " Unidades de consumo");
+        String finalResultText = new DecimalFormat("#.#####").format(finalResult);
+        System.out.println("Valor por el método = " + finalResultText + " Unidades de consumo");
+        double error = Math.abs(realValue - finalResult);
+        String errorText = new DecimalFormat("#.#####").format(error);
+        System.out.println("Error del método = " + errorText);
     }
 
     private int getFactor(int n, int index) {
