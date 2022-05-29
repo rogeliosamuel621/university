@@ -31,16 +31,19 @@ public class Calculations {
         return ((3*h) / 8) * (this.fx(a) + summation + this.fx(b));
     }
 
-    /*
+
     public double fx(double x) {
         return 8 + (5 * (x * x));
     }
 
-     */
 
+
+    /*
     public double fx(double x) {
         return 2 + Math.sin(2 * Math.sqrt(x));
     }
+
+     */
 
     public int getFactorForComplexRule3(int index) {
         return (index % 2) == 0 ? 2 : 4;

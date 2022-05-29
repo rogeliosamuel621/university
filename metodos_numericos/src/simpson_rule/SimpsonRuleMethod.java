@@ -1,11 +1,12 @@
 package simpson_rule;
 
+import java.text.DecimalFormat;
+
 public class SimpsonRuleMethod {
     public void startSimulation(double a, double b, int[] nValues, double realValue) {
         for (int i = 0; i < nValues.length; i++) {
             int currentNValue = nValues[i];
             this.process(a, b, currentNValue);
-            System.out.println("----------------------------------------------");
         }
     }
 
@@ -14,52 +15,57 @@ public class SimpsonRuleMethod {
         int pointsXY = n + 1;
         int numOfX = n - 1;
 
-        // get X1, ..., Xn
         double[] xValues = new double[numOfX];
         for (int i = 0; i < numOfX; i++) {
             xValues[i] = a + ((i+1) * h);
         }
 
-        System.out.println("a: " + a);
-        System.out.println("b: " + b);
-        System.out.println("n: " + n);
-        System.out.println("h: " + h);
-
-        for (int i = 0; i < xValues.length; i++) {
-            System.out.println("x" + (i+1) + ": " + xValues[i]);
-        }
-
         Calculations calculations = new Calculations();
-        // f(xn)
+
         double fa = calculations.fx(a);
         double fb = calculations.fx(b);
-        System.out.println("fa: " + fa);
 
         double[] fxValues = new double[numOfX];
         for (int i = 0; i < fxValues.length; i++) {
             fxValues[i] = calculations.fx(xValues[i]);
-            System.out.println("fx" + (i + 1) + ": " + fxValues[i]);
         }
 
-        System.out.println("fb: " + fb);
 
-        // f(xn) * factor
         double[] fxFactorValues = new double[fxValues.length];
+        int[] factorValues = new int[fxValues.length];
         for (int i = 0; i < fxValues.length; i++) {
             int factor = this.getFactor(n, i + 1);
-            //System.out.println("factor: " + factor);
+            factorValues[i] = factor;
             fxFactorValues[i] = factor * fxValues[i];
-            System.out.println("fxFactor" + (i + 1) + ": " + fxFactorValues[i]);
         }
-        // sum f(a), f(Xn), f(b)
+
         double summationFx = fa + fb;
         for (int i = 0; i < fxFactorValues.length; i++) {
             summationFx = summationFx + fxFactorValues[i];
         }
 
         double finalResult = this.getRuleValue(n, h) * summationFx;
-        System.out.println("Reusltado final: " + finalResult);
+
         //show table
+        DecimalFormat d = new DecimalFormat();
+        String aText = new DecimalFormat("0.00000").format(a);
+        String faText = new DecimalFormat("0.00000").format(fa);
+        String bText = new DecimalFormat("0.00000").format(b);
+        String fbText = new DecimalFormat("0.00000").format(fb);
+
+        System.out.println("------------------------------------------------------------------------------------");
+        System.out.println("Pxy \t\t x \t\t f(x) \t\t Factor \t\t Area \t\t");
+        System.out.println("------------------------------------------------------------------------------------");
+        System.out.println(1 + "\t\t  " + aText + "\t" + faText + "\t\t" + 1 + "\t\t\t" + faText);
+        for (int i = 0; i < fxValues.length; i++) {
+            String xValueText = new DecimalFormat("0.00000").format(xValues[i]);
+            String fxValueText = new DecimalFormat("0.00000").format(fxValues[i]);
+            String factorValueText = Integer.toString(factorValues[i]);
+            String fxFactorValueText = new DecimalFormat("0.00000").format(fxFactorValues[i]);
+
+            System.out.println((i + 1) + "\t\t  " + xValueText + "\t" + fxValueText + "\t\t" + factorValueText + "\t\t\t" + fxFactorValueText);
+        }
+        System.out.println(pointsXY + "\t\t  " + bText + "\t" + fbText + "\t\t" + 1 + "\t\t\t" + fbText);
     }
 
     private int getFactor(int n, int index) {

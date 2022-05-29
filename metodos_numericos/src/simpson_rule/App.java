@@ -6,16 +6,26 @@ public class App {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-
+/*
+        String problem = getProblem();
         double realValue = getRealValue();
         int lowerLimit = getLowerLimit();
         int upperLimit = getUpperLimit();
         int[] nValues = getEnValues();
+        */
+        int[] nValues = {2, 3, 8, 15};
+
+        showHeader("problem");
 
 
         SimpsonRuleMethod simpsonRuleMethod = new SimpsonRuleMethod();
-        simpsonRuleMethod.startSimulation(lowerLimit, upperLimit, nValues, 10);
+        simpsonRuleMethod.startSimulation(1, 6, nValues, 10);
 
+    }
+
+    static private String getProblem() {
+        System.out.println("Digite el problema: ");
+        return sc.nextLine();
     }
 
     static private double getRealValue() {
@@ -46,5 +56,19 @@ public class App {
         }
 
         return nValues;
+    }
+
+    static private void showHeader(String problem) {
+        System.out.println();
+        System.out.println();
+        System.out.println("Instituto Tecnológico de Culiacán");
+        System.out.println("Ing. en Sistemas");
+        System.out.println();
+        System.out.println("Meza Valenzuela Alan");
+        System.out.println("Moreno Corrales Rogelio Samuel");
+        System.out.println("Integración Numérica-Método de Simpson");
+        System.out.println("De 10:00 –11:00 horas");
+
+        System.out.println("Pregunta: " + problem);
     }
 }
