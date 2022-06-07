@@ -39,6 +39,10 @@ public class SimulationRecord {
         return records.get(index);
     }
 
+    public int getRecordLength() {
+        return this.records.size();
+    }
+
     public int getNormalSalary() {
         return this.normalSalary;
     }
