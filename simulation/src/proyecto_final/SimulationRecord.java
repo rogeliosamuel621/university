@@ -13,13 +13,22 @@ public class SimulationRecord {
     private int normalSalary = 0;
     private double extraSalary = 0;
     private double busAwaitTimePrice = 0;
-    private int servicePrice = 0;
-    private int totalCost;
+    private double servicePrice = 0;
+    private double totalCost;
     private int teamMates;
 
     public SimulationRecord(int teamMates) {
         this.normalSalary = this.salaryPerHour * this.workHours * teamMates;
         this.teamMates = teamMates;
+    }
+
+    public int getServiceTime(double randomNumber) {
+        if (this.teamMates == 3) return InverseTransform.getServiceTimeTeam3(randomNumber);
+        if (this.teamMates == 4) return InverseTransform.getServiceTimeTeam4(randomNumber);
+        if (this.teamMates == 5) return InverseTransform.getServiceTimeTeam5(randomNumber);
+        if (this.teamMates == 6) return InverseTransform.getServiceTimeTeam6(randomNumber);
+
+        return InverseTransform.getServiceTimeTeam3(randomNumber);
     }
 
     public void updateRecord(TableRecord record) {
@@ -39,10 +48,18 @@ public class SimulationRecord {
     }
 
     public double getServicePrice(double timeService) {
-        return servicePrice * timeService;
+        this.servicePrice = this.servicePricePerHour * timeService;
+        return this.servicePrice;
     }
 
     public double getBusAwaitTimePrice(double busAwaitTime) {
-        return this.busAwaitTimePrice * busAwaitTime;
+        this.busAwaitTimePrice = this.waitBusPricePerHour * busAwaitTime;
+        return this.busAwaitTimePrice;
+    }
+
+    public double getTotalCost() {
+        this.totalCost = this.normalSalary + this.extraSalary + this.servicePrice + this.busAwaitTimePrice;
+
+        return this.totalCost;
     }
 }
