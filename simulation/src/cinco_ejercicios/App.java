@@ -1,5 +1,6 @@
 package cinco_ejercicios;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
@@ -15,7 +16,7 @@ public class App {
         System.out.println("1- Chi cuadrado");
         System.out.println("2- Kolmogorov");
         System.out.println("3- Prueba de aleatoriedad");
-        System.out.println("4- ");
+        System.out.println("4- Huecos");
         System.out.println("5- ");
 
         int option = sc.nextInt();
@@ -26,6 +27,11 @@ public class App {
                 chiSquareMethod.startSimulation();
                 break;
             case 2:
+                ArrayList<Double> r = new ArrayList<>();
+                for (int i = 0; i < randomNumbers.length; i++) {
+                    r.add(randomNumbers[i]);
+                }
+                new Kolgomorov(r);
                 break;
             case 3:
                 new PSerie(randomNumbers);
