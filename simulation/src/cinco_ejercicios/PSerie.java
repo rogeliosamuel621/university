@@ -30,7 +30,7 @@ public class PSerie extends JPanel {
 
         }while(N<34 || N>100);
  */
-        ram=new double [N];
+        //ram=new double [N];
         arr=new double [N][2];
 
         do {

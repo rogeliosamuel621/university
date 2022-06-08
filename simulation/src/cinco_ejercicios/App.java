@@ -68,6 +68,7 @@ public class App {
             }
         } while (exit == false);
         System.out.println("aiuda");
+        System.exit(0);
     }
 
     static double[] generateRandomNumber(int limit) {
