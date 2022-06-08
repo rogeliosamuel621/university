@@ -2,25 +2,20 @@ package proyecto_final;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Scanner;
 
 public class Simulation {
     DecimalFormat formatAle = new DecimalFormat("0.0000");
     DecimalFormat formatTime = new DecimalFormat("0.00");
-    Scanner sc = new Scanner(System.in);
     SimulationRecord simulationRecord3 = new SimulationRecord(3);
     SimulationRecord simulationRecord4 = new SimulationRecord(4);
     SimulationRecord simulationRecord5 = new SimulationRecord(5);
     SimulationRecord simulationRecord6 = new SimulationRecord(6);
 
-    float initialHour = 23.00f;
-    float limitHour = 7.00f;
-
 
     public void startSimulation() {
-        //this.simulate3(true);
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < 2; i++) {
             this.simulateTeam3(3);
             this.simulateTeam3(4);
             this.simulateTeam3(5);
@@ -39,14 +34,45 @@ public class Simulation {
         }
 
         NumberFormat formatoImporte = NumberFormat.getCurrencyInstance(new Locale("en","US"));
+        DecimalFormat decimalFormat = new DecimalFormat("0.00000");
+
+        String n3 = decimalFormat.format(simulationRecord3.totalNormalSalary);
+        String n4 = decimalFormat.format(simulationRecord4.totalNormalSalary);
+        String n5 = decimalFormat.format(simulationRecord5.totalNormalSalary);
+        String n6 = decimalFormat.format(simulationRecord6.totalNormalSalary);
+
+        String e3 = decimalFormat.format(simulationRecord3.totalExtraSalary);
+        String e4 = decimalFormat.format(simulationRecord4.totalExtraSalary);
+        String e5 = decimalFormat.format(simulationRecord5.totalExtraSalary);
+        String e6 = decimalFormat.format(simulationRecord6.totalExtraSalary);
+
+        String o3 = decimalFormat.format(simulationRecord3.totalOciBus);
+        String o4 = decimalFormat.format(simulationRecord4.totalOciBus);
+        String o5 = decimalFormat.format(simulationRecord5.totalOciBus);
+        String o6 = decimalFormat.format(simulationRecord6.totalOciBus);
+
+        String op3 = decimalFormat.format(simulationRecord3.totalOperation);
+        String op4 = decimalFormat.format(simulationRecord4.totalOperation);
+        String op5 = decimalFormat.format(simulationRecord5.totalOperation);
+        String op6 = decimalFormat.format(simulationRecord6.totalOperation);
+
+        double _t3 = simulationRecord3.totalNormalSalary + simulationRecord3.totalExtraSalary + simulationRecord3.totalOciBus + simulationRecord3.totalOperation;
+        double _t4 = simulationRecord4.totalNormalSalary + simulationRecord4.totalExtraSalary + simulationRecord4.totalOciBus + simulationRecord4.totalOperation;
+        double _t5 = simulationRecord5.totalNormalSalary + simulationRecord5.totalExtraSalary + simulationRecord5.totalOciBus + simulationRecord5.totalOperation;
+        double _t6 = simulationRecord6.totalNormalSalary + simulationRecord6.totalExtraSalary + simulationRecord6.totalOciBus + simulationRecord6.totalOperation;
+
+        String t3 = decimalFormat.format(_t3);
+        String t4 = decimalFormat.format(_t4);
+        String t5 = decimalFormat.format(_t5);
+        String t6 = decimalFormat.format(_t6);
 
         System.out.println("Resultados");
-        System.out.println(simulationRecord3.totalPrices.size());
+        System.out.println("Tam equipo " + "| Salario normal " + "| Salario extra"  + "| Ocio del camion " + "| Operaciones " + "| Totales");
         System.out.println("--------------------------------------------------------------------------------------------------------");
-        System.out.println("Precio total de la 3: " + formatoImporte.format(sum1 / simulationRecord3.totalPrices.size()));
-        System.out.println("Precio total de la 4: " + formatoImporte.format(sum2 / simulationRecord4.totalPrices.size()));
-        System.out.println("Precio total de la 5: " + formatoImporte.format(sum3 / simulationRecord5.totalPrices.size()));
-        System.out.println("Precio total de la 6: " + formatoImporte.format(sum4 / simulationRecord6.totalPrices.size()));
+        System.out.println(3 + "\t\t\t\t" + n3 + "\t\t" + e3 + "\t\t\t" + o3 + "\t\t " + op3 + "\t\t" + t3);
+        System.out.println(4 + "\t\t\t\t" + n4 + "\t\t" + e4 + "\t\t\t" + o4 + "\t\t " + op4 + "\t\t" + t4);
+        System.out.println(5 + "\t\t\t\t" + n5 + "\t\t" + e5 + "\t\t\t" + o5 + "\t\t " + op5 + "\t\t" + t5);
+        System.out.println(6 + "\t\t\t\t" + n6 + "\t\t" + e6 + "\t\t\t" + o6 + "\t\t    " + op6 + "\t\t" + t6);
         System.out.println("--------------------------------------------------------------------------------------------------------");
     }
 
@@ -93,8 +119,8 @@ public class Simulation {
 
         double busWaitingTime = 0.0d;
         double workingTime = 0.0d;
-        System.out.println("#ale \t| Tiempo entre llegadas | Tiempo de llegada | Inicio del servicio | #ale \t| Tiempo de servicio | Terminacion del servicio | Ocio del personal | Tiempo de espera del camión | Longitud de la cola ");
-        System.out.println("--------------------------------------------------------------------------------------------------------");
+
+
         for (int i = 0; i < this.getTeam(team).getRecordLength(); i++) {
 
             TableRecord currentRecord = this.getTeam(team).getRecord(i);
@@ -102,58 +128,20 @@ public class Simulation {
             busWaitingTime = busWaitingTime + currentRecord.timeToWaitForBus;
             workingTime = workingTime + currentRecord.serviceTime;
 
-            String ale1 = formatAle.format(currentRecord.randomNumber_1);
-            String tB = formatTime.format(currentRecord.timeBetweenArrives);
-            String arrH = formatTime.format(currentRecord.arriveHour);
-            String stS = formatTime.format(currentRecord.serviceStartHour);
-            String ale2 = formatAle.format(currentRecord.randomNumber_2);
-            String sT = formatTime.format(currentRecord.serviceTime);
-            String fS = formatTime.format(currentRecord.serviceFinishTime);
-            String oP = formatTime.format(currentRecord.deathTime);
-            String wB = formatTime.format(currentRecord.timeToWaitForBus);
-            String queue = formatTime.format(currentRecord.inQueue);
-
-            System.out.println(ale1 + "\t\t\t" + tB + "\t\t\t\t  " + arrH + "\t\t\t\t\t" + stS + "\t\t\t" + ale2 + "\t\t\t" + sT + "\t\t\t\t\t" + fS + "\t\t\t\t\t" + oP + "\t\t\t\t\t" + wB + "\t\t\t\t\t" + queue);
-            System.out.println("--------------------------------------------------------------------------------------------------------");
-/*
-            System.out.println("RECORD");
-            System.out.println("ale: " + currentRecord.randomNumber_1);
-            System.out.println("tiempoEntreLlegadas: " + currentRecord.timeBetweenArrives);
-            System.out.println("tiempo de llegada: " + currentRecord.arriveHour);
-            System.out.println("inicio servicio " + currentRecord.serviceStartHour);
-            System.out.println("ale2: " + currentRecord.randomNumber_2);
-            System.out.println("service time: " + currentRecord.serviceTime);
-            System.out.println("fin service: " + currentRecord.serviceFinishTime);
-            System.out.println("ocio: " + currentRecord.deathTime);
-            System.out.println("timepo espera bus: " + currentRecord.timeToWaitForBus);
-            System.out.println("en cola: " + currentRecord.inQueue);
-            System.out.println("RECORD");
-            System.out.println();
- */
         }
-
-        double d1 = getTeam(team).getBusAwaitTimePrice(busWaitingTime);
-        double d2 = getTeam(team).getServicePrice(workingTime * 0.01);
-        double d3 = getTeam(team).getNormalSalary();
-        System.out.println("--------------------------------------------------------------------------------------------------------");
-        System.out.println("bus wait: " + d1 + " jkn " + busWaitingTime);
-        System.out.println("service price: " + d2 + " cdjkdsc " + workingTime);
-        System.out.println("normal salary: " + d3);
 
         double totalPrice = getTeam(team).getTotalCost();
         NumberFormat formatoImporte = NumberFormat.getCurrencyInstance(new Locale("en","US"));
 
-        System.out.println("Total Price: " + formatoImporte.format(totalPrice));
-        System.out.println("--------------------------------------------------------------------------------------------------------");
-        this.getTeam(team).totalPrices.add(totalPrice);
-
-
+        double normalSalary = this.getTeam(team).getNormalSalary();
+        double ociBus = getTeam(team).getBusAwaitTimePrice(busWaitingTime);
+        double operations = getTeam(team).getServicePrice(workingTime * 0.01);
+        System.out.println(workingTime);
+        PricesRecord newPricesRecord = new PricesRecord(normalSalary, 0.0d, ociBus, operations, totalPrice);
+        this.getTeam(team).updatePriceRecord(newPricesRecord);
     }
 
     private SimulationRecord getTeam(int teamMates) {
-        //System.out.println("Team");
-        //System.out.println(teamMates);
-        //System.out.println("team");
         if (teamMates == 3) return simulationRecord3;
         if (teamMates == 4) return simulationRecord4;
         if (teamMates == 5) return simulationRecord5;
@@ -173,6 +161,51 @@ public class Simulation {
 
     private double getTimesInMinutes(double time) {
         return time * 0.01;
+    }
+
+    private double getTotalNormalSalary(ArrayList<PricesRecord> arr) {
+        double summation = 0.0d;
+        for (int i = 0; i < arr.size(); i++) {
+            summation = summation + arr.get(i).normalSalary;
+        }
+
+        return summation;
+    }
+
+    private double getTotalExtraSalary(ArrayList<PricesRecord> arr) {
+        double summation = 0.0d;
+        for (int i = 0; i < arr.size(); i++) {
+            summation = summation + arr.get(i).extraSalary;
+        }
+
+        return summation;
+    }
+
+    private double getTotalOciBus(ArrayList<PricesRecord> arr) {
+        double summation = 0.0d;
+        for (int i = 0; i < arr.size(); i++) {
+            summation = summation + arr.get(i).ociBus;
+        }
+
+        return summation;
+    }
+
+    private double getTotalOperation(ArrayList<PricesRecord> arr) {
+        double summation = 0.0d;
+        for (int i = 0; i < arr.size(); i++) {
+            summation = summation + arr.get(i).operation;
+        }
+
+        return summation;
+    }
+
+    private double getTotalCost(ArrayList<PricesRecord> arr) {
+        double summation = 0.0d;
+        for (int i = 0; i < arr.size(); i++) {
+            summation = summation + arr.get(i).totalCost;
+        }
+
+        return summation;
     }
 
 }

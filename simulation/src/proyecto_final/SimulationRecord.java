@@ -17,6 +17,13 @@ public class SimulationRecord {
     private double totalCost;
     private int teamMates;
     public ArrayList<Double> totalPrices = new ArrayList<>();
+    public ArrayList<PricesRecord> pricesRecords = new ArrayList<>();
+
+    public double totalNormalSalary = 0.0d;
+    public double totalExtraSalary = 0.0d;
+    public double totalOciBus = 0.0d;
+    public double totalOperation = 0.0d;
+    public double totalCostFinal = 0.0d;
 
     public SimulationRecord(int teamMates) {
         this.normalSalary = this.salaryPerHour * this.workHours * teamMates;
@@ -30,6 +37,16 @@ public class SimulationRecord {
         if (teamMates == 6) return InverseTransform.getServiceTimeTeam6(randomNumber);
 
         return InverseTransform.getServiceTimeTeam3(randomNumber);
+    }
+
+    public void updatePriceRecord(PricesRecord priceToRecord) {
+        this.totalNormalSalary = this.totalNormalSalary + priceToRecord.normalSalary;
+        this.totalExtraSalary = this.totalExtraSalary + priceToRecord.extraSalary;
+        this.totalOciBus = this.totalOciBus + priceToRecord.ociBus;
+        this.totalOperation = this.totalOperation + priceToRecord.operation;
+        this.totalCostFinal = this.totalCostFinal + priceToRecord.totalCost;
+
+        this.pricesRecords.add(priceToRecord);
     }
 
     public void updateRecord(TableRecord record) {
@@ -70,5 +87,21 @@ public class SimulationRecord {
 
     public void clearRecord() {
         this.records.clear();
+    }
+}
+
+class PricesRecord {
+    double normalSalary;
+    double extraSalary;
+    double ociBus;
+    double operation;
+    double totalCost;
+
+    public PricesRecord(double normalSalary, double extraSalary, double ociBus, double operation, double totalCost) {
+        this.normalSalary = normalSalary;
+        this.extraSalary = extraSalary;
+        this.ociBus = ociBus;
+        this.operation = operation;
+        this.totalCost = totalCost;
     }
 }
