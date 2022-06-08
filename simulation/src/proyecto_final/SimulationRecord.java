@@ -16,17 +16,18 @@ public class SimulationRecord {
     private double servicePrice = 0;
     private double totalCost;
     private int teamMates;
+    public ArrayList<Double> totalPrices = new ArrayList<>();
 
     public SimulationRecord(int teamMates) {
         this.normalSalary = this.salaryPerHour * this.workHours * teamMates;
         this.teamMates = teamMates;
     }
 
-    public int getServiceTime(double randomNumber) {
-        if (this.teamMates == 3) return InverseTransform.getServiceTimeTeam3(randomNumber);
-        if (this.teamMates == 4) return InverseTransform.getServiceTimeTeam4(randomNumber);
-        if (this.teamMates == 5) return InverseTransform.getServiceTimeTeam5(randomNumber);
-        if (this.teamMates == 6) return InverseTransform.getServiceTimeTeam6(randomNumber);
+    public int getServiceTime(int teamMates, double randomNumber) {
+        if (teamMates == 3) return InverseTransform.getServiceTimeTeam3(randomNumber);
+        if (teamMates == 4) return InverseTransform.getServiceTimeTeam4(randomNumber);
+        if (teamMates == 5) return InverseTransform.getServiceTimeTeam5(randomNumber);
+        if (teamMates == 6) return InverseTransform.getServiceTimeTeam6(randomNumber);
 
         return InverseTransform.getServiceTimeTeam3(randomNumber);
     }
@@ -65,5 +66,9 @@ public class SimulationRecord {
         this.totalCost = this.normalSalary + this.extraSalary + this.servicePrice + this.busAwaitTimePrice;
 
         return this.totalCost;
+    }
+
+    public void clearRecord() {
+        this.records.clear();
     }
 }
