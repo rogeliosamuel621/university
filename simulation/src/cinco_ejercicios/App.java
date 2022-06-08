@@ -17,7 +17,7 @@ public class App {
         System.out.println("2- Kolmogorov");
         System.out.println("3- Prueba de aleatoriedad");
         System.out.println("4- Huecos");
-        System.out.println("5- ");
+        System.out.println("5- Poker");
 
         int option = sc.nextInt();
 
@@ -44,6 +44,7 @@ public class App {
                 new Huecos(r2);
                 break;
             case 5:
+                new Poker(randomNumbers);
                 break;
         }
     }
