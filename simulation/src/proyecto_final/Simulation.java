@@ -37,7 +37,7 @@ public class Simulation {
             random1 = this.generateRandomNumber();
             int timeBetweenArrives = InverseTransform.getArriveTime(random1);
 
-            boolean isInQueue = (arriveTime + timeBetweenArrives) < serviceTimeFinish;
+            boolean isInQueue = (arriveTime + (timeBetweenArrives * 0.01)) < serviceTimeFinish;
 
             TableRecord newTableRecord = new TableRecord(prevRandomNumber1, prevTimeBetweenArrives, arriveTime, startService, random2, serviceTime, serviceTimeFinish, leisurePersonalTime, timeToWaitForNextBus, isInQueue ? 1 : 0);
             simulationRecord3.updateRecord(newTableRecord);
