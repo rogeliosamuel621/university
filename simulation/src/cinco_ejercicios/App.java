@@ -37,6 +37,11 @@ public class App {
                 new PSerie(randomNumbers);
                 break;
             case 4:
+                ArrayList<Double> r2 = new ArrayList<>();
+                for (int i = 0; i < randomNumbers.length; i++) {
+                    r2.add(randomNumbers[i]);
+                }
+                new Huecos(r2);
                 break;
             case 5:
                 break;
