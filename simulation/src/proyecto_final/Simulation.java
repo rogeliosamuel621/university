@@ -69,10 +69,10 @@ public class Simulation {
         System.out.println("Resultados");
         System.out.println("Tam equipo " + "| Salario normal " + "| Salario extra"  + "| Ocio del camion " + "| Operaciones " + "| \tTotales");
         System.out.println("--------------------------------------------------------------------------------------------------------");
-        System.out.println(3 + "\t\t\t" + n3 + "\t\t\t" + e3 + "\t\t" + o3 + "\t\t " + op3 + "\t\t" + t3);
-        System.out.println(4 + "\t\t\t" + n4 + "\t\t\t" + e4 + "\t\t" + o4 + "\t\t " + op4 + "\t\t" + t4);
-        System.out.println(5 + "\t\t\t" + n5 + "\t\t\t" + e5 + "\t\t" + o5 + "\t\t " + op5 + "\t\t" + t5);
-        System.out.println(6 + "\t\t\t" + n6 + "\t\t\t" + e6 + "\t\t" + o6 + "\t\t    " + op6 + "\t\t" + t6);
+        System.out.println(3 + "\t\t\t" + n3 + "\t\t\t" + e3 + "\t\t" + o3 + "\t\t " + op3 + "\t\t\t" + t3);
+        System.out.println(4 + "\t\t\t" + n4 + "\t\t\t" + e4 + "\t\t" + o4 + "\t\t " + op4 + "\t\t\t" + t4);
+        System.out.println(5 + "\t\t\t" + n5 + "\t\t\t" + e5 + "\t\t" + o5 + "\t\t " + op5 + "\t\t\t" + t5);
+        System.out.println(6 + "\t\t\t" + n6 + "\t\t\t" + e6 + "\t\t" + o6 + "\t\t    " + op6 + "\t\t\t" + t6);
         System.out.println("--------------------------------------------------------------------------------------------------------");
     }
 
@@ -126,7 +126,8 @@ public class Simulation {
 
         double busWaitingTime = 0.0d;
         double workingTime = 0.0d;
-
+        //System.out.println("#ale \t| Tiempo entre llegadas | Tiempo de llegada | Inicio del servicio | #ale \t| Tiempo de servicio | Terminacion del servicio | Ocio del personal | Tiempo de espera del camión | Longitud de la cola ");
+        //System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         for (int i = 0; i < this.getTeam(team).getRecordLength(); i++) {
 
@@ -135,10 +136,24 @@ public class Simulation {
             busWaitingTime = busWaitingTime + currentRecord.timeToWaitForBus;
             workingTime = workingTime + currentRecord.serviceTime;
 
+            String ale1 = formatAle.format(currentRecord.randomNumber_1);
+            String tB = formatTime.format(currentRecord.timeBetweenArrives);
+            String arrH = formatTime.format(currentRecord.arriveHour);
+            String stS = formatTime.format(currentRecord.serviceStartHour);
+            String ale2 = formatAle.format(currentRecord.randomNumber_2);
+            String sT = formatTime.format(currentRecord.serviceTime);
+            String fS = formatTime.format(currentRecord.serviceFinishTime);
+            String oP = formatTime.format(currentRecord.deathTime);
+            String wB = formatTime.format(currentRecord.timeToWaitForBus);
+            String queue = formatTime.format(currentRecord.inQueue);
+
+            // System.out.println(ale1 + "\t\t\t" + tB + "\t\t\t\t  " + arrH + "\t\t\t\t\t" + stS + "\t\t\t" + ale2 + "\t\t\t" + sT + "\t\t\t\t\t" + fS + "\t\t\t\t\t" + oP + "\t\t\t\t\t" + wB + "\t\t\t\t\t" + queue);
+
         }
+        // System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         double totalPrice = getTeam(team).getTotalCost();
-        NumberFormat formatoImporte = NumberFormat.getCurrencyInstance(new Locale("en","US"));
+        DecimalFormat format = new DecimalFormat("0.00000");
 
         double normalSalary = this.getTeam(team).getNormalSalary();
         double ociBus = getTeam(team).getBusAwaitTimePrice(busWaitingTime);
@@ -146,6 +161,14 @@ public class Simulation {
         //System.out.println(workingTime);
         PricesRecord newPricesRecord = new PricesRecord(normalSalary, extraTime, ociBus, operations, totalPrice);
         this.getTeam(team).updatePriceRecord(newPricesRecord);
+        /*
+        System.out.println("Resultados");
+        System.out.println("Tam equipo " + "| Salario normal " + "| Salario extra"  + "| Ocio del camion " + "| Operaciones " + "| \tTotales");
+        System.out.println("--------------------------------------------------------------------------------------------------------");
+        System.out.println(team + "\t\t\t\t" + format.format(normalSalary) + "\t\t" + format.format(extraTime) + "\t\t\t" + format.format(ociBus) + "\t\t\t" + format.format(operations) + "\t\t" + format.format(totalPrice));
+        System.out.println();
+        System.out.println();
+         */
     }
 
     private SimulationRecord getTeam(int teamMates) {
