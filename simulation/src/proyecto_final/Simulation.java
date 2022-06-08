@@ -15,7 +15,7 @@ public class Simulation {
 
 
     public void startSimulation() {
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 60; i++) {
             this.simulateTeam3(3);
             this.simulateTeam3(4);
             this.simulateTeam3(5);
@@ -67,12 +67,12 @@ public class Simulation {
         String t6 = decimalFormat.format(_t6);
 
         System.out.println("Resultados");
-        System.out.println("Tam equipo " + "| Salario normal " + "| Salario extra"  + "| Ocio del camion " + "| Operaciones " + "| Totales");
+        System.out.println("Tam equipo " + "| Salario normal " + "| Salario extra"  + "| Ocio del camion " + "| Operaciones " + "| \tTotales");
         System.out.println("--------------------------------------------------------------------------------------------------------");
-        System.out.println(3 + "\t\t\t\t" + n3 + "\t\t" + e3 + "\t\t\t" + o3 + "\t\t " + op3 + "\t\t" + t3);
-        System.out.println(4 + "\t\t\t\t" + n4 + "\t\t" + e4 + "\t\t\t" + o4 + "\t\t " + op4 + "\t\t" + t4);
-        System.out.println(5 + "\t\t\t\t" + n5 + "\t\t" + e5 + "\t\t\t" + o5 + "\t\t " + op5 + "\t\t" + t5);
-        System.out.println(6 + "\t\t\t\t" + n6 + "\t\t" + e6 + "\t\t\t" + o6 + "\t\t    " + op6 + "\t\t" + t6);
+        System.out.println(3 + "\t\t\t" + n3 + "\t\t\t" + e3 + "\t\t" + o3 + "\t\t " + op3 + "\t\t" + t3);
+        System.out.println(4 + "\t\t\t" + n4 + "\t\t\t" + e4 + "\t\t" + o4 + "\t\t " + op4 + "\t\t" + t4);
+        System.out.println(5 + "\t\t\t" + n5 + "\t\t\t" + e5 + "\t\t" + o5 + "\t\t " + op5 + "\t\t" + t5);
+        System.out.println(6 + "\t\t\t" + n6 + "\t\t\t" + e6 + "\t\t" + o6 + "\t\t    " + op6 + "\t\t" + t6);
         System.out.println("--------------------------------------------------------------------------------------------------------");
     }
 
@@ -90,6 +90,7 @@ public class Simulation {
         double timeToWaitForNextBus = 0;
         int count = 0;
         int prevTimeBetweenArrives = 0;
+        double extraTime = 0.0d;
 
         while (true) {
             double prevRandomNumber1 = random1;
@@ -111,6 +112,12 @@ public class Simulation {
             timeToWaitForNextBus = (arriveTime < prevServiceTimeFinish) ? Math.abs(arriveTime - prevServiceTimeFinish) : 0;
             prevServiceTimeFinish = serviceTimeFinish;
 
+
+            if (serviceTimeFinish >= 15.00d) {
+                extraTime = serviceTimeFinish - 15.00d;
+                arriveTime = arriveTime + 0.3d;
+
+            }
 
             if (serviceTimeFinish >= 17.00d || count == 60) break;
             count++;
@@ -136,8 +143,8 @@ public class Simulation {
         double normalSalary = this.getTeam(team).getNormalSalary();
         double ociBus = getTeam(team).getBusAwaitTimePrice(busWaitingTime);
         double operations = getTeam(team).getServicePrice(workingTime * 0.01);
-        System.out.println(workingTime);
-        PricesRecord newPricesRecord = new PricesRecord(normalSalary, 0.0d, ociBus, operations, totalPrice);
+        //System.out.println(workingTime);
+        PricesRecord newPricesRecord = new PricesRecord(normalSalary, extraTime, ociBus, operations, totalPrice);
         this.getTeam(team).updatePriceRecord(newPricesRecord);
     }
 
