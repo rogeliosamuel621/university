@@ -99,14 +99,18 @@ public class Simulation {
 
             boolean isInQueue = (arriveTime + (timeBetweenArrives * 0.01)) < serviceTimeFinish;
 
+            // System.out.println("HOUR BEFORE SAVE: " + arriveTime);
             TableRecord newTableRecord = new TableRecord(prevRandomNumber1, prevTimeBetweenArrives, arriveTime, startService, random2, serviceTime, serviceTimeFinish, leisurePersonalTime, timeToWaitForNextBus, isInQueue ? 1 : 0);
             getTeam(team).updateRecord(newTableRecord);
 
             arriveTime = arriveTime + (timeBetweenArrives * 0.01);
+            arriveTime = this.transformHour(arriveTime);
+            // System.out.println("HORAAAA: " + arriveTime);
             startService = (arriveTime < serviceTimeFinish) ? serviceTimeFinish : arriveTime;
             random2 = this.generateRandomNumber();
             serviceTime = getTeam(team).getServiceTime(team, random2);
             serviceTimeFinish = startService + (double)((double)(serviceTime) * 0.01);
+            serviceTimeFinish = this.transformHour(serviceTimeFinish);
             leisurePersonalTime = (prevServiceTimeFinish < arriveTime) ? Math.abs(prevServiceTimeFinish - arriveTime) : 0;
 
             timeToWaitForNextBus = (arriveTime < prevServiceTimeFinish) ? Math.abs(arriveTime - prevServiceTimeFinish) : 0;
@@ -116,6 +120,7 @@ public class Simulation {
             if (serviceTimeFinish >= 15.00d) {
                 extraTime = serviceTimeFinish - 15.00d;
                 arriveTime = arriveTime + 0.3d;
+                arriveTime = this.transformHour(arriveTime);
 
             }
 
@@ -126,8 +131,8 @@ public class Simulation {
 
         double busWaitingTime = 0.0d;
         double workingTime = 0.0d;
-        //System.out.println("#ale \t| Tiempo entre llegadas | Tiempo de llegada | Inicio del servicio | #ale \t| Tiempo de servicio | Terminacion del servicio | Ocio del personal | Tiempo de espera del camión | Longitud de la cola ");
-        //System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("#ale \t| Tiempo entre llegadas | Tiempo de llegada | Inicio del servicio | #ale \t| Tiempo de servicio | Terminacion del servicio | Ocio del personal | Tiempo de espera del camión | Longitud de la cola ");
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         for (int i = 0; i < this.getTeam(team).getRecordLength(); i++) {
 
@@ -147,10 +152,10 @@ public class Simulation {
             String wB = formatTime.format(currentRecord.timeToWaitForBus);
             String queue = formatTime.format(currentRecord.inQueue);
 
-            // System.out.println(ale1 + "\t\t\t" + tB + "\t\t\t\t  " + arrH + "\t\t\t\t\t" + stS + "\t\t\t" + ale2 + "\t\t\t" + sT + "\t\t\t\t\t" + fS + "\t\t\t\t\t" + oP + "\t\t\t\t\t" + wB + "\t\t\t\t\t" + queue);
+            System.out.println(ale1 + "\t\t\t" + tB + "\t\t\t\t  " + arrH + "\t\t\t\t\t" + stS + "\t\t\t" + ale2 + "\t\t\t" + sT + "\t\t\t\t\t" + fS + "\t\t\t\t\t" + oP + "\t\t\t\t\t" + wB + "\t\t\t\t\t" + queue);
 
         }
-        // System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         double totalPrice = getTeam(team).getTotalCost();
         DecimalFormat format = new DecimalFormat("0.00000");
@@ -161,14 +166,14 @@ public class Simulation {
         //System.out.println(workingTime);
         PricesRecord newPricesRecord = new PricesRecord(normalSalary, extraTime, ociBus, operations, totalPrice);
         this.getTeam(team).updatePriceRecord(newPricesRecord);
-        /*
+
         System.out.println("Resultados");
         System.out.println("Tam equipo " + "| Salario normal " + "| Salario extra"  + "| Ocio del camion " + "| Operaciones " + "| \tTotales");
         System.out.println("--------------------------------------------------------------------------------------------------------");
         System.out.println(team + "\t\t\t\t" + format.format(normalSalary) + "\t\t" + format.format(extraTime) + "\t\t\t" + format.format(ociBus) + "\t\t\t" + format.format(operations) + "\t\t" + format.format(totalPrice));
         System.out.println();
         System.out.println();
-         */
+
     }
 
     private SimulationRecord getTeam(int teamMates) {
@@ -187,6 +192,23 @@ public class Simulation {
 
     private boolean areBusesWaiting(double randomNumber) {
         return InverseTransform.getBusesWaiting(randomNumber) != 0;
+    }
+
+    private double transformHour(double hour) {
+        double minutes = hour % 1;
+
+        double _hour = hour;
+
+        if (minutes > 0.60d) {
+            _hour = (_hour + 1) - minutes;
+            _hour = _hour + (minutes - 0.60d);
+        }
+
+        double minutes2 = _hour % 1;
+        if (minutes2 == 0.60d) {
+            _hour = (_hour + 1) - 0.60d;
+        }
+        return _hour;
     }
 
     private double getTimesInMinutes(double time) {
