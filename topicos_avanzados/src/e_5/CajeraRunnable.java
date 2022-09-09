@@ -34,7 +34,7 @@ public class CajeraRunnable implements Runnable{
                     + this.cliente.getNombre()+
                     " EN EL TIEMPO: "
                     + (System.currentTimeMillis() - this. initialTime) / 1000 + "seg"
-            + " Con un precio total de: " + this.cliente.totalPrice);
+            + " Con un precio total de: $" + this.cliente.totalPrice);
     }
 
     private void esperarXsegundos (int segundos) {
