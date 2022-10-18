@@ -17,26 +17,11 @@ public class Carrera extends JFrame{
         paneles = new JPanel[4];
         labels = new JLabel[4];
 
-        // Codigo que agrega la imagen de meta
-        /*
-        JPanel metaComponent = new JPanel();
-        add(metaComponent);
-        JLabel metaIcon = new JLabel();
-        ImageIcon metaImg = new ImageIcon(getClass().getResource("meta.jpeg"));
-        metaIcon.setIcon(metaImg);
-        metaComponent.add(metaIcon);
-        metaIcon.setLocation(700, 0);
-         */
-
         for (int i = 0; i < labels.length; i++) {
-            paneles[i] = new JPanel();
-            add(paneles[i]);
-            labels[i] = new JLabel(nombres [i]);
-            ImageIcon img = new ImageIcon(getClass().getResource(nombres[i] + ".png"));
-            labels[i].setIcon(img);
-            paneles[i].add(labels[i]);
-            labels[i].setLocation(0,0);
+            this.crearAnimal(i);
         }
+
+        // Creamos los animales
         boton = new JButton("Comenzar Carrera");
         Animal conejo = new Animal("Conejo", ancho -250, labels[0]);
         Animal tortuga = new Animal("Tortuga", ancho -250, labels[1]);
@@ -47,6 +32,7 @@ public class Carrera extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Inicializamos los hilos
                 conejo.start();
                 tortuga.start();
                 zorro.start();
@@ -55,8 +41,9 @@ public class Carrera extends JFrame{
             }
         });
 
-        BackGround bg = new BackGround();
-        add(bg);
+        /**
+         * Añade elementos a la vista como el botón y marca las posiciones de las ventanas y sus dimenciones
+         */
         add(boton);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocation(200,250);
@@ -64,10 +51,10 @@ public class Carrera extends JFrame{
         setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new Carrera();
-    }
-
+    /**
+     * Método que asigna la imagen para el animal y el nombre
+     * @param i
+     */
     private void crearAnimal(int i) {
         this.paneles[i] = new JPanel();
         add(this.paneles[i]);

@@ -313,7 +313,7 @@ public class PriorityQueue {
     private String getRandomName() {
         int randomPosition = (int)(Math.random() * 9);
 
-        String[] names = {"Maia", "Alan", "Samuel", "Lie", "Paulina", "Alejandra", "Marielena", "Alberto", "Eduardo", "Alma"};
+        String[] names = {"Maia", "Alan", "Samuel", "Lie", "Paulina", "Alejandra", "Esmeralda", "Alberto", "Eduardo", "Alma"};
 
         return names[randomPosition];
     }

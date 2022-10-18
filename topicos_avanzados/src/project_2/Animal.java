@@ -18,10 +18,6 @@ public class Animal extends Thread {
     public void run(){
 
         for (int i = 0; i < limite; i++) {
-            if  (Thread.currentThread().isInterrupted()) {
-                System.out.println("Break");
-                break;
-            }
             this.avanza(i);
         }
 
@@ -34,7 +30,7 @@ public class Animal extends Thread {
      */
     private void avanza(int nuevaPosision) {
         try{
-            System.out.println(nombre + " AVANZA");
+            // System.out.println(nombre + " AVANZA");
             label.setLocation(nuevaPosision,0);
             Thread.sleep(20);
         }catch(InterruptedException err){
@@ -44,6 +40,6 @@ public class Animal extends Thread {
 
     private void mostrarMensajeDeMeta() {
         JOptionPane.showMessageDialog(null,nombre + " HA LLEGADO A LA META");
-        System.out.println(nombre + " HA LLEGADO A LA META");
+        // System.out.println(nombre + " HA LLEGADO A LA META");
     }
 }
