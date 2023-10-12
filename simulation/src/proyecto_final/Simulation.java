@@ -14,12 +14,12 @@ public class Simulation {
     SimulationRecord simulationRecord6 = new SimulationRecord(6);
 
 
-    public void startSimulation() {
+    public void iniciarSimulacion() {
         for (int i = 0; i < 60; i++) {
-            this.simulateTeam3(3);
-            this.simulateTeam3(4);
-            this.simulateTeam3(5);
-            this.simulateTeam3(6);
+            this.simularEquipo(3);
+            this.simularEquipo(4);
+            this.simularEquipo(5);
+            this.simularEquipo(6);
         }
 
         double sum1 = 0.0d;
@@ -76,14 +76,14 @@ public class Simulation {
         System.out.println("--------------------------------------------------------------------------------------------------------");
     }
 
-    private void simulateTeam3(int team) {
-        this.getTeam(team).clearRecord();
+    private void simularEquipo(int team) {
+        this.getEquipo(team).clearRecord();
         double random1 = this.generateRandomNumber();
         boolean areBusesWaiting = this.areBusesWaiting(random1);
         double arriveTime = 11.00;
         double startService = 11.00;
         double random2 = this.generateRandomNumber();
-        int serviceTime = areBusesWaiting ? getTeam(team).getServiceTime(team, random2) : 0;
+        int serviceTime = areBusesWaiting ? getEquipo(team).getServiceTime(team, random2) : 0;
         double serviceTimeFinish = startService + (double)((serviceTime > 0 ? serviceTime : 0) * 0.01);
         double prevServiceTimeFinish= serviceTimeFinish;
         double leisurePersonalTime = 0;
@@ -101,14 +101,14 @@ public class Simulation {
 
             // System.out.println("HOUR BEFORE SAVE: " + arriveTime);
             TableRecord newTableRecord = new TableRecord(prevRandomNumber1, prevTimeBetweenArrives, arriveTime, startService, random2, serviceTime, serviceTimeFinish, leisurePersonalTime, timeToWaitForNextBus, isInQueue ? 1 : 0);
-            getTeam(team).updateRecord(newTableRecord);
+            getEquipo(team).updateRecord(newTableRecord);
 
             arriveTime = arriveTime + (timeBetweenArrives * 0.01);
             arriveTime = this.transformHour(arriveTime);
             // System.out.println("HORAAAA: " + arriveTime);
             startService = (arriveTime < serviceTimeFinish) ? serviceTimeFinish : arriveTime;
             random2 = this.generateRandomNumber();
-            serviceTime = getTeam(team).getServiceTime(team, random2);
+            serviceTime = getEquipo(team).getServiceTime(team, random2);
             serviceTimeFinish = startService + (double)((double)(serviceTime) * 0.01);
             serviceTimeFinish = this.transformHour(serviceTimeFinish);
             leisurePersonalTime = (prevServiceTimeFinish < arriveTime) ? Math.abs(prevServiceTimeFinish - arriveTime) : 0;
@@ -134,9 +134,9 @@ public class Simulation {
         System.out.println("#ale \t| Tiempo entre llegadas | Tiempo de llegada | Inicio del servicio | #ale \t| Tiempo de servicio | Terminacion del servicio | Ocio del personal | Tiempo de espera del camión | Longitud de la cola ");
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
-        for (int i = 0; i < this.getTeam(team).getRecordLength(); i++) {
+        for (int i = 0; i < this.getEquipo(team).getRecordLength(); i++) {
 
-            TableRecord currentRecord = this.getTeam(team).getRecord(i);
+            TableRecord currentRecord = this.getEquipo(team).getRecord(i);
 
             busWaitingTime = busWaitingTime + currentRecord.timeToWaitForBus;
             workingTime = workingTime + currentRecord.serviceTime;
@@ -157,15 +157,15 @@ public class Simulation {
         }
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
-        double totalPrice = getTeam(team).getTotalCost();
+        double totalPrice = getEquipo(team).getTotalCost();
         DecimalFormat format = new DecimalFormat("0.00000");
 
-        double normalSalary = this.getTeam(team).getNormalSalary();
-        double ociBus = getTeam(team).getBusAwaitTimePrice(busWaitingTime);
-        double operations = getTeam(team).getServicePrice(workingTime * 0.01);
+        double normalSalary = this.getEquipo(team).getNormalSalary();
+        double ociBus = getEquipo(team).getBusAwaitTimePrice(busWaitingTime);
+        double operations = getEquipo(team).getServicePrice(workingTime * 0.01);
         //System.out.println(workingTime);
         PricesRecord newPricesRecord = new PricesRecord(normalSalary, extraTime, ociBus, operations, totalPrice);
-        this.getTeam(team).updatePriceRecord(newPricesRecord);
+        this.getEquipo(team).updatePriceRecord(newPricesRecord);
 
         System.out.println("Resultados");
         System.out.println("Tam equipo " + "| Salario normal " + "| Salario extra"  + "| Ocio del camion " + "| Operaciones " + "| \tTotales");
@@ -176,7 +176,7 @@ public class Simulation {
 
     }
 
-    private SimulationRecord getTeam(int teamMates) {
+    private SimulationRecord getEquipo(int teamMates) {
         if (teamMates == 3) return simulationRecord3;
         if (teamMates == 4) return simulationRecord4;
         if (teamMates == 5) return simulationRecord5;
@@ -209,55 +209,6 @@ public class Simulation {
             _hour = (_hour + 1) - 0.60d;
         }
         return _hour;
-    }
-
-    private double getTimesInMinutes(double time) {
-        return time * 0.01;
-    }
-
-    private double getTotalNormalSalary(ArrayList<PricesRecord> arr) {
-        double summation = 0.0d;
-        for (int i = 0; i < arr.size(); i++) {
-            summation = summation + arr.get(i).normalSalary;
-        }
-
-        return summation;
-    }
-
-    private double getTotalExtraSalary(ArrayList<PricesRecord> arr) {
-        double summation = 0.0d;
-        for (int i = 0; i < arr.size(); i++) {
-            summation = summation + arr.get(i).extraSalary;
-        }
-
-        return summation;
-    }
-
-    private double getTotalOciBus(ArrayList<PricesRecord> arr) {
-        double summation = 0.0d;
-        for (int i = 0; i < arr.size(); i++) {
-            summation = summation + arr.get(i).ociBus;
-        }
-
-        return summation;
-    }
-
-    private double getTotalOperation(ArrayList<PricesRecord> arr) {
-        double summation = 0.0d;
-        for (int i = 0; i < arr.size(); i++) {
-            summation = summation + arr.get(i).operation;
-        }
-
-        return summation;
-    }
-
-    private double getTotalCost(ArrayList<PricesRecord> arr) {
-        double summation = 0.0d;
-        for (int i = 0; i < arr.size(); i++) {
-            summation = summation + arr.get(i).totalCost;
-        }
-
-        return summation;
     }
 
 }

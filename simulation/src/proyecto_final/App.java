@@ -2,8 +2,8 @@ package proyecto_final;
 
 public class App {
     public static void main(String[] args) {
-        Simulation simulation = new Simulation();
+        Simulation simulacion = new Simulation();
 
-        simulation.startSimulation();
+        simulacion.iniciarSimulacion();
     }
 }
